@@ -20,6 +20,7 @@
     <string name="msg_login_failed">Login Failed! Wrong User Name or Password.</string>
     <string name="msg_signup_failed">Sign Up Failed! Please try again.</string>
     <string name="msg_signup_success">Sign Up Successful! Please Login.</string>
+    <string name="msg_app_exit">Do you want to Exit App?</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
 </resources>
