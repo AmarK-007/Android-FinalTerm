@@ -1,43 +1,49 @@
 package com.android.assignment1.shoecart.models;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Product implements Serializable {
-    String productId;
-    ArrayList<String> imageArray= new ArrayList<>();
-    String title;
-    Double price;
+import java.util.List;
 
+public class Product implements Parcelable {
+    public static final String TABLE_NAME = "products";
+    public static final String COLUMN_PRODUCT_ID = "product_id";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_PRICE = "price";
+    public static final String COLUMN_SHIPPING_COST = "shipping_cost";
+    public static final String COLUMN_IS_DELETED = "is_deleted";
 
-    String description;
-    String size;
-    int quantity;
+    private int productId;
+    private String title;
+    private String description;
+    private double price;
+    private double shippingCost;
+    private int isDeleted;
 
-    public Product(String productId, ArrayList<String> imageArray, String title, Double price, String description, String size, int quantity) {
-        this.productId = productId;
-        this.imageArray = imageArray;
-        this.title = title;
-        this.price = price;
-        this.description = description;
-        this.size = size;
-        this.quantity = quantity;
+    private List<ProductSize> sizes;
+    private List<ProductImage> images;
+
+    public Product() {
     }
 
-    public String getProductId() {
+    public Product(int productId, String title, String description, double price, double shippingCost, int isDeleted, List<ProductSize> sizes, List<ProductImage> images) {
+        this.productId = productId;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.shippingCost = shippingCost;
+        this.isDeleted = isDeleted;
+        this.sizes = sizes;
+        this.images = images;
+    }
+
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
-    }
-
-    public ArrayList<String> getImageArray() {
-        return imageArray;
-    }
-
-    public void setImageArray(ArrayList<String> imageArray) {
-        this.imageArray = imageArray;
     }
 
     public String getTitle() {
@@ -48,6 +54,7 @@ public class Product implements Serializable {
         this.title = title;
     }
 
+<<<<<<< HEAD
     public Double getPrice() {
         return price;
     }
@@ -56,6 +63,8 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+=======
+>>>>>>> origin/master
     public String getDescription() {
         return description;
     }
@@ -64,32 +73,87 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public String getSize() {
-        return size;
+    public double getPrice() {
+        return price;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public double getShippingCost() {
+        return shippingCost;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setShippingCost(double shippingCost) {
+        this.shippingCost = shippingCost;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public List<ProductSize> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(List<ProductSize> sizes) {
+        this.sizes = sizes;
+    }
+
+    public List<ProductImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ProductImage> images) {
+        this.images = images;
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
-    public String toString() {
-        return "Product{" +
-                "productId='" + productId + '\'' +
-                ", imageArray=" + imageArray +
-                ", title='" + title + '\'' +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                ", size='" + size + '\'' +
-                ", quantity=" + quantity +
-                '}';
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(productId);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeDouble(price);
+        parcel.writeDouble(shippingCost);
+        parcel.writeInt(isDeleted);
+        parcel.writeTypedList(sizes);
+        parcel.writeTypedList(images);
+    }
+
+    protected Product(Parcel in) {
+        productId = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        price = in.readDouble();
+        shippingCost = in.readDouble();
+        isDeleted = in.readInt();
+        sizes = in.createTypedArrayList(ProductSize.CREATOR);
+        images = in.createTypedArrayList(ProductImage.CREATOR);
     }
 }
+
+
+
+

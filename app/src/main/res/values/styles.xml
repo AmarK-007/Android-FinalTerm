@@ -19,6 +19,10 @@
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
 
         <!--<item name="actionBarStyle">@style/MyActionBar</item>-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+
     </style>
 
     <style name="AppTheme.SplashTheme" parent="Theme.AppCompat.NoActionBar">
