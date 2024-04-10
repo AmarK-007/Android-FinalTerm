@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.utils.Utility;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -17,6 +18,12 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+
+        MaterialToolbar materialToolbar = findViewById(R.id.homeToolBar);
+        setSupportActionBar(materialToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     @Override

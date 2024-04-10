@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menuItems"
+    >
+    <item
+        android:id="@+id/myProfile"
+        android:icon="@drawable/profile"
+        android:title="My Profile"
+        />
+
+    <item
+        android:id="@+id/myOrders"
+        android:icon="@drawable/baseline_note_24"
+        android:title="My Orders"
+        />
+
+    <item
+        android:id="@+id/categories"
+        android:icon="@drawable/baseline_category_24"
+        android:title="Categories"
+        />
+
+    <item
+        android:id="@+id/whislist"
+        android:icon="@drawable/whishlist"
+        android:title="Whislist"
+        />
+
+    <item
+        android:id="@+id/support"
+        android:icon="@drawable/support"
+        android:title="Support"
+        />
+
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/about"
+        android:title="About"
+        />
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/logout"
+        android:title="Logout"
+        />
+
+
+
+
+
+</menu>
