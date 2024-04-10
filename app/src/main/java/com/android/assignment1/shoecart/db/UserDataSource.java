@@ -18,7 +18,7 @@ public class UserDataSource {
         dbHelper = new DBHelper(context);
     }
 
-    public void insertUser(User user) {
+    public boolean insertUser(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -33,8 +33,14 @@ public class UserDataSource {
         values.put(User.COLUMN_PROVINCE, user.getProvince());
         values.put(User.COLUMN_PINCODE, user.getPincode());
 
-        db.insert(User.TABLE_NAME, null, values);
+        long result = db.insert(User.TABLE_NAME, null, values);
         db.close();
+
+        if (result == -1) {
+            return false; // Insertion failed
+        } else {
+            return true; // Insertion successful
+        }
     }
 
     @SuppressLint("Range")
@@ -123,5 +129,23 @@ public class UserDataSource {
         db.delete(User.TABLE_NAME, User.COLUMN_USER_ID + " = ?",
                 new String[]{String.valueOf(user.getUserId())});
         db.close();
+    }
+
+    public boolean validateUser(String username, String password) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(User.TABLE_NAME,
+                new String[]{User.COLUMN_USERNAME},
+                User.COLUMN_USERNAME + "=? AND " + User.COLUMN_PASSWORD + "=?",
+                new String[]{username, password},
+                null, null, null);
+
+        int cursorCount = cursor.getCount();
+        cursor.close();
+
+        if (cursorCount > 0) {
+            return true;
+        }
+
+        return false;
     }
 }

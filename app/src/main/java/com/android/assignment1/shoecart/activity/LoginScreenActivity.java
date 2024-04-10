@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.db.UserDataSource;
 import com.android.assignment1.shoecart.utils.Utility;
 
 public class LoginScreenActivity extends AppCompatActivity {
@@ -76,9 +77,14 @@ public class LoginScreenActivity extends AppCompatActivity {
     }
 
     private void performLogin(String username, String password) {
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(intent);
-        finish();
+        UserDataSource userDataSource = new UserDataSource(this);
+        if (userDataSource.validateUser(username, password)) {
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(LoginScreenActivity.this, getString(R.string.msg_login_failed), Toast.LENGTH_SHORT).show();
+        }
     }
 
 

@@ -14,6 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.db.UserDataSource;
+import com.android.assignment1.shoecart.models.User;
 import com.android.assignment1.shoecart.utils.Utility;
 
 public class SignUpScreenActivity extends AppCompatActivity {
@@ -86,7 +88,27 @@ public class SignUpScreenActivity extends AppCompatActivity {
                     return;
                 }
 
-                showAppSuccessAlert(SignUpScreenActivity.this);
+                // If all validations pass, proceed with signup
+                User user = new User();
+                user.setName(firstname + " " + lastname); // 'name' is a combination of first and last names
+                user.setUsername(username);
+                user.setEmail(email);
+                user.setPassword(password);
+                user.setPurchaseHistory("");
+                user.setShippingAddress1("");
+                user.setShippingAddress2("");
+                user.setCity("");
+                user.setProvince("");
+                user.setPincode("");
+
+                UserDataSource userDataSource = new UserDataSource(SignUpScreenActivity.this);
+                boolean success = userDataSource.insertUser(user);
+
+                if (success) {
+                    showAppSuccessAlert(SignUpScreenActivity.this);
+                } else {
+                    showAppFailureAlert(SignUpScreenActivity.this);
+                }
             }
         });
         loginTextView.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +137,18 @@ public class SignUpScreenActivity extends AppCompatActivity {
             dialog.dismiss();
             alertDialog = null;
         });
+        alertDialog.show();
+    }
+
+    public void showAppFailureAlert(final Context context) {
+        alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+        alertDialog.setTitle(Utility.getAppNameString(context));
+        alertDialog.setMessage(getString(R.string.msg_signup_failed));
+        alertDialog.setPositiveButton(getString(R.string.button_ok),
+                (dialog, which) -> {
+                    dialog.dismiss();
+                    alertDialog = null;
+                });
         alertDialog.show();
     }
 }
