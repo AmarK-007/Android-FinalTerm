@@ -14,7 +14,7 @@ import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.utils.Utility;
 
 public class LoginScreenActivity extends AppCompatActivity {
-
+    private static final String TAG = LoginScreenActivity.class.getSimpleName();
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;

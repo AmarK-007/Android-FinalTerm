@@ -17,7 +17,7 @@ import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.utils.Utility;
 
 public class SignUpScreenActivity extends AppCompatActivity {
-
+    private static final String TAG = SignUpScreenActivity.class.getSimpleName();
     private EditText firstnameEditText;
     private EditText lastnameEditText;
     private EditText usernameEditText;
