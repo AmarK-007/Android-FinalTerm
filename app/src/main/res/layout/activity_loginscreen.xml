@@ -67,6 +67,7 @@
                 app:errorTextAppearance="@style/error_appearance">
 
                 <EditText
+                    android:text="admin"
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,6 +93,7 @@
                 app:passwordToggleEnabled="true">
 
                 <EditText
+                    android:text="admin123"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

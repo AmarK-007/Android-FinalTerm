@@ -4,14 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.assignment1.shoecart.R;
-import com.android.assignment1.shoecart.fragments.OrdersFragment;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 import com.android.assignment1.shoecart.models.Orders;
 
@@ -53,7 +52,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView ivProduct;
         TextView title,shortDescription,status,orderDate;
-        RelativeLayout parent;
+        LinearLayout parent;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProduct = itemView.findViewById(R.id.ivProduct);

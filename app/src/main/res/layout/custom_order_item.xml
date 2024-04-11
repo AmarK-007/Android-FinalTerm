@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/parentLayout"
     android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView style="@style/cardViewStyle">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ivProduct"
@@ -56,11 +62,12 @@
 
     </LinearLayout>
 
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_below="@id/ivProduct"
-        android:layout_width="match_parent"
-        android:layout_margin="5dp"
-        android:layout_height="1dp"/>
+            <!--    <com.google.android.material.divider.MaterialDivider-->
+            <!--        android:layout_below="@id/ivProduct"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_margin="5dp"-->
+            <!--        android:layout_height="1dp"/>-->
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-
-</RelativeLayout>
+</LinearLayout>

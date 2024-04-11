@@ -32,7 +32,7 @@ public class User implements Parcelable {
 
     // Create table SQL query
     public static final String CREATE_TABLE =
-            "CREATE TABLE " + TABLE_NAME + "("
+            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
                     + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + COLUMN_NAME + " TEXT,"
                     + COLUMN_EMAIL + " TEXT UNIQUE,"

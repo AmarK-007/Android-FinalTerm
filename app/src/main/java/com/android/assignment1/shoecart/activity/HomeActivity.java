@@ -1,11 +1,11 @@
 package com.android.assignment1.shoecart.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.utils.Utility;
@@ -24,10 +24,16 @@ public class HomeActivity extends AppCompatActivity {
         MaterialToolbar materialToolbar = findViewById(R.id.homeToolBar);
         setSupportActionBar(materialToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+//
+//        Fragment fragment = new CartFragment();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.frames, fragment).commit();
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         onSupportNavigateUp();
     }
 

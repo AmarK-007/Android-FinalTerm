@@ -54,17 +54,7 @@ public class Product implements Parcelable {
         this.title = title;
     }
 
-<<<<<<< HEAD
-    public Double getPrice() {
-        return price;
-    }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-=======
->>>>>>> origin/master
     public String getDescription() {
         return description;
     }

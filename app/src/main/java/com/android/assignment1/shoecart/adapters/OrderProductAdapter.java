@@ -32,8 +32,8 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(productArrayList.get(position).getTitle() + " x " + productArrayList.get(position).getQuantity());
-        holder.price.setText(String.valueOf(productArrayList.get(position).getPrice() * productArrayList.get(position).getQuantity()));
+        holder.title.setText(productArrayList.get(position).getTitle() + " x " + productArrayList.get(position).getSizes().get(0).getQuantity());
+        holder.price.setText(String.valueOf(productArrayList.get(position).getPrice() * productArrayList.get(position).getSizes().get(0).getQuantity()));
         holder.shortDescription.setText(productArrayList.get(position).getDescription());
 
     }

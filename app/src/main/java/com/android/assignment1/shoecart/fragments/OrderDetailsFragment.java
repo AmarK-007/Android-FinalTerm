@@ -1,16 +1,13 @@
 package com.android.assignment1.shoecart.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
-import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.OrderProductAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentOrderDetailsBinding;
 import com.android.assignment1.shoecart.models.Orders;
@@ -35,7 +32,7 @@ OrderProductAdapter adapter;
         binding = FragmentOrderDetailsBinding.inflate(inflater,container,false);
         if (getArguments() != null) {
             //geting arguments
-            order = (Orders) getArguments().getSerializable("order");
+            order = (Orders) getArguments().getParcelable("order");
 
             if (order != null){
                 setData();
@@ -56,7 +53,7 @@ OrderProductAdapter adapter;
         binding.tvPaymentMethod.setText(order.getPaymentMethod());
         double total = 0.0;
         for (int i = 0 ; i < order.getProductList().size() ; i++){
-            total += order.getProductList().get(i).getPrice() * order.getProductList().get(i).getQuantity();
+            total += order.getProductList().get(i).getPrice() * order.getProductList().get(i).getSizes().get(0).getQuantity();
         }
         binding.tvItemTotal.setText("$ "+total);
         binding.tvDeliveryCharges.setText("$2");

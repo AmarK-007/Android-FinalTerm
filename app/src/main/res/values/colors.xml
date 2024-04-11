@@ -12,6 +12,8 @@
     <color name="colorPrimaryDarkLight">#122863</color>
     <color name="colorPrimaryLight">#FF0857A0</color>
     <color name="colorAccent">#50ABDD</color>
+    <color name="dividerColor">#E6888888</color>
+
     <!--<color name="colorAccentLight">#FF0092E4</color>-->
 
 
