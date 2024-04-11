@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:id="@+id/drawerMenu"
+    android:background="@color/colorPrimaryDark"
     tools:context=".activity.HomeActivity">
 
     <LinearLayout
@@ -18,8 +19,7 @@
             android:id="@+id/homeToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:elevation="5dp"
+            android:background="@color/colorPrimaryDark"
             app:title="Shoe Cart"
             app:menu="@menu/appbar_menu"
             app:navigationIcon="@drawable/hamburger_menu"
@@ -29,7 +29,77 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ViewFlipper
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:id="@+id/categoryCaraousal"
+                        android:flipInterval="4000"
+                        android:autoStart="true"
+                        android:layout_marginTop="20dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/caraousalImage"/>
+                    </ViewFlipper>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="New Arrivals"
+                        android:textColor="@color/white"
+                        android:textSize="22dp"
+                        android:gravity="center"/>
+
+                    <GridLayout
+                        android:id="@+id/newArrivalsGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:rowCount="2"
+                        android:columnCount="2"
+                        android:useDefaultMargins="true"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Best Sellers"
+                        android:textColor="@color/white"
+                        android:textSize="22dp"
+                        android:gravity="center"/>
+
+                    <GridLayout
+                        android:id="@+id/bestSellersGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:rowCount="2"
+                        android:columnCount="2"
+                        android:useDefaultMargins="true"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
 
     </LinearLayout>
 

@@ -23,4 +23,6 @@
     <string name="msg_app_exit">Do you want to Exit App?</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

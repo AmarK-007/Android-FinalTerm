@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.activity.LoginScreenActivity;
-import com.android.assignment1.shoecart.databinding.ActivitySplashscreenBinding;
 
 import java.io.File;
 import java.io.FileOutputStream;
