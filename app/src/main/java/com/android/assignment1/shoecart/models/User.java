@@ -18,25 +18,6 @@ public class User implements Parcelable {
     private String province;
     private String pincode;
 
-<<<<<<< Updated upstream
-    // Create table SQL query
-    public static final String CREATE_TABLE =
-            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
-                    + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + COLUMN_NAME + " TEXT,"
-                    + COLUMN_EMAIL + " TEXT UNIQUE,"
-                    + COLUMN_PASSWORD + " TEXT,"
-                    + COLUMN_USERNAME + " TEXT,"
-                    + COLUMN_PURCHASE_HISTORY + " TEXT,"
-                    + COLUMN_SHIPPING_ADDRESS_1 + " TEXT,"
-                    + COLUMN_SHIPPING_ADDRESS_2 + " TEXT,"
-                    + COLUMN_CITY + " TEXT,"
-                    + COLUMN_PROVINCE + " TEXT,"
-                    + COLUMN_PINCODE + " TEXT"
-                    + ")";
-=======
->>>>>>> Stashed changes
-
     public User() {
     }
 

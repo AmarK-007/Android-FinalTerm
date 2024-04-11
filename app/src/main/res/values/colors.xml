@@ -13,13 +13,8 @@
     <color name="colorPrimaryDark">#E2233877</color>
     <color name="colorPrimaryDarkLight">#122863</color>
     <color name="colorPrimaryLight">#FF0857A0</color>
-<<<<<<< Updated upstream
-    <color name="colorAccent">#50ABDD</color>
-    <color name="dividerColor">#E6888888</color>
+-->
 
-=======
-    <color name="colorAccent">#50ABDD</color>-->
->>>>>>> Stashed changes
     <!--<color name="colorAccentLight">#FF0092E4</color>-->
 
     <!-- Theme Colors - 2-->
@@ -30,12 +25,12 @@
      <color name="colorAccent">#FFBB86FC</color>-->
 
     <!-- Theme Colors - 3-->
-    <color name="colorPrimary">#FF0035C9</color>
+    <color name="colorPrimary">#012CA5</color>
     <color name="colorPrimaryDark">#FF1041FB</color>
     <color name="colorPrimaryDarkLight">#1A49FB</color>
     <color name="colorPrimaryLight">#013CDF</color>
     <color name="colorAccent">#FFFFDE03</color>
-
+    <color name="dividerColor">#E6888888</color>
 
     <color name="colorErrorText">#E10606</color>
     <color name="colorGrayLight">#c5c5c5</color>
