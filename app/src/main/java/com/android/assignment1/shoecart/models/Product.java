@@ -6,13 +6,6 @@ import android.os.Parcelable;
 import java.util.List;
 
 public class Product implements Parcelable {
-    public static final String TABLE_NAME = "products";
-    public static final String COLUMN_PRODUCT_ID = "product_id";
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_PRICE = "price";
-    public static final String COLUMN_SHIPPING_COST = "shipping_cost";
-    public static final String COLUMN_IS_DELETED = "is_deleted";
 
     private int productId;
     private String title;
@@ -23,6 +16,7 @@ public class Product implements Parcelable {
 
     private List<ProductSize> sizes;
     private List<ProductImage> images;
+
 
     public Product() {
     }

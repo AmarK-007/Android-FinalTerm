@@ -4,18 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class User implements Parcelable {
-    public static final String TABLE_NAME = "users";
-    public static final String COLUMN_USER_ID = "user_id";
-    public static final String COLUMN_NAME = "name";
-    public static final String COLUMN_EMAIL = "email";
-    public static final String COLUMN_PASSWORD = "password";
-    public static final String COLUMN_USERNAME = "username";
-    public static final String COLUMN_PURCHASE_HISTORY = "purchase_history";
-    public static final String COLUMN_SHIPPING_ADDRESS_1 = "shipping_address_1";
-    public static final String COLUMN_SHIPPING_ADDRESS_2 = "shipping_address_2";
-    public static final String COLUMN_CITY = "city";
-    public static final String COLUMN_PROVINCE = "province";
-    public static final String COLUMN_PINCODE = "pincode";
 
     // User fields...
     private int userId;
@@ -30,6 +18,7 @@ public class User implements Parcelable {
     private String province;
     private String pincode;
 
+<<<<<<< Updated upstream
     // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
@@ -45,6 +34,8 @@ public class User implements Parcelable {
                     + COLUMN_PROVINCE + " TEXT,"
                     + COLUMN_PINCODE + " TEXT"
                     + ")";
+=======
+>>>>>>> Stashed changes
 
     public User() {
     }

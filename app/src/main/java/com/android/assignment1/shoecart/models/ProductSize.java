@@ -4,11 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ProductSize implements Parcelable {
-    public static final String TABLE_NAME = "productsizes";
-    public static final String COLUMN_SIZE_ID = "size_id";
-    public static final String COLUMN_PRODUCT_ID = "product_id";
-    public static final String COLUMN_SIZE_US = "size_us";
-    public static final String COLUMN_QUANTITY = "quantity";
 
     private int sizeId;
     private int productId;

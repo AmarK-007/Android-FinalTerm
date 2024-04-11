@@ -7,14 +7,34 @@
       <color name="light_blue_A200">#FF40C4FF</color>
       <color name="light_blue_A400">#FF00B0FF</color>-->
     <color name="black_overlay">#66000000</color>
-    <color name="colorPrimary">#FF20262B</color>
-    <color name="colorPrimaryDark">#233b77</color>
+
+    <!-- Theme Colors - 1-->
+    <!--<color name="colorPrimary">#FF20262B</color>
+    <color name="colorPrimaryDark">#E2233877</color>
     <color name="colorPrimaryDarkLight">#122863</color>
     <color name="colorPrimaryLight">#FF0857A0</color>
+<<<<<<< Updated upstream
     <color name="colorAccent">#50ABDD</color>
     <color name="dividerColor">#E6888888</color>
 
+=======
+    <color name="colorAccent">#50ABDD</color>-->
+>>>>>>> Stashed changes
     <!--<color name="colorAccentLight">#FF0092E4</color>-->
+
+    <!-- Theme Colors - 2-->
+    <!-- <color name="colorPrimary">#FF3700B3</color>
+     <color name="colorPrimaryDark">#FF6200EE</color>
+     <color name="colorPrimaryDarkLight">#6A03FF</color>
+     <color name="colorPrimaryLight">#4E04F6</color>
+     <color name="colorAccent">#FFBB86FC</color>-->
+
+    <!-- Theme Colors - 3-->
+    <color name="colorPrimary">#FF0035C9</color>
+    <color name="colorPrimaryDark">#FF1041FB</color>
+    <color name="colorPrimaryDarkLight">#1A49FB</color>
+    <color name="colorPrimaryLight">#013CDF</color>
+    <color name="colorAccent">#FFFFDE03</color>
 
 
     <color name="colorErrorText">#E10606</color>

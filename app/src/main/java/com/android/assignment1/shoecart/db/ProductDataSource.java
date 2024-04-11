@@ -20,18 +20,64 @@ public class ProductDataSource {
         dbHelper = new DBHelper(context);
     }
 
+    public static final String TABLE_NAME_PRODUCT = "products";
+    public static final String COLUMN_PRODUCT_ID = "product_id";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_PRICE = "price";
+    public static final String COLUMN_SHIPPING_COST = "shipping_cost";
+    public static final String COLUMN_IS_DELETED = "is_deleted";
+
+    public static final String TABLE_NAME_PROD_IMAGE = "productimages";
+    public static final String COLUMN_IMAGE_ID = "image_id";
+    public static final String COLUMN_PROD_IMAGE_PRODUCT_ID = "product_id";
+    public static final String COLUMN_IMAGE_URL = "image_url";
+
+
+    public static final String TABLE_NAME_PROD_SIZE = "productsizes";
+    public static final String COLUMN_SIZE_ID = "size_id";
+    public static final String COLUMN_PROD_SIZE_PRODUCT_ID = "product_id";
+    public static final String COLUMN_SIZE_US = "size_us";
+    public static final String COLUMN_QUANTITY = "quantity";
+
+
+    public static final String CREATE_TABLE =
+            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_PRODUCT + "("
+                    + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + COLUMN_TITLE + " TEXT,"
+                    + COLUMN_DESCRIPTION + " TEXT,"
+                    + COLUMN_PRICE + " REAL,"
+                    + COLUMN_SHIPPING_COST + " REAL,"
+                    + COLUMN_IS_DELETED + " INTEGER DEFAULT 0"
+                    + ")";
+    public static final String CREATE_TABLE_PROD_IMAGE =
+            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_PROD_IMAGE + "("
+                    + COLUMN_IMAGE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + COLUMN_PROD_IMAGE_PRODUCT_ID + " INTEGER,"
+                    + COLUMN_IMAGE_URL + " TEXT"
+                    + " FOREIGN KEY(" + COLUMN_PROD_IMAGE_PRODUCT_ID + ") REFERENCES " + TABLE_NAME_PRODUCT + "(" + COLUMN_PRODUCT_ID + ") "
+                    + ")";
+    public static final String CREATE_TABLE_PROD_SIZE =
+            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_PROD_SIZE + "("
+                    + COLUMN_SIZE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + COLUMN_PROD_SIZE_PRODUCT_ID + " INTEGER,"
+                    + COLUMN_SIZE_US + " INTEGER,"
+                    + COLUMN_QUANTITY + " INTEGER"
+                    + " FOREIGN KEY(" + COLUMN_PROD_SIZE_PRODUCT_ID + ") REFERENCES " + TABLE_NAME_PRODUCT + "(" + COLUMN_PRODUCT_ID + ") "
+                    + ")";
+
     public void insertProduct(Product product) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Product.COLUMN_PRODUCT_ID, product.getProductId());
-        values.put(Product.COLUMN_TITLE, product.getTitle());
-        values.put(Product.COLUMN_DESCRIPTION, product.getDescription());
-        values.put(Product.COLUMN_PRICE, product.getPrice());
-        values.put(Product.COLUMN_SHIPPING_COST, product.getShippingCost());
-        values.put(Product.COLUMN_IS_DELETED, product.getIsDeleted());
+        values.put(COLUMN_PRODUCT_ID, product.getProductId());
+        values.put(COLUMN_TITLE, product.getTitle());
+        values.put(COLUMN_DESCRIPTION, product.getDescription());
+        values.put(COLUMN_PRICE, product.getPrice());
+        values.put(COLUMN_SHIPPING_COST, product.getShippingCost());
+        values.put(COLUMN_IS_DELETED, product.getIsDeleted());
 
-        long insertID = db.insert(Product.TABLE_NAME, null, values);
+        long insertID = db.insert(TABLE_NAME_PRODUCT, null, values);
         db.close();
         for (ProductSize productSize : product.getSizes())
             insertProductSize(insertID, productSize);
@@ -43,12 +89,12 @@ public class ProductDataSource {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(ProductSize.COLUMN_SIZE_ID, productSize.getSizeId());
-        values.put(ProductSize.COLUMN_PRODUCT_ID, productSize.getProductId());
-        values.put(ProductSize.COLUMN_SIZE_US, productSize.getSizeUs());
-        values.put(ProductSize.COLUMN_QUANTITY, productSize.getQuantity());
+        values.put(COLUMN_SIZE_ID, productSize.getSizeId());
+        values.put(COLUMN_PROD_SIZE_PRODUCT_ID, productSize.getProductId());
+        values.put(COLUMN_SIZE_US, productSize.getSizeUs());
+        values.put(COLUMN_QUANTITY, productSize.getQuantity());
 
-        db.insert(ProductSize.TABLE_NAME, null, values);
+        db.insert(TABLE_NAME_PRODUCT, null, values);
         db.close();
     }
 
@@ -56,11 +102,11 @@ public class ProductDataSource {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(ProductImage.COLUMN_IMAGE_ID, productImage.getImageId());
-        values.put(ProductImage.COLUMN_PRODUCT_ID, productImage.getProductId());
-        values.put(ProductImage.COLUMN_IMAGE_URL, productImage.getImageUrl());
+        values.put(COLUMN_IMAGE_ID, productImage.getImageId());
+        values.put(COLUMN_PROD_IMAGE_PRODUCT_ID, productImage.getProductId());
+        values.put(COLUMN_IMAGE_URL, productImage.getImageUrl());
 
-        db.insert(ProductImage.TABLE_NAME, null, values);
+        db.insert(TABLE_NAME_PRODUCT, null, values);
         db.close();
     }
 
@@ -68,20 +114,19 @@ public class ProductDataSource {
     public Product getProduct(int productId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor cursor = db.query(Product.TABLE_NAME,
-                null,
-                Product.COLUMN_PRODUCT_ID + "=?",
+        Cursor cursor = db.query(TABLE_NAME_PRODUCT,
+                null, COLUMN_PRODUCT_ID + "=?",
                 new String[]{String.valueOf(productId)},
                 null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             Product product = new Product();
-            product.setProductId(cursor.getInt(cursor.getColumnIndex(Product.COLUMN_PRODUCT_ID)));
-            product.setTitle(cursor.getString(cursor.getColumnIndex(Product.COLUMN_TITLE)));
-            product.setDescription(cursor.getString(cursor.getColumnIndex(Product.COLUMN_DESCRIPTION)));
-            product.setPrice(cursor.getDouble(cursor.getColumnIndex(Product.COLUMN_PRICE)));
-            product.setShippingCost(cursor.getDouble(cursor.getColumnIndex(Product.COLUMN_SHIPPING_COST)));
-            product.setIsDeleted(cursor.getInt(cursor.getColumnIndex(Product.COLUMN_IS_DELETED)));
+            product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
+            product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+            product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+            product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));
+            product.setShippingCost(cursor.getDouble(cursor.getColumnIndex(COLUMN_SHIPPING_COST)));
+            product.setIsDeleted(cursor.getInt(cursor.getColumnIndex(COLUMN_IS_DELETED)));
 
             product.setSizes(getProductSizes(productId));
             product.setImages(getProductImages(productId));
@@ -97,19 +142,19 @@ public class ProductDataSource {
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + Product.TABLE_NAME;
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME_PRODUCT;
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
                 Product product = new Product();
-                product.setProductId(cursor.getInt(cursor.getColumnIndex(Product.COLUMN_PRODUCT_ID)));
-                product.setTitle(cursor.getString(cursor.getColumnIndex(Product.COLUMN_TITLE)));
-                product.setDescription(cursor.getString(cursor.getColumnIndex(Product.COLUMN_DESCRIPTION)));
-                product.setPrice(cursor.getDouble(cursor.getColumnIndex(Product.COLUMN_PRICE)));
-                product.setShippingCost(cursor.getDouble(cursor.getColumnIndex(Product.COLUMN_SHIPPING_COST)));
-                product.setIsDeleted(cursor.getInt(cursor.getColumnIndex(Product.COLUMN_IS_DELETED)));
+                product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
+                product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+                product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+                product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));
+                product.setShippingCost(cursor.getDouble(cursor.getColumnIndex(COLUMN_SHIPPING_COST)));
+                product.setIsDeleted(cursor.getInt(cursor.getColumnIndex(COLUMN_IS_DELETED)));
 
                 product.setSizes(getProductSizes(product.getProductId()));
                 product.setImages(getProductImages(product.getProductId()));
@@ -132,13 +177,13 @@ public class ProductDataSource {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Product.COLUMN_PRODUCT_ID, product.getProductId());
-        values.put(Product.COLUMN_TITLE, product.getTitle());
-        values.put(Product.COLUMN_DESCRIPTION, product.getDescription());
-        values.put(Product.COLUMN_PRICE, product.getPrice());
-        values.put(Product.COLUMN_SHIPPING_COST, product.getShippingCost());
-        values.put(Product.COLUMN_IS_DELETED, product.getIsDeleted());
-        return db.update(Product.TABLE_NAME, values, Product.COLUMN_PRODUCT_ID + " = ?",
+        values.put(COLUMN_PRODUCT_ID, product.getProductId());
+        values.put(COLUMN_TITLE, product.getTitle());
+        values.put(COLUMN_DESCRIPTION, product.getDescription());
+        values.put(COLUMN_PRICE, product.getPrice());
+        values.put(COLUMN_SHIPPING_COST, product.getShippingCost());
+        values.put(COLUMN_IS_DELETED, product.getIsDeleted());
+        return db.update(TABLE_NAME_PRODUCT, values, COLUMN_PRODUCT_ID + " = ?",
                 new String[]{String.valueOf(product.getProductId())});
     }
 
@@ -149,7 +194,7 @@ public class ProductDataSource {
             deleteProductImage(productImage);
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(Product.TABLE_NAME, Product.COLUMN_PRODUCT_ID + " = ?",
+        db.delete(TABLE_NAME_PRODUCT, COLUMN_PRODUCT_ID + " = ?",
                 new String[]{String.valueOf(product.getProductId())});
         db.close();
     }
@@ -159,19 +204,19 @@ public class ProductDataSource {
         List<ProductSize> productSizes = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(ProductSize.TABLE_NAME,
+        Cursor cursor = db.query(TABLE_NAME_PROD_SIZE,
                 null,
-                ProductSize.COLUMN_PRODUCT_ID + "=?",
+                COLUMN_PRODUCT_ID + "=?",
                 new String[]{String.valueOf(productId)},
                 null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
                 ProductSize productSize = new ProductSize();
-                productSize.setSizeId(cursor.getInt(cursor.getColumnIndex(ProductSize.COLUMN_SIZE_ID)));
-                productSize.setProductId(cursor.getInt(cursor.getColumnIndex(ProductSize.COLUMN_PRODUCT_ID)));
-                productSize.setSizeUs(cursor.getInt(cursor.getColumnIndex(ProductSize.COLUMN_SIZE_US)));
-                productSize.setQuantity(cursor.getInt(cursor.getColumnIndex(ProductSize.COLUMN_QUANTITY)));
+                productSize.setSizeId(cursor.getInt(cursor.getColumnIndex(COLUMN_SIZE_ID)));
+                productSize.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PROD_SIZE_PRODUCT_ID)));
+                productSize.setSizeUs(cursor.getInt(cursor.getColumnIndex(COLUMN_SIZE_US)));
+                productSize.setQuantity(cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY)));
 
                 productSizes.add(productSize);
             } while (cursor.moveToNext());
@@ -186,18 +231,18 @@ public class ProductDataSource {
         List<ProductImage> productImages = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(ProductImage.TABLE_NAME,
+        Cursor cursor = db.query(TABLE_NAME_PROD_IMAGE,
                 null,
-                ProductImage.COLUMN_PRODUCT_ID + "=?",
+                COLUMN_PRODUCT_ID + "=?",
                 new String[]{String.valueOf(productId)},
                 null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
                 ProductImage productImage = new ProductImage();
-                productImage.setImageId(cursor.getInt(cursor.getColumnIndex(ProductImage.COLUMN_IMAGE_ID)));
-                productImage.setProductId(cursor.getInt(cursor.getColumnIndex(ProductImage.COLUMN_PRODUCT_ID)));
-                productImage.setImageUrl(cursor.getString(cursor.getColumnIndex(ProductImage.COLUMN_IMAGE_URL)));
+                productImage.setImageId(cursor.getInt(cursor.getColumnIndex(COLUMN_IMAGE_ID)));
+                productImage.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PROD_IMAGE_PRODUCT_ID)));
+                productImage.setImageUrl(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_URL)));
 
                 productImages.add(productImage);
             } while (cursor.moveToNext());
@@ -211,10 +256,13 @@ public class ProductDataSource {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(ProductSize.COLUMN_SIZE_US, productSize.getSizeUs());
-        values.put(ProductSize.COLUMN_QUANTITY, productSize.getQuantity());
+        values.put(COLUMN_SIZE_US, productSize.getSizeUs());
+        values.put(COLUMN_QUANTITY, productSize.getQuantity());
+        values.put(COLUMN_PROD_SIZE_PRODUCT_ID, productSize.getProductId());
+        values.put(COLUMN_SIZE_ID, productSize.getSizeId());
+        values.put(COLUMN_QUANTITY, productSize.getQuantity());
 
-        db.update(ProductSize.TABLE_NAME, values, ProductSize.COLUMN_SIZE_ID + " = ?",
+        db.update(TABLE_NAME_PROD_SIZE, values, COLUMN_SIZE_ID + " = ?",
                 new String[]{String.valueOf(productSize.getSizeId())});
         db.close();
     }
@@ -223,23 +271,24 @@ public class ProductDataSource {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(ProductImage.COLUMN_IMAGE_URL, productImage.getImageUrl());
+        values.put(COLUMN_PROD_IMAGE_PRODUCT_ID, productImage.getProductId());
+        values.put(COLUMN_IMAGE_URL, productImage.getImageUrl());
 
-        db.update(ProductImage.TABLE_NAME, values, ProductImage.COLUMN_IMAGE_ID + " = ?",
+        db.update(TABLE_NAME_PROD_IMAGE, values, COLUMN_IMAGE_ID + " = ?",
                 new String[]{String.valueOf(productImage.getImageId())});
         db.close();
     }
 
     public void deleteProductSize(ProductSize productSize) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(ProductSize.TABLE_NAME, ProductSize.COLUMN_SIZE_ID + " = ?",
+        db.delete(TABLE_NAME_PROD_SIZE, COLUMN_SIZE_ID + " = ?",
                 new String[]{String.valueOf(productSize.getSizeId())});
         db.close();
     }
 
     public void deleteProductImage(ProductImage productImage) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(ProductImage.TABLE_NAME, ProductImage.COLUMN_IMAGE_ID + " = ?",
+        db.delete(TABLE_NAME_PROD_IMAGE, COLUMN_IMAGE_ID + " = ?",
                 new String[]{String.valueOf(productImage.getImageId())});
         db.close();
     }
