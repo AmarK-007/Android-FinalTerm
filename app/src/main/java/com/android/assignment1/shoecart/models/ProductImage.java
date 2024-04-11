@@ -4,10 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ProductImage implements Parcelable {
-    public static final String TABLE_NAME = "productimages";
-    public static final String COLUMN_IMAGE_ID = "image_id";
-    public static final String COLUMN_PRODUCT_ID = "product_id";
-    public static final String COLUMN_IMAGE_URL = "image_url";
 
     private int imageId;
     private int productId;

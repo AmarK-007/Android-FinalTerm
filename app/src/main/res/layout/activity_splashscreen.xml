@@ -6,14 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".activity.SplashScreenActivity">
 
+    <TextView
+        android:id="@+id/logoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/animation_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-100dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:shadowColor="@color/colorAccent"
+        android:shadowDx="4"
+        android:shadowDy="3"
+        android:shadowRadius="20"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_centerInParent="true"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/shoecart_splash" />
