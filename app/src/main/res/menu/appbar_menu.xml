@@ -4,20 +4,20 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/home_icon"
+        android:icon="@drawable/icon_home"
         app:showAsAction="ifRoom|collapseActionView"
         android:title="Search" />
 
     <item
         android:id="@+id/search"
-        android:icon="@drawable/search"
+        android:icon="@drawable/icon_search"
         app:showAsAction="ifRoom|collapseActionView"
         android:iconTint="@color/white"
         android:title="Search" />
 
     <item
         android:id="@+id/cart"
-        android:icon="@drawable/cart"
+        android:icon="@drawable/icon_cart"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom|collapseActionView"
         android:title="Cart" />

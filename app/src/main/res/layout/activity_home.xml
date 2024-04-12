@@ -19,16 +19,17 @@
             android:id="@+id/homeToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/appbar_menu"
             app:navigationIcon="@drawable/hamburger_menu"
-            app:navigationIconTint="@color/white"
+            app:navigationIconTint="@color/colorAccent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Shoe Cart" />
+            app:title="Shoe Cart"
+            app:titleTextColor="@color/colorAccent"/>
 
         <FrameLayout
             android:id="@+id/frames"
@@ -51,19 +52,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:id="@+id/navMenu"
-        android:background="@color/black"
+        android:background="@color/colorPrimary"
         app:headerLayout="@layout/menu_drawer_header"
         app:menu="@menu/drawer_menu"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"/>
+        app:itemIconTint="@color/colorAccent"
+        app:itemTextColor="@color/colorAccent"/>
 
-<<<<<<< Updated upstream
-    <!--    <FrameLayout-->
-    <!--        android:id="@+id/frames"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_marginTop="55dp" />-->
-
-=======
->>>>>>> Stashed changes
 </androidx.drawerlayout.widget.DrawerLayout>

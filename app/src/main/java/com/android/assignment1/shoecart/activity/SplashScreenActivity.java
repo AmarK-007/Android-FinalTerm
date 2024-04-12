@@ -32,19 +32,19 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         new CopyDatabaseTask().execute();
 
-        int SPLASH_TIME_OUT = 8000; // This is 3 seconds
+        int SPLASH_TIME_OUT = 7000; // This is 7 seconds
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (Utility.getUser(SplashScreenActivity.this) == null) {
+               // if (Utility.getUser(SplashScreenActivity.this) == null) {
                     Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);
                     startActivity(homeIntent);
                     finish();
-                } else {
-                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
-                    startActivity(homeIntent);
-                    finish();
-                }
+//                } else {
+//                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+//                    startActivity(homeIntent);
+//                    finish();
+//                }
             }
         }, SPLASH_TIME_OUT);
     }
