@@ -74,14 +74,14 @@ public class HomeActivity extends AppCompatActivity {
         bestSellersGrid = findViewById(R.id.bestSellersGrid);
 
         viewFlipper = findViewById(R.id.categoryCaraousal);
-        for (int i: caraousalImages) {
+        for (int i : caraousalImages) {
             flipperCaraousalImages(i);
         }
 
-        for(int i = 0; i < gridNewShoes.size(); i++){
+        for (int i = 0; i < gridNewShoes.size(); i++) {
 
             HomeProduct product = gridNewShoes.get(i);
-            CardView gridNewShoesCard =(CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
+            CardView gridNewShoesCard = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
 
             ImageView newShoesImage = gridNewShoesCard.findViewById(R.id.productImage);
             TextView newShoesName = gridNewShoesCard.findViewById(R.id.productName);
@@ -95,10 +95,10 @@ public class HomeActivity extends AppCompatActivity {
             newArrivalsGrid.addView(gridNewShoesCard);
         }
 
-        for(int i = 0; i < gridBestShoes.size(); i++){
+        for (int i = 0; i < gridBestShoes.size(); i++) {
 
             HomeProduct product = gridBestShoes.get(i);
-            CardView gridBestShoes =(CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
+            CardView gridBestShoes = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
 
             ImageView bestShoesImage = gridBestShoes.findViewById(R.id.productImage);
             TextView bestShoesName = gridBestShoes.findViewById(R.id.productName);
@@ -117,7 +117,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void flipperCaraousalImages(int image){
+    public void flipperCaraousalImages(int image) {
 
         imageView = findViewById(R.id.caraousalImage);
         imageView.setBackgroundResource(image);
@@ -126,38 +126,31 @@ public class HomeActivity extends AppCompatActivity {
         viewFlipper.setOutAnimation(this, android.R.anim.slide_out_right);
     }
 
+    @Override
+    public void onBackPressed() {
+        showAppExitingAlert(this);
+    }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        onSupportNavigateUp();
-//    }
-//
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        showAppExitingAlert(this);
-//        return true;
-//    }
-//
-//    AlertDialog.Builder alertDialog;
-//
-//    public void showAppExitingAlert(final Context context) {
-//        alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
-//        alertDialog.setTitle(Utility.getAppNameString(context));
-//        alertDialog.setMessage(getString(R.string.msg_app_exit));
-//        alertDialog.setPositiveButton(getString(R.string.button_ok),
-//                (dialog, which) -> {
-//                    dialog.dismiss();
-//                    alertDialog = null;
-//                    Log.v(TAG, "App Exited via Alert Dialog");
-//                    Log.v(TAG, "from exitDialog HomeActivity called");
-//                    //HomeActivity.this.finishAffinity();
-//                    HomeActivity.this.finishAndRemoveTask();
-//                });
-//        alertDialog.setNegativeButton(getString(R.string.button_cancel), (dialog, which) -> {
-//            dialog.dismiss();
-//            alertDialog = null;
-//        });
-//        alertDialog.show();
-//    }
+    AlertDialog.Builder alertDialog;
+
+    public void showAppExitingAlert(final Context context) {
+        alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+        alertDialog.setTitle(Utility.getAppNameString(context));
+        alertDialog.setMessage(getString(R.string.msg_app_exit));
+        alertDialog.setPositiveButton(getString(R.string.button_ok),
+                (dialog, which) -> {
+                    dialog.dismiss();
+                    alertDialog = null;
+                    Log.v(TAG, "App Exited via Alert Dialog");
+                    Log.v(TAG, "from exitDialog HomeActivity called");
+                    //HomeActivity.this.finishAffinity();
+                    HomeActivity.this.finishAndRemoveTask();
+                });
+        alertDialog.setNegativeButton(getString(R.string.button_cancel), (dialog, which) -> {
+            dialog.dismiss();
+            alertDialog = null;
+        });
+        alertDialog.show();
+    }
+
 }

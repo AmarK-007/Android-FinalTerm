@@ -78,7 +78,7 @@ public class UserDataSource {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME,
-                new String[]{COLUMN_USER_ID, COLUMN_NAME, COLUMN_EMAIL, COLUMN_PASSWORD, COLUMN_USERNAME, /* Add the rest of the user fields... */},
+                null,
                 COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?",
                 new String[]{username, password},
                 null, null, null);

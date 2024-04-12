@@ -27,12 +27,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splashscreen);
 
         LottieAnimationView animationView = findViewById(R.id.animation_view);
-        animationView.setAnimation(R.raw.shoecart_splash);
+        animationView.setAnimation(R.raw.shoecart_orderplaced);
         animationView.playAnimation();
 
         new CopyDatabaseTask().execute();
 
-        int SPLASH_TIME_OUT = 3000; // This is 3 seconds
+        int SPLASH_TIME_OUT = 8000; // This is 3 seconds
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
