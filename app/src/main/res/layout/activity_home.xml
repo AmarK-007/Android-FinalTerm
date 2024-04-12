@@ -10,99 +10,41 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".activity.HomeActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/homeToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
-            app:title="Shoe Cart"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/appbar_menu"
             app:navigationIcon="@drawable/hamburger_menu"
             app:navigationIconTint="@color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="Shoe Cart" />
 
         <FrameLayout
             android:id="@+id/frames"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ViewFlipper
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:id="@+id/categoryCaraousal"
-                        android:flipInterval="4000"
-                        android:autoStart="true"
-                        android:layout_marginTop="20dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/caraousalImage"/>
-                    </ViewFlipper>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="New Arrivals"
-                        android:textColor="@color/white"
-                        android:textSize="22dp"
-                        android:gravity="center"/>
-
-                    <GridLayout
-                        android:id="@+id/newArrivalsGrid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:rowCount="2"
-                        android:columnCount="2"
-                        android:useDefaultMargins="true"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Best Sellers"
-                        android:textColor="@color/white"
-                        android:textSize="22dp"
-                        android:gravity="center"/>
-
-                    <GridLayout
-                        android:id="@+id/bestSellersGrid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:rowCount="2"
-                        android:columnCount="2"
-                        android:useDefaultMargins="true"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-            </ScrollView>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeToolBar">
         </FrameLayout>
 
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -115,10 +57,13 @@
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"/>
 
+<<<<<<< Updated upstream
     <!--    <FrameLayout-->
     <!--        android:id="@+id/frames"-->
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="match_parent"-->
     <!--        android:layout_marginTop="55dp" />-->
 
+=======
+>>>>>>> Stashed changes
 </androidx.drawerlayout.widget.DrawerLayout>

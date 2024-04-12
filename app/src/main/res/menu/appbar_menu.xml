@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/home"
+        android:icon="@drawable/home_icon"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:title="Search" />
+
+    <item
         android:id="@+id/search"
         android:icon="@drawable/search"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|collapseActionView"
         android:iconTint="@color/white"
         android:title="Search" />
 
@@ -13,6 +19,6 @@
         android:id="@+id/cart"
         android:icon="@drawable/cart"
         android:iconTint="@color/white"
-        app:showAsAction="ifRoom"
+        app:showAsAction="ifRoom|collapseActionView"
         android:title="Cart" />
 </menu>
