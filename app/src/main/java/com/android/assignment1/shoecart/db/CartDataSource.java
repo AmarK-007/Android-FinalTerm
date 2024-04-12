@@ -81,6 +81,31 @@ public class CartDataSource {
         return carts;
     }
 
+    @SuppressLint("Range")
+    public List<Cart> getAllCartsForUser(String userID) {
+        List<Cart> carts = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE " + COLUMN_USER_ID + " = " + userID;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Cart cart = new Cart();
+                cart.setCartId(cursor.getInt(cursor.getColumnIndex(COLUMN_CART_ID)));
+                cart.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
+                cart.setProductSize(cursor.getString(cursor.getColumnIndex(COLUMN_PRODUCT_SIZE)));
+                cart.setQuantity(cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY)));
+                cart.setUserId(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));
+
+                carts.add(cart);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return carts;
+    }
+
     public void updateCart(Cart cart) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 

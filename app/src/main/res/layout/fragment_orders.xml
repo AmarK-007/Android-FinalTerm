@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".fragments.OrdersFragment">
 
 
@@ -17,7 +18,7 @@
         android:id="@+id/rvOrders"
         tools:listitem="@layout/custom_order_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

@@ -10,13 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.assignment1.shoecart.adapters.OrderProductAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentOrderDetailsBinding;
-import com.android.assignment1.shoecart.models.Orders;
+import com.android.assignment1.shoecart.db.ProductDataSource;
+import com.android.assignment1.shoecart.models.Order;
+import com.android.assignment1.shoecart.models.Product;
+
+import java.util.ArrayList;
 
 
 public class OrderDetailsFragment extends Fragment {
 
 FragmentOrderDetailsBinding binding;
-Orders order;
+    Order order;
+    ArrayList<Product> products;
 
 OrderProductAdapter adapter;
     @Override
@@ -32,7 +37,7 @@ OrderProductAdapter adapter;
         binding = FragmentOrderDetailsBinding.inflate(inflater,container,false);
         if (getArguments() != null) {
             //geting arguments
-            order = (Orders) getArguments().getParcelable("order");
+            order = (Order) getArguments().getParcelable("order");
 
             if (order != null){
                 setData();
@@ -47,19 +52,25 @@ OrderProductAdapter adapter;
 
     public void setData(){
         binding.tvOrderId.setText("#" + order.getOrderId());
-        binding.tvDate.setText(order.getOrderDate());
-        binding.tvStatus.setText(order.getStatus());
-        binding.tvAddress.setText(order.getShippingAddress());
+        binding.tvDate.setText(order.getOrderDate().toString());
+        binding.tvStatus.setText(order.getDeliveryStatus());
+//        binding.tvAddress.setText(order.get());
         binding.tvPaymentMethod.setText(order.getPaymentMethod());
         double total = 0.0;
-        for (int i = 0 ; i < order.getProductList().size() ; i++){
-            total += order.getProductList().get(i).getPrice() * order.getProductList().get(i).getSizes().get(0).getQuantity();
+        double deliveryCharges = 0.0;
+        products = new ArrayList<>();
+        for (int i = 0; i < order.getOrderDetails().size(); i++) {
+            products.add(new ProductDataSource(requireContext()).getProduct(order.getOrderDetails().get(i).getProductId()));
         }
-        binding.tvItemTotal.setText("$ "+total);
-        binding.tvDeliveryCharges.setText("$2");
-        binding.tvPaid.setText("$"+ (total + 2));
+        for (int i = 0; i < order.getOrderDetails().size(); i++) {
+            total += products.get(i).getPrice() * order.getOrderDetails().get(i).getQuantity();
+            deliveryCharges += products.get(i).getShippingCost();
+        }
+        binding.tvItemTotal.setText("$" + total);
+        binding.tvDeliveryCharges.setText("$" + deliveryCharges);
+        binding.tvPaid.setText("$" + (total + deliveryCharges));
 
-        adapter = new OrderProductAdapter(order.getProductList());
+        adapter = new OrderProductAdapter(products, order.getOrderDetails());
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);
 
         binding.rvOrdersList.setAdapter(adapter);

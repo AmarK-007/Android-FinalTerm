@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.assignment1.shoecart.R;
-import com.android.assignment1.shoecart.activity.LoginScreenActivity;
+import com.android.assignment1.shoecart.utils.Utility;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,9 +36,15 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);
-                startActivity(homeIntent);
-                finish();
+                if (Utility.getUser(SplashScreenActivity.this) == null) {
+                    Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                } else {
+                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                }
             }
         }, SPLASH_TIME_OUT);
     }

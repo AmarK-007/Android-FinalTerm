@@ -21,7 +21,7 @@
         />
 
     <item
-        android:id="@+id/whislist"
+        android:id="@+id/wishList"
         android:icon="@drawable/whishlist"
         android:title="Whislist"
         />

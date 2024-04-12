@@ -10,16 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.models.OrderDetail;
 import com.android.assignment1.shoecart.models.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapter.MyViewHolder> {
 
     ArrayList<Product> productArrayList;
+    List<OrderDetail> orderDetailList;
 
-    public OrderProductAdapter(ArrayList<Product> productArrayList) {
+    public OrderProductAdapter(ArrayList<Product> productArrayList, List<OrderDetail> orderDetailList) {
         this.productArrayList = productArrayList;
+        this.orderDetailList = orderDetailList;
     }
 
     @NonNull
@@ -32,8 +36,8 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(productArrayList.get(position).getTitle() + " x " + productArrayList.get(position).getSizes().get(0).getQuantity());
-        holder.price.setText(String.valueOf(productArrayList.get(position).getPrice() * productArrayList.get(position).getSizes().get(0).getQuantity()));
+        holder.title.setText(productArrayList.get(position).getTitle() + " x " + orderDetailList.get(position).getQuantity());
+        holder.price.setText(String.valueOf(productArrayList.get(position).getPrice() * orderDetailList.get(position).getQuantity()));
         holder.shortDescription.setText(productArrayList.get(position).getDescription());
 
     }

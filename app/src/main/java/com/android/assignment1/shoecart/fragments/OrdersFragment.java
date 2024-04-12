@@ -13,19 +13,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.OrdersAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentOrdersBinding;
+import com.android.assignment1.shoecart.db.OrderDataSource;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
-import com.android.assignment1.shoecart.models.Orders;
+import com.android.assignment1.shoecart.models.Order;
 import com.android.assignment1.shoecart.models.Product;
 import com.android.assignment1.shoecart.models.ProductSize;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class OrdersFragment extends Fragment implements AdapterInterface<Orders> {
+public class OrdersFragment extends Fragment implements AdapterInterface<Order> {
 
 
     FragmentOrdersBinding binding;
-    ArrayList<Orders> ordersList = new ArrayList<>();
+    List<Order> ordersList = new ArrayList<>();
     ArrayList<Product> productArrayList = new ArrayList<>();
 
     OrdersAdapter adapter;
@@ -48,8 +50,14 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Orders>
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentOrdersBinding.inflate(inflater,container,false);
-        productArrayList = new ArrayList<>();
+
+        OrderDataSource orderDataSource = new OrderDataSource(requireContext());
         ordersList = new ArrayList<>();
+        ordersList = orderDataSource.getAllOrders();
+
+
+        productArrayList = new ArrayList<>();
+
         ArrayList<ProductSize> sizes = new ArrayList<>();
         sizes.add(new ProductSize(2, 3, 14, 2));
         productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
@@ -57,11 +65,11 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Orders>
         productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 
 
-        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
-        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
-        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
-        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
-        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
+//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
+//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
+//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
+//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
+//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
 
         setData();
 
@@ -70,14 +78,15 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Orders>
     }
 
     public void setData(){
-        adapter = new OrdersAdapter(ordersList,this);
+        adapter = new OrdersAdapter(ordersList, this, requireContext());
         layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);
         binding.rvOrders.setLayoutManager(layoutManager);
         binding.rvOrders.setAdapter(adapter);
     }
 
+
     @Override
-    public void onItemSelected(Orders data, int position) {
+    public void onItemSelected(Order data, int position) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("order", data);
 //        moving to add fragment

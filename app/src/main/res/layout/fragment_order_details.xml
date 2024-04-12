@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryLight"
     tools:context=".fragments.OrderDetailsFragment">
 
     <androidx.cardview.widget.CardView
@@ -59,20 +60,20 @@
                         android:text="23/01/2000"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="Delivered to"
-                        android:textSize="16sp" />
+                    <!--                    <TextView-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="10dp"-->
+                    <!--                        android:text="Delivered to"-->
+                    <!--                        android:textSize="16sp" />-->
 
-                    <TextView
-                        android:id="@+id/tvAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="139 Jackson"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/tvAddress"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="139 Jackson"-->
+                    <!--                        android:textSize="18sp"-->
+                    <!--                        android:textStyle="bold" />-->
 
                     <TextView
                         android:layout_width="match_parent"

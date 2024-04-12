@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryLight"
     tools:context=".fragments.ShippingDetailsFragment">
 
     <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -28,180 +31,192 @@
 
             <!-- First Name -->
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/firsnameWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconMinSize="24dp">
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorAccent"
+                app:errorTextAppearance="@style/error_appearance">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvFirstName"
+                <EditText
+                    android:id="@+id/firstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_person_resized"
-                    android:drawablePadding="10dp"
-                    android:hint="First Name"
-                    android:inputType="textPersonName" />
+                    android:fontFamily="@fonts/roboto_light"
+                    android:hint="Name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorAccent"
+                    android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Last Name -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconDrawable="@drawable/ic_person">
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/lastnameWrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@android:color/white"-->
+            <!--                android:textColorHint="@color/colorAccent"-->
+            <!--                app:errorTextAppearance="@style/error_appearance">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_person_resized"
-                    android:drawablePadding="10dp"
-                    android:hint="Last Name"
-                    android:inputType="textPersonName" />
+            <!--                <EditText-->
+            <!--                    android:id="@+id/lasname"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:fontFamily="@fonts/roboto_light"-->
+            <!--                    android:hint="Last Name"-->
+            <!--                    android:imeOptions="actionNext"-->
+            <!--                    android:inputType="textEmailAddress"-->
+            <!--                    android:textColor="@android:color/white"-->
+            <!--                    android:textColorHint="@color/colorAccent"-->
+            <!--                    android:textSize="15sp" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <!-- Address 1 -->
             <com.google.android.material.textfield.TextInputLayout
-
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/addressOneWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconDrawable="@drawable/ic_location">
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorAccent"
+                app:errorTextAppearance="@style/error_appearance">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvAddress1"
+                <EditText
+                    android:id="@+id/addressOne"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_location_resized"
-                    android:drawablePadding="10dp"
+                    android:fontFamily="@fonts/roboto_light"
                     android:hint="Address 1"
-                    android:inputType="textPostalAddress" />
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorAccent"
+                    android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Address 2 -->
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/addressTwoWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconDrawable="@drawable/ic_location">
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorAccent"
+                app:errorTextAppearance="@style/error_appearance">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvAddress2"
+                <EditText
+                    android:id="@+id/addressTwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_location_resized"
-                    android:drawablePadding="10dp"
+                    android:fontFamily="@fonts/roboto_light"
                     android:hint="Address 2"
-                    android:inputType="textPostalAddress" />
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorAccent"
+                    android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Postal Code -->
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/postalCodeWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconDrawable="@drawable/ic_postal_codes">
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorAccent"
+                app:errorTextAppearance="@style/error_appearance">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvPostalCode"
+                <EditText
+                    android:id="@+id/postalCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_postal_code_resized"
-                    android:drawablePadding="10dp"
+                    android:fontFamily="@fonts/roboto_light"
                     android:hint="Postal Code"
-                    android:inputType="textPostalAddress" />
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorAccent"
+                    android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- City -->
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/cityWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconDrawable="@drawable/ic_location">
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorAccent"
+                app:errorTextAppearance="@style/error_appearance">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvCity"
+                <EditText
+                    android:id="@+id/city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_location_resized"
-                    android:drawablePadding="10dp"
-                    android:hint="City"
-                    android:inputType="text" />
+                    android:fontFamily="@fonts/roboto_light"
+                    android:hint="Ciy"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorAccent"
+                    android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <!-- Province -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/provinceWrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@android:color/white"-->
+            <!--                android:textColorHint="@color/colorAccent"-->
+            <!--                app:errorTextAppearance="@style/error_appearance">-->
+
+            <!--                <EditText-->
+            <!--                    android:id="@+id/province"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:fontFamily="@fonts/roboto_light"-->
+            <!--                    android:hint="Province"-->
+            <!--                    android:imeOptions="actionNext"-->
+            <!--                    android:inputType="textEmailAddress"-->
+            <!--                    android:textColor="@android:color/white"-->
+            <!--                    android:textColorHint="@color/colorAccent"-->
+            <!--                    android:textSize="15sp" />-->
+
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+            <Spinner
+                android:id="@+id/provinceSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconDrawable="@drawable/ic_location">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvProvince"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_location_resized"
-                    android:drawablePadding="10dp"
-                    android:hint="Province"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                android:layout_height="wrap_content" />
             <!-- Country -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="16dp"
-                app:hintEnabled="true"
-                app:startIconDrawable="@drawable/ic_location">
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:id="@+id/countryWrapper"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@android:color/white"-->
+            <!--                android:textColorHint="@color/colorAccent"-->
+            <!--                app:errorTextAppearance="@style/error_appearance">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tvCountry"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_location_resized"
-                    android:drawablePadding="10dp"
-                    android:hint="Country"
-                    android:inputType="text" />
+            <!--                <EditText-->
+            <!--                    android:id="@+id/country"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:fontFamily="@fonts/roboto_light"-->
+            <!--                    android:hint="Country"-->
+            <!--                    android:imeOptions="actionNext"-->
+            <!--                    android:inputType="textEmailAddress"-->
+            <!--                    android:textColor="@android:color/white"-->
+            <!--                    android:textColorHint="@color/colorAccent"-->
+            <!--                    android:textSize="15sp" />-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <Button
                 android:id="@+id/btnCheckOut"

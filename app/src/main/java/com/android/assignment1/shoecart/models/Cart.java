@@ -14,6 +14,13 @@ public class Cart implements Parcelable {
     public Cart() {
     }
 
+    public Cart(int productId, String productSize, int quantity, int userId) {
+        this.productId = productId;
+        this.productSize = productSize;
+        this.quantity = quantity;
+        this.userId = userId;
+    }
+
     public Cart(int cartId, int productId, String productSize, int quantity, int userId) {
         this.cartId = cartId;
         this.productId = productId;

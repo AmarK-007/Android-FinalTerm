@@ -79,6 +79,8 @@ public class LoginScreenActivity extends AppCompatActivity {
     private void performLogin(String username, String password) {
         UserDataSource userDataSource = new UserDataSource(this);
         if (userDataSource.validateUser(username, password)) {
+
+            Utility.storeUser(userDataSource.getUser(username, password), this);
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
             finish();

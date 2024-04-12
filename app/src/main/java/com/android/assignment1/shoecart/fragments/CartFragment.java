@@ -7,22 +7,28 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.CartAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentCartBinding;
+import com.android.assignment1.shoecart.db.CartDataSource;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
-import com.android.assignment1.shoecart.models.Product;
+import com.android.assignment1.shoecart.models.Cart;
 import com.android.assignment1.shoecart.models.ProductSize;
+import com.android.assignment1.shoecart.utils.Utility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class CartFragment extends Fragment implements AdapterInterface<Product> {
+public class CartFragment extends Fragment implements AdapterInterface<Cart> {
 
     FragmentCartBinding binding;
     CartAdapter adapter;
-    ArrayList<Product> arrayList;
+    List<Cart> arrayList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,14 +44,14 @@ public class CartFragment extends Fragment implements AdapterInterface<Product> 
 
         arrayList = new ArrayList<>();
         ArrayList<ProductSize> sizes = new ArrayList<>();
-        sizes.add(new ProductSize(2, 3, 14, 2));
+//        sizes.add(new ProductSize(2, 3, 14, 2));
+        arrayList = new CartDataSource(requireContext()).getAllCartsForUser(String.valueOf(Utility.getUser(requireContext()).getUserId()));
+//        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
+//        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
+//        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 
-        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
-        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
-        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 
-
-        adapter = new CartAdapter(arrayList, this);
+        adapter = new CartAdapter(arrayList, this, requireContext());
         LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
 
         binding.rvCartItem.setLayoutManager(manager);
@@ -54,14 +60,22 @@ public class CartFragment extends Fragment implements AdapterInterface<Product> 
 
         binding.btnProceed.setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Hello", Toast.LENGTH_SHORT).show();
+
+            Fragment fragment = new ShippingDetailsFragment();
+
+            FragmentManager supportFragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frames, fragment);
+            fragmentTransaction.commit();
         });
 
 
         return binding.getRoot();
     }
 
+
     @Override
-    public void onItemSelected(Product data, int position) {
+    public void onItemSelected(Cart data, int position) {
 
     }
 }

@@ -35,6 +35,17 @@ public class Order implements Parcelable {
         this.orderDetails = orderDetails;
     }
 
+    public Order(int userId, double totalAmount, Date orderDate, Date deliveryDate, String paymentMethod, String deliveryStatus, String returnStatus, List<OrderDetail> orderDetails) {
+        this.userId = userId;
+        this.totalAmount = totalAmount;
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.paymentMethod = paymentMethod;
+        this.deliveryStatus = deliveryStatus;
+        this.returnStatus = returnStatus;
+        this.orderDetails = orderDetails;
+    }
+
     protected Order(Parcel in) {
         orderId = in.readInt();
         userId = in.readInt();

@@ -15,25 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.db.CartDataSource;
 import com.android.assignment1.shoecart.db.ProductDataSource;
+import com.android.assignment1.shoecart.db.WishlistDataSource;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 import com.android.assignment1.shoecart.models.Cart;
 import com.android.assignment1.shoecart.models.Product;
+import com.android.assignment1.shoecart.models.Wishlist;
 import com.android.assignment1.shoecart.utils.Utility;
 
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
+public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyViewHolder> {
 
-    List<Cart> cartArrayList;
-    AdapterInterface<Cart> adapterInterface;
+    List<Wishlist> wishlistList;
+    AdapterInterface<Wishlist> adapterInterface;
     Context context;
-    CartDataSource dataSource;
+    WishlistDataSource dataSource;
 
-    public CartAdapter(List<Cart> cartArrayList, AdapterInterface<Cart> adapterInterface, Context context) {
-        this.cartArrayList = cartArrayList;
+    public WishlistAdapter(List<Wishlist> wishListArrayList, AdapterInterface<Wishlist> adapterInterface, Context context) {
+        this.wishlistList = wishListArrayList;
         this.adapterInterface = adapterInterface;
         this.context = context;
-        dataSource = new CartDataSource(context);
+        dataSource = new WishlistDataSource(context);
     }
 
     @NonNull
@@ -46,9 +48,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Product product = new ProductDataSource(context).getProduct(cartArrayList.get(position).getProductId());
-        final int[] quantity = {0};
-        quantity[0] = cartArrayList.get(position).getQuantity();
+        ProductDataSource productDataSource = new ProductDataSource(context);
+        Product product = productDataSource.getProduct(wishlistList.get(position).getProductId());
+
+        holder.btnRemove.setText("Add to Cart");
+        final int[] quantity = {1};
+
         holder.tvPrice.setText("$" + product.getPrice());
         holder.tvTitle.setText(product.getTitle());
         holder.tvQuantity.setText(String.valueOf(quantity[0]));
@@ -58,36 +63,41 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.ivAdd.setOnClickListener(v -> {
             quantity[0]++;
             holder.tvQuantity.setText(String.valueOf(quantity[0]));
-            updateCart(new Cart(cartArrayList.get(position).getCartId(), cartArrayList.get(position).getProductId(), cartArrayList.get(position).getProductSize(), quantity[0], cartArrayList.get(position).getUserId()));
+//            updateCart(new Cart(wishlistList.get(position).getCartId(), wishlistList.get(position).getProductId(), wishlistList.get(position).getProductSize(),quantity[0], wishlistList.get(position).getUserId()));
         });
 
         holder.ivMinus.setOnClickListener(v -> {
             if (quantity[0] > 1) {
                 quantity[0]--;
                 holder.tvQuantity.setText(String.valueOf(quantity[0]));
-                updateCart(new Cart(cartArrayList.get(position).getCartId(), cartArrayList.get(position).getProductId(), cartArrayList.get(position).getProductSize(), quantity[0], cartArrayList.get(position).getUserId()));
+//                updateCart(new Cart(wishlistList.get(position).getCartId(), wishlistList.get(position).getProductId(), wishlistList.get(position).getProductSize(),quantity[0], wishlistList.get(position).getUserId()));
 
             } else {
                 Toast.makeText(context, "Item can't be 0. Please click remove item button to remove item from cart", Toast.LENGTH_SHORT).show();
             }
         });
-
+        final String[] productSize = new String[1];
         holder.btnRemove.setOnClickListener(v -> {
+            CartDataSource cartDataSource = new CartDataSource(context);
 
-            dataSource.deleteCart(cartArrayList.get(position));
-            cartArrayList.remove(position);
+
+            productDataSource.getProductSizes(product.getProductId()).forEach(size -> {
+                if (size.getSizeId() == wishlistList.get(position).getSizeId()) {
+                    productSize[0] = String.valueOf(size.getSizeUs());
+                }
+            });
+
+            cartDataSource.insertCart(new Cart(wishlistList.get(position).getProductId(), productSize[0], quantity[0], wishlistList.get(position).getUserId()));
+            dataSource.deleteWishlist(wishlistList.get(position));
+            wishlistList.remove(position);
             notifyDataSetChanged();
         });
     }
 
-    public void updateCart(Cart cart) {
-
-        dataSource.updateCart(cart);
-    }
 
     @Override
     public int getItemCount() {
-        return cartArrayList.size();
+        return wishlistList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
