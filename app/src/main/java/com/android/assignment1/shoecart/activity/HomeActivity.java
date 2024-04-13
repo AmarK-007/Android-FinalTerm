@@ -1,6 +1,7 @@
 package com.android.assignment1.shoecart.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +22,7 @@ import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.fragments.AboutFragment;
 import com.android.assignment1.shoecart.fragments.CartFragment;
 import com.android.assignment1.shoecart.fragments.OrdersFragment;
+import com.android.assignment1.shoecart.fragments.ProfileFragment;
 import com.android.assignment1.shoecart.fragments.SupportFragment;
 import com.android.assignment1.shoecart.fragments.WishlistFragment;
 import com.android.assignment1.shoecart.models.HomeProduct;
@@ -44,8 +46,6 @@ public class HomeActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     NavigationView navigationView;
-    ViewFlipper viewFlipper;
-    ImageView imageView;
     NavigationView navDrawerMenu;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -78,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
                 int i = item.getItemId();
 
                 if (i == R.id.myProfile) {
-
+                    changeFragment(new ProfileFragment());
                 } else if (i == R.id.myOrders) {
                     changeFragment(new OrdersFragment());
                 } else if (i == R.id.categories) {
@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (i == R.id.about) {
                     changeFragment(new AboutFragment());
                 } else if (i == R.id.logout) {
-                    onBackPressed();
+                    showAppExitingAlertLogout(HomeActivity.this);
                 }
                 return false;
             }
@@ -154,6 +154,27 @@ public class HomeActivity extends AppCompatActivity {
                     Log.v(TAG, "from exitDialog HomeActivity called");
                     //HomeActivity.this.finishAffinity();
                     HomeActivity.this.finishAndRemoveTask();
+                });
+        alertDialog.setNegativeButton(getString(R.string.button_cancel), (dialog, which) -> {
+            dialog.dismiss();
+            alertDialog = null;
+        });
+        alertDialog.show();
+    }
+
+    public void showAppExitingAlertLogout(final Context context) {
+        alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+        alertDialog.setTitle(Utility.getAppNameString(context));
+        alertDialog.setMessage(getString(R.string.msg_app_exit));
+        alertDialog.setPositiveButton(getString(R.string.button_ok),
+                (dialog, which) -> {
+                    dialog.dismiss();
+                    alertDialog = null;
+                    Log.v(TAG, "App Exited via Alert Dialog");
+                    Log.v(TAG, "from exitDialog HomeActivity called");
+                    Intent intent = new Intent(this, LoginScreenActivity.class);
+                    startActivity(intent);
+                    finish();
                 });
         alertDialog.setNegativeButton(getString(R.string.button_cancel), (dialog, which) -> {
             dialog.dismiss();

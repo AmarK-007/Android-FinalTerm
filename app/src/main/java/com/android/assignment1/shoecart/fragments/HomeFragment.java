@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        int caraousalImages[] = {R.drawable.shoe1, R.drawable.shoe2, R.drawable.shoe3};
+        int caraousalImages[] = {R.drawable.product_blue_1, R.drawable.product_white_blue_1, R.drawable.product_grey_3};
 
         HomeProduct product1 = new HomeProduct(R.drawable.product_blue_1, "Blue Shoes", 122.99);
         HomeProduct product2 = new HomeProduct(R.drawable.product_grey_1, "Grey Shoes", 122.99);
@@ -58,8 +58,12 @@ public class HomeFragment extends Fragment {
 
         viewFlipper = rootView.findViewById(R.id.categoryCaraousal);
         for (int i: caraousalImages) {
-            flipperCaraousalImages(i);
+            ImageView imageView = new ImageView(requireContext());
+            imageView.setImageResource(i);
+            viewFlipper.addView(imageView);
         }
+
+        viewFlipper.startFlipping();
 
         for(int i = 0; i < gridNewShoes.size(); i++){
 
@@ -96,15 +100,6 @@ public class HomeFragment extends Fragment {
         }
         // Inflate the layout for this fragment
         return rootView;
-    }
-
-    public void flipperCaraousalImages(int image){
-
-        imageView = viewFlipper.findViewById(R.id.caraousalImage);
-        imageView.setBackgroundResource(image);
-
-        viewFlipper.setInAnimation(requireContext(), android.R.anim.slide_in_left);
-        viewFlipper.setOutAnimation(requireContext(), android.R.anim.slide_out_right);
     }
 
 }
