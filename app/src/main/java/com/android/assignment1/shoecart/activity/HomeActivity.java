@@ -18,7 +18,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.fragments.AboutFragment;
 import com.android.assignment1.shoecart.fragments.CartFragment;
+import com.android.assignment1.shoecart.fragments.OrdersFragment;
+import com.android.assignment1.shoecart.fragments.SupportFragment;
+import com.android.assignment1.shoecart.fragments.WishlistFragment;
+import com.android.assignment1.shoecart.models.HomeProduct;
+import com.android.assignment1.shoecart.utils.Utility;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 import com.android.assignment1.shoecart.fragments.CategoryFragment;
 import com.android.assignment1.shoecart.fragments.HomeFragment;
 import com.android.assignment1.shoecart.fragments.OrdersFragment;
@@ -45,7 +56,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-
         materialToolbar = findViewById(R.id.homeToolBar);
         drawerLayout = findViewById(R.id.drawerMenu);
         navigationView = findViewById(R.id.navMenu);
@@ -59,45 +69,6 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-
-
-//    public void drawerItemClick() {
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Fragment fragment = null;
-//                int itemId = item.getItemId();
-//                if (itemId == R.id.myProfile) {
-////                   fragment = new AddFragment(employeeService);
-//                } else if (itemId == R.id.myOrders) {
-//                    fragment = new OrdersFragment();
-//                } else if (itemId == R.id.categories) {
-////                   fragment = new UpdateFragment();
-//                } else if (itemId == R.id.wishList) {
-//                    fragment = new WishlistFragment();
-//                } else if (itemId == R.id.support) {
-//                    fragment = new CartFragment();
-//                } else if (itemId == R.id.about) {
-////                   fragment = new ListFragment();
-//                } else if (itemId == R.id.logout) {
-////                   fragment = new ListFragment();
-//                } else {
-//
-//                }
-//                if (fragment != null) {
-////                    opening or moving to a fragment
-//                    FragmentManager supportFragmentManager = getSupportFragmentManager();
-//                    FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-//                    fragmentTransaction.replace(R.id.frames, fragment);
-//                    fragmentTransaction.commit();
-//                    drawerLayout.closeDrawers();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-//    }
-
     private void setDrawer() {
         navDrawerMenu = findViewById(R.id.navMenu);
         navDrawerMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -106,25 +77,19 @@ public class HomeActivity extends AppCompatActivity {
 
                 int i = item.getItemId();
 
-                if(i == R.id.myProfile){
+                if (i == R.id.myProfile) {
 
-                }
-                else if(i == R.id.myOrders){
+                } else if (i == R.id.myOrders) {
                     changeFragment(new OrdersFragment());
-                }
-                else if(i == R.id.categories){
+                } else if (i == R.id.categories) {
                     changeFragment(new CategoryFragment());
-                }
-                else if(i == R.id.wishList){
+                } else if (i == R.id.wishList) {
                     changeFragment(new WishlistFragment());
-                }
-                else if(i == R.id.support){
-
-                }
-                else if(i == R.id.about){
-
-                }
-                else if(i == R.id.logout){
+                } else if (i == R.id.support) {
+                    changeFragment(new SupportFragment());
+                } else if (i == R.id.about) {
+                    changeFragment(new AboutFragment());
+                } else if (i == R.id.logout) {
                     onBackPressed();
                 }
                 return false;
@@ -144,16 +109,15 @@ public class HomeActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        if(id == R.id.home){
+        if (id == R.id.home) {
             changeFragment(new HomeFragment());
-        }
-        else if(id == R.id.search){
+        } else if (id == R.id.search) {
 
-        } else if(id == R.id.cart){
+        } else if (id == R.id.cart) {
             changeFragment(new CartFragment());
         }
 
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -161,12 +125,14 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        showAppExitingAlert(this);
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frames);
+        if (currentFragment instanceof HomeFragment) {
+            showAppExitingAlert(this);
+        }
     }
 
 
-    public void changeFragment(Fragment fragment){
+    public void changeFragment(Fragment fragment) {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frames, fragment);
