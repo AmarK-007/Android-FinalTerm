@@ -3,25 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
     tools:context=".fragments.OrderDetailsFragment">
 
-    <androidx.cardview.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="20dp">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp">
 
-            <ScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/btnReOrder">
+                android:layout_height="wrap_content">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -60,20 +62,6 @@
                         android:text="23/01/2000"
                         android:textSize="16sp" />
 
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_marginTop="10dp"-->
-                    <!--                        android:text="Delivered to"-->
-                    <!--                        android:textSize="16sp" />-->
-
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/tvAddress"-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:text="139 Jackson"-->
-                    <!--                        android:textSize="18sp"-->
-                    <!--                        android:textStyle="bold" />-->
 
                     <TextView
                         android:layout_width="match_parent"
@@ -100,7 +88,8 @@
                         android:id="@+id/rvOrdersList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp" />
+                        android:layout_marginTop="20dp"
+                        android:nestedScrollingEnabled="false" />
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
@@ -177,19 +166,19 @@
                         android:layout_marginTop="15dp"
                         app:dividerColor="@color/dividerColor" />
 
-
+                    <Button
+                        android:id="@+id/btnReOrder"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:text="Re-order" />
                 </LinearLayout>
-            </ScrollView>
 
 
-            <Button
-                android:id="@+id/btnReOrder"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="25dp"
-                android:text="Re-order" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
 </LinearLayout>

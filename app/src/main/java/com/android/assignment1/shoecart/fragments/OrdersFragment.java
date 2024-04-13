@@ -17,9 +17,9 @@ import com.android.assignment1.shoecart.db.OrderDataSource;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 import com.android.assignment1.shoecart.models.Order;
 import com.android.assignment1.shoecart.models.Product;
-import com.android.assignment1.shoecart.models.ProductSize;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -54,22 +54,7 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
         OrderDataSource orderDataSource = new OrderDataSource(requireContext());
         ordersList = new ArrayList<>();
         ordersList = orderDataSource.getAllOrders();
-
-
-        productArrayList = new ArrayList<>();
-
-        ArrayList<ProductSize> sizes = new ArrayList<>();
-        sizes.add(new ProductSize(2, 3, 14, 2));
-        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
-        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
-        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
-
-
-//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
-//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
-//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
-//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
-//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
+        Collections.reverse(ordersList);
 
         setData();
 

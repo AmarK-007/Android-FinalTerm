@@ -36,15 +36,15 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               // if (Utility.getUser(SplashScreenActivity.this) == null) {
+                if (Utility.getUser(SplashScreenActivity.this) == null) {
                     Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);
                     startActivity(homeIntent);
                     finish();
-//                } else {
-//                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
-//                    startActivity(homeIntent);
-//                    finish();
-//                }
+                } else {
+                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                }
             }
         }, SPLASH_TIME_OUT);
     }
