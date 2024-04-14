@@ -22,7 +22,7 @@ public class ProductDataSource {
 
     public static final String TABLE_NAME_PRODUCT = "products";
     public static final String COLUMN_PRODUCT_ID = "product_id";
-    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_CATEGORY = "categories";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_PRICE = "price";
