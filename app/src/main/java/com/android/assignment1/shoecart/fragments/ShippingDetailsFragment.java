@@ -10,11 +10,25 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.databinding.FragmentShippingDetailsBinding;
+import com.android.assignment1.shoecart.db.CartDataSource;
+import com.android.assignment1.shoecart.db.OrderDataSource;
+import com.android.assignment1.shoecart.db.ProductDataSource;
+import com.android.assignment1.shoecart.db.UserDataSource;
+import com.android.assignment1.shoecart.models.Cart;
+import com.android.assignment1.shoecart.models.Order;
+import com.android.assignment1.shoecart.models.OrderDetail;
+import com.android.assignment1.shoecart.models.Product;
 import com.android.assignment1.shoecart.models.User;
 import com.android.assignment1.shoecart.utils.Utility;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class ShippingDetailsFragment extends Fragment {
@@ -100,20 +114,50 @@ public class ShippingDetailsFragment extends Fragment {
         } else if (binding.city.getText().toString().isEmpty()) {
             binding.city.setError("Required*");
         } else {
-//            UserDataSource userDataSource = new UserDataSource(requireContext());
-//            userDataSource.updateUser(new User(user.getUserId(), binding.firstname.getText().toString(), user.getEmail(),user.getPassword(), user.getUsername(), user.getPurchaseHistory(), binding.addressOne.getText().toString(), binding.addressTwo.getText().toString(), binding.city.getText().toString(), spinnerSelectedItem, binding.postalCode.getText().toString()));
-//
-//            OrderDataSource orderDataSource = new OrderDataSource(requireContext());
-//            CartDataSource cartDataSource = new CartDataSource(requireContext());
-//            String userId= Utility.getUser(requireContext()).getUserId() + "";
-//            List<Cart> cartList = cartDataSource.getAllCartsForUser(userId);
-//
-//
-//
-//            Order order = new Order(userId , double totalAmount, Date orderDate, java.util.Date
-//            deliveryDate, String paymentMethod, String deliveryStatus, String returnStatus, List< OrderDetail > orderDetails);
-//
-//            orderDataSource.insertOrder()
+            UserDataSource userDataSource = new UserDataSource(requireContext());
+            userDataSource.updateUser(new User(user.getUserId(), binding.firstname.getText().toString(), user.getEmail(), user.getPassword(), user.getUsername(), user.getPurchaseHistory(), binding.addressOne.getText().toString(), binding.addressTwo.getText().toString(), binding.city.getText().toString(), spinnerSelectedItem, binding.postalCode.getText().toString()));
+
+            OrderDataSource orderDataSource = new OrderDataSource(requireContext());
+            CartDataSource cartDataSource = new CartDataSource(requireContext());
+            int userId = Utility.getUser(requireContext()).getUserId();
+            List<Cart> cartList = cartDataSource.getAllCartsForUser(userId + "");
+
+            List<OrderDetail> orderDetails = new ArrayList<>();
+            double total = 0.0;
+            double deliveryCharges = 0.0;
+            List<Product> products = new ArrayList<>();
+
+
+            for (int i = 0; i < cartList.size(); i++) {
+                products.add(new ProductDataSource(requireContext()).getProduct(cartList.get(i).getProductId()));
+                total += products.get(i).getPrice() * cartList.get(i).getQuantity();
+                deliveryCharges += products.get(i).getShippingCost();
+                orderDetails.add(new OrderDetail(cartList.get(i).getProductId(), cartList.get(i).getQuantity(), cartList.get(i).getProductSize()));
+            }
+
+
+            double totalAmount = (total * 0.13) + total + deliveryCharges;
+
+
+            Order order = new Order(userId, totalAmount, new Date(), new Date(), "Cash On Delivery", "Ordered", "", orderDetails);
+
+            orderDataSource.insertOrder(order);
+
+//            cartList.forEach(cartDataSource::deleteCart);
+
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("order", order);
+            bundle.putBoolean("fromShipping", true);
+//        moving to add fragment
+            Fragment fragment = new OrderDetailsFragment();
+            //passing arguments
+            fragment.setArguments(bundle);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frames, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
     }
 }

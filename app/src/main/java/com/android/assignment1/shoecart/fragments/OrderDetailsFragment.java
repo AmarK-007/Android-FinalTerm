@@ -1,20 +1,27 @@
 package com.android.assignment1.shoecart.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.OrderProductAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentOrderDetailsBinding;
+import com.android.assignment1.shoecart.db.CartDataSource;
 import com.android.assignment1.shoecart.db.ProductDataSource;
+import com.android.assignment1.shoecart.models.Cart;
 import com.android.assignment1.shoecart.models.Order;
 import com.android.assignment1.shoecart.models.Product;
+import com.android.assignment1.shoecart.utils.Utility;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class OrderDetailsFragment extends Fragment {
@@ -22,6 +29,8 @@ public class OrderDetailsFragment extends Fragment {
 FragmentOrderDetailsBinding binding;
     Order order;
     ArrayList<Product> products;
+
+    Boolean fromShipping = false;
 
 OrderProductAdapter adapter;
     @Override
@@ -38,11 +47,35 @@ OrderProductAdapter adapter;
         if (getArguments() != null) {
             //geting arguments
             order = (Order) getArguments().getParcelable("order");
+            fromShipping = getArguments().getBoolean("fromShipping", false);
 
             if (order != null){
                 setData();
             }
         }
+
+        if (fromShipping) {
+            binding.btnReOrder.setText("Place Order");
+
+        }
+
+
+        binding.btnReOrder.setOnClickListener(v -> {
+            if (fromShipping) {
+                showPopUp();
+                CartDataSource cartDataSource = new CartDataSource(requireContext());
+                List<Cart> cartList = cartDataSource.getAllCartsForUser(Utility.getUser(requireContext()).getUserId() + "");
+                cartList.forEach(cartDataSource::deleteCart);
+                Toast.makeText(requireContext(), "Order Placed", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(requireContext(), "Products Added to cart", Toast.LENGTH_SHORT).show();
+
+                CartDataSource cartDataSource = new CartDataSource(requireContext());
+                order.getOrderDetails().forEach(orderDetail -> {
+                    cartDataSource.insertCart(new Cart(orderDetail.getProductId(), orderDetail.getProductSize(), orderDetail.getQuantity(), Utility.getUser(requireContext()).getUserId()));
+                });
+            }
+        });
 
 
 
@@ -50,6 +83,21 @@ OrderProductAdapter adapter;
         return binding.getRoot();
     }
 
+
+    public void showPopUp() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Ordered");
+
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.custom_alert_dialog_layout, null);
+        builder.setView(customLayout);
+
+        // add a button
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     public void setData(){
         binding.tvOrderId.setText("#" + order.getOrderId());
         binding.tvDate.setText(order.getOrderDate().toString());
@@ -61,11 +109,12 @@ OrderProductAdapter adapter;
         products = new ArrayList<>();
         for (int i = 0; i < order.getOrderDetails().size(); i++) {
             products.add(new ProductDataSource(requireContext()).getProduct(order.getOrderDetails().get(i).getProductId()));
-        }
-        for (int i = 0; i < order.getOrderDetails().size(); i++) {
             total += products.get(i).getPrice() * order.getOrderDetails().get(i).getQuantity();
             deliveryCharges += products.get(i).getShippingCost();
         }
+//        for (int i = 0; i < order.getOrderDetails().size(); i++) {
+//
+//        }
         binding.tvItemTotal.setText("$" + total);
         binding.tvDeliveryCharges.setText("$" + deliveryCharges);
         binding.tvPaid.setText("$" + (total + deliveryCharges));

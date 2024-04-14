@@ -4,43 +4,44 @@
     >
     <item
         android:id="@+id/myProfile"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/nav_icon_profile"
         android:title="My Profile"
         />
 
     <item
         android:id="@+id/myOrders"
-        android:icon="@drawable/baseline_note_24"
+        android:icon="@drawable/nav_icon_orders"
         android:title="My Orders"
         />
 
     <item
         android:id="@+id/categories"
-        android:icon="@drawable/baseline_category_24"
+        android:icon="@drawable/nav_icon_category"
         android:title="Categories"
         />
 
     <item
         android:id="@+id/wishList"
-        android:icon="@drawable/whishlist"
-        android:title="Whislist"
+        android:icon="@drawable/nav_icon_wishlist"
+        android:title="Wishlist"
+
         />
 
     <item
         android:id="@+id/support"
-        android:icon="@drawable/support"
+        android:icon="@drawable/nav_icon_support"
         android:title="Support"
         />
 
     <item
         android:id="@+id/about"
-        android:icon="@drawable/about"
+        android:icon="@drawable/nav_icon_about"
         android:title="About"
         />
 
     <item
         android:id="@+id/logout"
-        android:icon="@drawable/logout"
+        android:icon="@drawable/nav_icon_logout"
         android:title="Logout"
         />
 

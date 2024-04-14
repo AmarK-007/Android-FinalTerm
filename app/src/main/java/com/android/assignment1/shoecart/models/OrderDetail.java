@@ -24,6 +24,12 @@ public class OrderDetail implements Parcelable {
         this.productSize = productSize;
     }
 
+    public OrderDetail(int productId, int quantity, String productSize) {
+        this.productId = productId;
+        this.quantity = quantity;
+        this.productSize = productSize;
+    }
+
     protected OrderDetail(Parcel in) {
         orderDetailId = in.readInt();
         orderId = in.readInt();

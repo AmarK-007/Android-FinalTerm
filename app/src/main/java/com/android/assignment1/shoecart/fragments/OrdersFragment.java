@@ -20,6 +20,7 @@ import com.android.assignment1.shoecart.models.Product;
 import com.android.assignment1.shoecart.models.ProductSize;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -38,8 +39,6 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
     }
 
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,7 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentOrdersBinding.inflate(inflater,container,false);
+        binding = FragmentOrdersBinding.inflate(inflater, container, false);
 
         OrderDataSource orderDataSource = new OrderDataSource(requireContext());
         ordersList = new ArrayList<>();
@@ -70,6 +69,7 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
 //        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
 //        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
 //        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
+        Collections.reverse(ordersList);
 
         setData();
 
@@ -77,9 +77,9 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
         return binding.getRoot();
     }
 
-    public void setData(){
+    public void setData() {
         adapter = new OrdersAdapter(ordersList, this, requireContext());
-        layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);
+        layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
         binding.rvOrders.setLayoutManager(layoutManager);
         binding.rvOrders.setAdapter(adapter);
     }

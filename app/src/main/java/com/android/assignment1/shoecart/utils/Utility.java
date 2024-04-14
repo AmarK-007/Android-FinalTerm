@@ -27,6 +27,14 @@ public class Utility {
         return password.length() == 0;
     }
 
+    public static boolean validateIsNameEmpty(String name){
+        return name.length() == 0;
+    }
+
+    public static boolean validateIsTextAreaEmpty(String textArea){
+        return textArea.length() == 0;
+    }
+
     public static boolean validateUserName(String username) {
         return username.length() > 3;
     }
