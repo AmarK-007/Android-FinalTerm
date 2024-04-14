@@ -32,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         new CopyDatabaseTask().execute();
 
-        int SPLASH_TIME_OUT = 8000; // This is 3 seconds
+        int SPLASH_TIME_OUT = 8000; // This is 8 seconds
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

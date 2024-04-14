@@ -22,6 +22,7 @@ public class ProductDataSource {
 
     public static final String TABLE_NAME_PRODUCT = "products";
     public static final String COLUMN_PRODUCT_ID = "product_id";
+    public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_PRICE = "price";
@@ -48,7 +49,8 @@ public class ProductDataSource {
                     + COLUMN_DESCRIPTION + " TEXT,"
                     + COLUMN_PRICE + " REAL,"
                     + COLUMN_SHIPPING_COST + " REAL,"
-                    + COLUMN_IS_DELETED + " INTEGER DEFAULT 0"
+                    + COLUMN_IS_DELETED + " INTEGER DEFAULT 0 ,"
+                    + COLUMN_CATEGORY + " TEXT,"
                     + ")";
     public static final String CREATE_TABLE_PROD_IMAGE =
             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_PROD_IMAGE + "("
@@ -71,6 +73,7 @@ public class ProductDataSource {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_PRODUCT_ID, product.getProductId());
+        values.put(COLUMN_CATEGORY, product.getCategory());
         values.put(COLUMN_TITLE, product.getTitle());
         values.put(COLUMN_DESCRIPTION, product.getDescription());
         values.put(COLUMN_PRICE, product.getPrice());
@@ -122,6 +125,7 @@ public class ProductDataSource {
         if (cursor != null && cursor.moveToFirst()) {
             Product product = new Product();
             product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
+            product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
             product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
             product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
             product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));
@@ -150,6 +154,7 @@ public class ProductDataSource {
             do {
                 Product product = new Product();
                 product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
+                product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
                 product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
                 product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
                 product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));
@@ -178,6 +183,7 @@ public class ProductDataSource {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_PRODUCT_ID, product.getProductId());
+        values.put(COLUMN_CATEGORY, product.getCategory());
         values.put(COLUMN_TITLE, product.getTitle());
         values.put(COLUMN_DESCRIPTION, product.getDescription());
         values.put(COLUMN_PRICE, product.getPrice());

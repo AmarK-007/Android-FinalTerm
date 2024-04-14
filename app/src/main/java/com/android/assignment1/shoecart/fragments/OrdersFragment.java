@@ -60,9 +60,9 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
 
         ArrayList<ProductSize> sizes = new ArrayList<>();
         sizes.add(new ProductSize(2, 3, 14, 2));
-        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
-        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
-        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
+//        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
+//        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
+//        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 
 
 //        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));

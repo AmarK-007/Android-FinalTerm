@@ -8,6 +8,7 @@ import java.util.List;
 public class Product implements Parcelable {
 
     private int productId;
+    private String category;
     private String title;
     private String description;
     private double price;
@@ -21,7 +22,7 @@ public class Product implements Parcelable {
     public Product() {
     }
 
-    public Product(int productId, String title, String description, double price, double shippingCost, int isDeleted, List<ProductSize> sizes, List<ProductImage> images) {
+    public Product(int productId, String category, String title, String description, double price, double shippingCost, int isDeleted, List<ProductSize> sizes, List<ProductImage> images) {
         this.productId = productId;
         this.title = title;
         this.description = description;
@@ -38,6 +39,14 @@ public class Product implements Parcelable {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getTitle() {
@@ -117,6 +126,7 @@ public class Product implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(productId);
+        parcel.writeString(category);
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeDouble(price);
@@ -128,6 +138,7 @@ public class Product implements Parcelable {
 
     protected Product(Parcel in) {
         productId = in.readInt();
+        category = in.readString();
         title = in.readString();
         description = in.readString();
         price = in.readDouble();
