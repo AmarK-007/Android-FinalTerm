@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment implements AdapterInterface<Product> 
         recyclerViewNewArrivals.setAdapter(adapterNewArrivals);
 
 
-        GridLayoutManager layoutManagerBestSellers = new GridLayoutManager(getContext(), 2, GridLayoutManager.HORIZONTAL, false);
+        GridLayoutManager layoutManagerBestSellers = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         recyclerViewBestSellers.setLayoutManager(layoutManagerBestSellers);
         HomeRecyclerViewAdapter adapterBestSellers = new HomeRecyclerViewAdapter(gridBestShoes,requireContext(),this);
         recyclerViewBestSellers.setAdapter(adapterBestSellers);

@@ -172,6 +172,35 @@ public class ProductDataSource {
         return products;
     }
 
+    @SuppressLint("Range")
+    public ArrayList<Product> searchProduct(String title) {
+        ArrayList<Product> products = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME_PRODUCT,
+                null, COLUMN_TITLE + " LIKE ?",
+                new String[]{"%" + title + "%"},
+                null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Product product = new Product();
+            product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
+            product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
+            product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+            product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+            product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));
+            product.setShippingCost(cursor.getDouble(cursor.getColumnIndex(COLUMN_SHIPPING_COST)));
+            product.setIsDeleted(cursor.getInt(cursor.getColumnIndex(COLUMN_IS_DELETED)));
+
+            product.setSizes(getProductSizes(product.getProductId()));
+            product.setImages(getProductImages(product.getProductId()));
+
+            cursor.close();
+            products.add(product);
+        }
+        return products;
+    }
+
     public int updateProduct(Product product) {
 
         for (ProductSize productSize : product.getSizes())

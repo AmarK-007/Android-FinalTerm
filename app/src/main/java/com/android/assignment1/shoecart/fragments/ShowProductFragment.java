@@ -30,6 +30,7 @@ public class ShowProductFragment extends Fragment implements AdapterInterface<Pr
     FragmentShowProductBinding binding;
     List<Product> productList = new ArrayList<>();
     String category;
+    String searchQuery;
 
     ShowProductAdapter showProductAdapter;
 
@@ -49,27 +50,34 @@ public class ShowProductFragment extends Fragment implements AdapterInterface<Pr
         if (getArguments() != null) {
             //geting arguments
             category = getArguments().getString("category");
+            searchQuery = getArguments().getString("searchQuery");
             Log.e("TAG", category + " 1");
-
         }
 
         productList = new ProductDataSource(requireContext()).getAllProducts();
+        List<Product> filteredProduct = new ArrayList<>();
 
-        List<Product> categoryProduct = new ArrayList<>();
+        if (searchQuery != null) {
+            // Filter products based on the search query
+            productList.forEach(product -> {
+                if (product.getTitle().toLowerCase().contains(searchQuery.toLowerCase())) {
+                    filteredProduct.add(product);
+                    Log.e("CAt", "searchQuery: " + product.getTitle());
+                }
+            });
 
-        productList.forEach(product -> {
-            if (Objects.equals(product.getCategory(), category)) {
-                categoryProduct.add(product);
-                Log.e("TAG", categoryProduct.get(0).getCategory() + " 23");
-            }
-            Log.e("TAG", product.getCategory());
-        });
+        } else {
+            // Filter products based on the category
+            productList.forEach(product -> {
+                if (Objects.equals(product.getCategory(), category)) {
+                    filteredProduct.add(product);
+                    Log.e("CAt", "category: " + product.getTitle());
+                }
+            });
+        }
 
-        categoryProduct.forEach(product -> {
-            Log.e("CAt", product.getTitle());
-        });
 
-        showProductAdapter = new ShowProductAdapter(categoryProduct, requireContext(), this);
+        showProductAdapter = new ShowProductAdapter(filteredProduct, requireContext(), this);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
         binding.rvCategory.setAdapter(showProductAdapter);

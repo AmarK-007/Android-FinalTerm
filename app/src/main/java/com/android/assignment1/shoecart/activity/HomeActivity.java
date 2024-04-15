@@ -1,15 +1,23 @@
 package com.android.assignment1.shoecart.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+<<<<<<< Updated upstream
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+=======
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+>>>>>>> Stashed changes
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -22,13 +30,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.db.ProductDataSource;
 import com.android.assignment1.shoecart.fragments.AboutFragment;
 import com.android.assignment1.shoecart.fragments.CartFragment;
 import com.android.assignment1.shoecart.fragments.OrdersFragment;
+import com.android.assignment1.shoecart.fragments.ProductDetailsFragment;
 import com.android.assignment1.shoecart.fragments.ProfileFragment;
+import com.android.assignment1.shoecart.fragments.ShowProductFragment;
 import com.android.assignment1.shoecart.fragments.SupportFragment;
 import com.android.assignment1.shoecart.fragments.WishlistFragment;
 import com.android.assignment1.shoecart.models.HomeProduct;
+import com.android.assignment1.shoecart.models.Product;
 import com.android.assignment1.shoecart.utils.Utility;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -124,7 +136,7 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.home) {
             changeFragment(new HomeFragment());
         } else if (id == R.id.search) {
-
+            showSearchDialog();
         } else if (id == R.id.cart) {
             changeFragment(new CartFragment());
         }
@@ -180,6 +192,46 @@ public class HomeActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null); // Add this line
         fragmentTransaction.commit();
         drawerLayout.closeDrawers();
+    }
+
+    public void showSearchDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        builder.setCustomTitle(Utility.showStyledAlertDialog(this));
+
+        LinearLayout container = new LinearLayout(this);
+        container.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(20, 20, 20, 20);
+
+        final EditText input = new EditText(this);
+        input.setLayoutParams(params);
+        input.setHint("Search for a product");
+        input.setTextColor(getResources().getColor(R.color.colorAccent));
+        input.setHintTextColor(getResources().getColor(R.color.colorGrayLight));
+        container.addView(input);
+
+        builder.setView(container);
+        builder.setPositiveButton("Search", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String searchQuery = input.getText().toString();
+                ProductDataSource dataSource = new ProductDataSource(HomeActivity.this);
+                ArrayList<Product> productList = dataSource.searchProduct(searchQuery);
+
+                if (productList != null && productList.size() > 0) {
+                    ShowProductFragment fragment = new ShowProductFragment();
+                    Bundle args = new Bundle();
+                    args.putString("searchQuery", searchQuery);
+                    fragment.setArguments(args);
+
+                    changeFragment(fragment);
+                } else {
+                    Toast.makeText(HomeActivity.this, "No product found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
     }
 
     AlertDialog.Builder alertDialog;
