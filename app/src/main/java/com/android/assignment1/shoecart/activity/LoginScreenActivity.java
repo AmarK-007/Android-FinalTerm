@@ -1,6 +1,8 @@
 package com.android.assignment1.shoecart.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -80,6 +82,10 @@ public class LoginScreenActivity extends AppCompatActivity {
         UserDataSource userDataSource = new UserDataSource(this);
         if (userDataSource.validateUser(username, password)) {
 
+            SharedPreferences sharedPreferences = getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("userName", username);
+            editor.apply();
             Utility.storeUser(userDataSource.getUser(username, password), this);
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);

@@ -2,11 +2,14 @@ package com.android.assignment1.shoecart.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -45,9 +48,9 @@ public class HomeActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     MaterialToolbar materialToolbar;
     DrawerLayout drawerLayout;
-
     NavigationView navigationView;
     NavigationView navDrawerMenu;
+    TextView userName;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
@@ -67,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setDrawer();
         changeFragment(new HomeFragment());
+        setUsernameInDrawer();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
@@ -78,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setDrawer() {
         navDrawerMenu = findViewById(R.id.navMenu);
+
         navDrawerMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -197,6 +202,15 @@ public class HomeActivity extends AppCompatActivity {
             alertDialog = null;
         });
         alertDialog.show();
+    }
+
+    public void setUsernameInDrawer(){
+        navDrawerMenu = findViewById(R.id.navMenu);
+        View navHeaderView = navDrawerMenu.getHeaderView(0);
+        userName= navHeaderView.findViewById(R.id.welcomeUser);
+        SharedPreferences sharedPreferences = getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
+        String getUsername = sharedPreferences.getString("userName", "");
+        userName.setText("Welcome, " + getUsername);
     }
 
     public void showAppExitingAlertLogout(final Context context) {

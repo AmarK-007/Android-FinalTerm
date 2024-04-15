@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.HomeFragment">
 
     <ScrollView
@@ -13,20 +14,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <ViewFlipper
-                android:id="@+id/categoryCaraousal"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:id="@+id/caraousalImage"
+            
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop" />
-            </ViewFlipper>
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp">
+                    <ViewFlipper
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:id="@+id/categoryCaraousal">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:adjustViewBounds="true"
+                            android:id="@+id/caraousalImage"/>
+                    </ViewFlipper>
+                </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="match_parent"
