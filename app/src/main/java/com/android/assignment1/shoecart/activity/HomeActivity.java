@@ -8,17 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-<<<<<<< Updated upstream
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-=======
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
->>>>>>> Stashed changes
-import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -33,28 +27,19 @@ import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.db.ProductDataSource;
 import com.android.assignment1.shoecart.fragments.AboutFragment;
 import com.android.assignment1.shoecart.fragments.CartFragment;
+import com.android.assignment1.shoecart.fragments.CategoryFragment;
+import com.android.assignment1.shoecart.fragments.HomeFragment;
 import com.android.assignment1.shoecart.fragments.OrdersFragment;
-import com.android.assignment1.shoecart.fragments.ProductDetailsFragment;
 import com.android.assignment1.shoecart.fragments.ProfileFragment;
 import com.android.assignment1.shoecart.fragments.ShowProductFragment;
 import com.android.assignment1.shoecart.fragments.SupportFragment;
 import com.android.assignment1.shoecart.fragments.WishlistFragment;
-import com.android.assignment1.shoecart.models.HomeProduct;
 import com.android.assignment1.shoecart.models.Product;
 import com.android.assignment1.shoecart.utils.Utility;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import com.android.assignment1.shoecart.fragments.CategoryFragment;
-import com.android.assignment1.shoecart.fragments.HomeFragment;
-import com.android.assignment1.shoecart.fragments.OrdersFragment;
-import com.android.assignment1.shoecart.fragments.WishlistFragment;
-import com.android.assignment1.shoecart.utils.Utility;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
@@ -256,10 +241,10 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void setUsernameInDrawer(){
+    public void setUsernameInDrawer() {
         navDrawerMenu = findViewById(R.id.navMenu);
         View navHeaderView = navDrawerMenu.getHeaderView(0);
-        userName= navHeaderView.findViewById(R.id.welcomeUser);
+        userName = navHeaderView.findViewById(R.id.welcomeUser);
         SharedPreferences sharedPreferences = getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
         String getUsername = sharedPreferences.getString("userName", "");
         userName.setText("Welcome, " + getUsername);
