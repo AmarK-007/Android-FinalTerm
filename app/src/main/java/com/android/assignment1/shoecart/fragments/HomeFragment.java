@@ -30,12 +30,13 @@ public class HomeFragment extends Fragment {
 
     List<HomeProduct> gridNewShoes = new ArrayList<>();
     List<HomeProduct> gridBestShoes = new ArrayList<>();
+    int[] carousalImages = {R.drawable.product_blue_1, R.drawable.product_white_blue_1, R.drawable.product_grey_3};
+    boolean imagesAdded = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        int caraousalImages[] = {R.drawable.product_blue_1, R.drawable.product_white_blue_1, R.drawable.product_grey_3};
 
         HomeProduct product1 = new HomeProduct(R.drawable.product_blue_1, "Blue Shoes", 122.99);
         HomeProduct product2 = new HomeProduct(R.drawable.product_grey_1, "Grey Shoes", 122.99);
@@ -57,13 +58,8 @@ public class HomeFragment extends Fragment {
         bestSellersGrid= rootView.findViewById(R.id.bestSellersGrid);
 
         viewFlipper = rootView.findViewById(R.id.categoryCaraousal);
-        for (int i: caraousalImages) {
-            ImageView imageView = new ImageView(requireContext());
-            imageView.setImageResource(i);
-            viewFlipper.addView(imageView);
-        }
+        addImagesToFlipper();
 
-        viewFlipper.startFlipping();
 
         for(int i = 0; i < gridNewShoes.size(); i++){
 
@@ -102,4 +98,28 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
+    private void addImagesToFlipper(){
+        viewFlipper.removeAllViews();
+        for (int i: carousalImages) {
+            ImageView imageView = new ImageView(requireContext());
+            imageView.setImageResource(i);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            viewFlipper.addView(imageView);
+        }
+        startFlipping();
+    }
+
+    private void startFlipping(){
+        if(!viewFlipper.isFlipping()){
+            viewFlipper.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(!viewFlipper.isAttachedToWindow()) return;
+                    int nextChildIndex = (viewFlipper.getDisplayedChild() + 1) % viewFlipper.getChildCount();
+                    viewFlipper.setDisplayedChild(nextChildIndex);
+                    startFlipping();
+                }
+            }, 2000);
+        }
+    }
 }

@@ -18,8 +18,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/categoryCaraousal"
-                android:flipInterval="4000"
-                android:autoStart="true"
                 android:layout_marginTop="10dp">
 
                 <ImageView
