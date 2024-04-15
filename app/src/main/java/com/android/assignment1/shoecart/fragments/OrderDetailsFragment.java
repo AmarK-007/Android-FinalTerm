@@ -107,12 +107,10 @@ public class OrderDetailsFragment extends Fragment implements OnDialogClickListe
             total += products.get(i).getPrice() * order.getOrderDetails().get(i).getQuantity();
             deliveryCharges += products.get(i).getShippingCost();
         }
-//        for (int i = 0; i < order.getOrderDetails().size(); i++) {
-//
-//        }
-        binding.tvItemTotal.setText("$" + total);
-        binding.tvDeliveryCharges.setText("$" + deliveryCharges);
-        binding.tvPaid.setText("$" + (total + deliveryCharges));
+
+        binding.tvItemTotal.setText("$" + String.format("%.2f", total));
+        binding.tvDeliveryCharges.setText("$" + String.format("%.2f", deliveryCharges));
+        binding.tvPaid.setText("$" + String.format("%.2f", (total + deliveryCharges)));
 
         adapter = new OrderProductAdapter(products, order.getOrderDetails());
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);

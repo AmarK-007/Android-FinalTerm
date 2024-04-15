@@ -34,6 +34,7 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@fonts/roboto_light"
                     android:gravity="center"
+                    android:textColor="@color/colorAccent"
                     android:text="Shipping Details"
                     android:textSize="23sp"
                     android:textStyle="bold" />

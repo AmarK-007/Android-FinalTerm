@@ -108,7 +108,7 @@ public class ProductDetailsFragment extends Fragment {
 //                updateCart(new Cart(wishlistList.get(position).getCartId(), wishlistList.get(position).getProductId(), wishlistList.get(position).getProductSize(),quantity[0], wishlistList.get(position).getUserId()));
 
             } else {
-                Toast.makeText(requireContext(), "Item can't be 0. Please click remove item button to remove item from cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Item can't be 0.", Toast.LENGTH_SHORT).show();
             }
         });
 
