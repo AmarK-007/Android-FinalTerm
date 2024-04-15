@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.OrdersAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentOrdersBinding;
@@ -72,7 +73,7 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
         Collections.reverse(ordersList);
 
         setData();
-
+        checkIfListIsEmpty();
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
@@ -98,5 +99,20 @@ public class OrdersFragment extends Fragment implements AdapterInterface<Order> 
         fragmentTransaction.replace(R.id.frames, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void checkIfListIsEmpty() {
+        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view_empty_orders);
+
+        if (ordersList.isEmpty()) {
+            animationView.setVisibility(View.VISIBLE);
+            animationView.playAnimation();
+        } else {
+            animationView.setVisibility(View.GONE);
+        }
+    }
+    @Override
+    public void onItemRemoved() {
+        checkIfListIsEmpty();
     }
 }

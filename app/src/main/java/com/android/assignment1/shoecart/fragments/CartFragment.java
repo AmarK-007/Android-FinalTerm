@@ -51,17 +51,7 @@ public class CartFragment extends Fragment implements AdapterInterface<Cart> {
 //        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 //        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 
-        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view_empty_cart);
-        animationView.setAnimation(R.raw.shoecart_item_empty);
-
-        if (arrayList.isEmpty()) {
-            animationView.setVisibility(View.VISIBLE);
-            binding.btnProceed.setVisibility(View.GONE);
-            animationView.playAnimation();
-        } else {
-            animationView.setVisibility(View.GONE);
-            binding.btnProceed.setVisibility(View.VISIBLE);
-        }
+        checkIfListIsEmpty();
         adapter = new CartAdapter(arrayList, this, requireContext());
         LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -84,9 +74,26 @@ public class CartFragment extends Fragment implements AdapterInterface<Cart> {
         return binding.getRoot();
     }
 
+    public void checkIfListIsEmpty() {
+            LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view_empty_cart);
+
+        if (arrayList.isEmpty()) {
+            animationView.setVisibility(View.VISIBLE);
+            binding.btnProceed.setVisibility(View.GONE);
+            animationView.playAnimation();
+        } else {
+            animationView.setVisibility(View.GONE);
+            binding.btnProceed.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onItemSelected(Cart data, int position) {
 
+    }
+
+    @Override
+    public void onItemRemoved() {
+        checkIfListIsEmpty();
     }
 }

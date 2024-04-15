@@ -16,6 +16,7 @@ import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.db.CartDataSource;
 import com.android.assignment1.shoecart.db.ProductDataSource;
 import com.android.assignment1.shoecart.db.WishlistDataSource;
+import com.android.assignment1.shoecart.fragments.WishlistFragment;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 import com.android.assignment1.shoecart.models.Cart;
 import com.android.assignment1.shoecart.models.Product;
@@ -92,6 +93,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
             dataSource.deleteWishlist(wishlistList.get(position));
             wishlistList.remove(position);
             notifyDataSetChanged();
+            // Notify the fragment that an item has been removed
+            adapterInterface.onItemRemoved();
         });
 
         holder.btnDelete.setOnClickListener(v -> {

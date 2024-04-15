@@ -77,6 +77,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             dataSource.deleteCart(cartArrayList.get(position));
             cartArrayList.remove(position);
             notifyDataSetChanged();
+            // Notify the fragment that an item has been removed
+            adapterInterface.onItemRemoved();
         });
     }
 

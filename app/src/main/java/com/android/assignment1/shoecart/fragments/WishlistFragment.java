@@ -56,9 +56,12 @@ public class WishlistFragment extends Fragment implements AdapterInterface<Wishl
         binding.rvWishlistItem.setLayoutManager(manager);
         binding.rvWishlistItem.setAdapter(adapter);
 
-        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view_empty_wishlist);
-        animationView.setAnimation(R.raw.shoecart_item_empty);
+        checkIfListIsEmpty();
+        return binding.getRoot();
+    }
 
+    public void checkIfListIsEmpty() {
+        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view_empty_wishlist);
 
         if (arrayList.isEmpty()) {
             animationView.setVisibility(View.VISIBLE);
@@ -66,11 +69,15 @@ public class WishlistFragment extends Fragment implements AdapterInterface<Wishl
         } else {
             animationView.setVisibility(View.GONE);
         }
-        return binding.getRoot();
     }
-
     @Override
     public void onItemSelected(Wishlist data, int position) {
 
     }
+
+    @Override
+    public void onItemRemoved() {
+        checkIfListIsEmpty();
+    }
+
 }

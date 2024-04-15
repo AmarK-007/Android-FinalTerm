@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.assignment1.shoecart.R;
@@ -15,6 +17,7 @@ import com.android.assignment1.shoecart.adapters.OrderProductAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentOrderDetailsBinding;
 import com.android.assignment1.shoecart.db.CartDataSource;
 import com.android.assignment1.shoecart.db.ProductDataSource;
+import com.android.assignment1.shoecart.interfaces.OnDialogClickListener;
 import com.android.assignment1.shoecart.models.Cart;
 import com.android.assignment1.shoecart.models.Order;
 import com.android.assignment1.shoecart.models.Product;
@@ -24,15 +27,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class OrderDetailsFragment extends Fragment {
+public class OrderDetailsFragment extends Fragment implements OnDialogClickListener {
 
-FragmentOrderDetailsBinding binding;
+    FragmentOrderDetailsBinding binding;
     Order order;
     ArrayList<Product> products;
 
     Boolean fromShipping = false;
 
-OrderProductAdapter adapter;
+    OrderProductAdapter adapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +47,13 @@ OrderProductAdapter adapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentOrderDetailsBinding.inflate(inflater,container,false);
+        binding = FragmentOrderDetailsBinding.inflate(inflater, container, false);
         if (getArguments() != null) {
             //geting arguments
             order = (Order) getArguments().getParcelable("order");
             fromShipping = getArguments().getBoolean("fromShipping", false);
 
-            if (order != null){
+            if (order != null) {
                 setData();
             }
         }
@@ -78,27 +82,15 @@ OrderProductAdapter adapter;
         });
 
 
-
-
         return binding.getRoot();
     }
 
 
     public void showPopUp() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Ordered");
-
-        // set the custom layout
-        final View customLayout = getLayoutInflater().inflate(R.layout.custom_alert_dialog_layout, null);
-        builder.setView(customLayout);
-
-        // add a button
-
-        // create and show the alert dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        CustomAlertDialogFragment.newInstance(this).show(getChildFragmentManager(), "customAlertDialog");
     }
-    public void setData(){
+
+    public void setData() {
         binding.tvOrderId.setText("#" + order.getOrderId());
         binding.tvDate.setText(order.getOrderDate().toString());
         binding.tvStatus.setText(order.getDeliveryStatus());
@@ -120,10 +112,28 @@ OrderProductAdapter adapter;
         binding.tvPaid.setText("$" + (total + deliveryCharges));
 
         adapter = new OrderProductAdapter(products, order.getOrderDetails());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
 
         binding.rvOrdersList.setAdapter(adapter);
         binding.rvOrdersList.setLayoutManager(layoutManager);
 
+    }
+
+    @Override
+    public void onDialogButtonClick() {
+        // Create a new instance of HomeFragment
+        HomeFragment homeFragment = new HomeFragment();
+
+        // Get the FragmentManager
+        FragmentManager fragmentManager = getFragmentManager();
+
+        // Begin a FragmentTransaction
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Replace the current fragment with HomeFragment
+        fragmentTransaction.replace(R.id.frames, homeFragment);
+
+        // Commit the transaction
+        fragmentTransaction.commit();
     }
 }

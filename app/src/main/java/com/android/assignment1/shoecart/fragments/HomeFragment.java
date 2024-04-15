@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     List<HomeProduct> gridBestShoes = new ArrayList<>();
     int[] carousalImages = {R.drawable.product_blue_1, R.drawable.product_white_blue_1, R.drawable.product_grey_3};
     boolean imagesAdded = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,16 +56,16 @@ public class HomeFragment extends Fragment {
 
 
         newArrivalsGrid = rootView.findViewById(R.id.newArrivalsGrid);
-        bestSellersGrid= rootView.findViewById(R.id.bestSellersGrid);
+        bestSellersGrid = rootView.findViewById(R.id.bestSellersGrid);
 
         viewFlipper = rootView.findViewById(R.id.categoryCaraousal);
         addImagesToFlipper();
 
 
-        for(int i = 0; i < gridNewShoes.size(); i++){
+        for (int i = 0; i < gridNewShoes.size(); i++) {
 
             HomeProduct product = gridNewShoes.get(i);
-            CardView gridNewShoesCard =(CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
+            CardView gridNewShoesCard = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
 
             ImageView newShoesImage = gridNewShoesCard.findViewById(R.id.productImage);
             TextView newShoesName = gridNewShoesCard.findViewById(R.id.productName);
@@ -78,10 +79,10 @@ public class HomeFragment extends Fragment {
             newArrivalsGrid.addView(gridNewShoesCard);
         }
 
-        for(int i = 0; i < gridBestShoes.size(); i++){
+        for (int i = 0; i < gridBestShoes.size(); i++) {
 
             HomeProduct product = gridBestShoes.get(i);
-            CardView gridBestShoes =(CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
+            CardView gridBestShoes = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
 
             ImageView bestShoesImage = gridBestShoes.findViewById(R.id.productImage);
             TextView bestShoesName = gridBestShoes.findViewById(R.id.productName);
@@ -98,9 +99,9 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
-    private void addImagesToFlipper(){
+    private void addImagesToFlipper() {
         viewFlipper.removeAllViews();
-        for (int i: carousalImages) {
+        for (int i : carousalImages) {
             ImageView imageView = new ImageView(requireContext());
             imageView.setImageResource(i);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -109,12 +110,12 @@ public class HomeFragment extends Fragment {
         startFlipping();
     }
 
-    private void startFlipping(){
-        if(!viewFlipper.isFlipping()){
+    private void startFlipping() {
+        if (!viewFlipper.isFlipping()) {
             viewFlipper.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(!viewFlipper.isAttachedToWindow()) return;
+                    if (!viewFlipper.isAttachedToWindow()) return;
                     int nextChildIndex = (viewFlipper.getDisplayedChild() + 1) % viewFlipper.getChildCount();
                     viewFlipper.setDisplayedChild(nextChildIndex);
                     startFlipping();
@@ -122,4 +123,5 @@ public class HomeFragment extends Fragment {
             }, 2000);
         }
     }
+
 }
