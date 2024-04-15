@@ -167,7 +167,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@fonts/roboto_light"
-                        android:hint="Ciy"
+                        android:hint="City"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:textColor="@android:color/white"
@@ -177,57 +177,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <!-- Province -->
-                <!--            <com.google.android.material.textfield.TextInputLayout-->
-                <!--                android:id="@+id/provinceWrapper"-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:textColor="@android:color/white"-->
-                <!--                android:textColorHint="@color/colorAccent"-->
-                <!--                app:errorTextAppearance="@style/error_appearance">-->
-
-                <!--                <EditText-->
-                <!--                    android:id="@+id/province"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:fontFamily="@fonts/roboto_light"-->
-                <!--                    android:hint="Province"-->
-                <!--                    android:imeOptions="actionNext"-->
-                <!--                    android:inputType="textEmailAddress"-->
-                <!--                    android:textColor="@android:color/white"-->
-                <!--                    android:textColorHint="@color/colorAccent"-->
-                <!--                    android:textSize="15sp" />-->
-
-                <!--            </com.google.android.material.textfield.TextInputLayout>-->
-
                 <Spinner
                     android:id="@+id/provinceSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:theme="@style/SpinnerTheme" />
-                <!-- Country -->
-                <!--            <com.google.android.material.textfield.TextInputLayout-->
-                <!--                android:id="@+id/countryWrapper"-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:textColor="@android:color/white"-->
-                <!--                android:textColorHint="@color/colorAccent"-->
-                <!--                app:errorTextAppearance="@style/error_appearance">-->
 
-                <!--                <EditText-->
-                <!--                    android:id="@+id/country"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:fontFamily="@fonts/roboto_light"-->
-                <!--                    android:hint="Country"-->
-                <!--                    android:imeOptions="actionNext"-->
-                <!--                    android:inputType="textEmailAddress"-->
-                <!--                    android:textColor="@android:color/white"-->
-                <!--                    android:textColorHint="@color/colorAccent"-->
-                <!--                    android:textSize="15sp" />-->
-
-                <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
                 <Button
                     android:id="@+id/btnCheckOut"

@@ -13,7 +13,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Product Card 1 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_1"
                 android:layout_width="match_parent"
@@ -27,29 +26,33 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Product Image -->
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/product_blue_1" />
 
-                    <!-- Product Name -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+<<<<<<< Updated upstream
                         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
                         android:text="Product 1"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <!-- Product Price -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+<<<<<<< Updated upstream
                         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
                         android:text="$20"
                         android:textColor="@color/colorAccent"
                         android:textSize="16sp" />
@@ -57,7 +60,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Product Card 2 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_2"
                 android:layout_width="match_parent"
@@ -71,29 +73,32 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Product Image -->
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/product_red_1" />
 
-                    <!-- Product Name -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+<<<<<<< Updated upstream
                         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
                         android:text="Product 2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <!-- Product Price -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+<<<<<<< Updated upstream
                         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
                         android:text="$25"
                         android:textColor="@color/colorAccent"
                         android:textSize="16sp" />
@@ -101,7 +106,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Product Card 3 -->
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_3"
                 android:layout_width="match_parent"
@@ -115,37 +120,39 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Product Image -->
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/product_grey_1" />
 
-                    <!-- Product Name -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Product 3"
                         android:textSize="18sp"
+<<<<<<< Updated upstream
                         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
                         android:textStyle="bold" />
 
-                    <!-- Product Price -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="$55"
+<<<<<<< Updated upstream
                         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
                         android:textColor="@color/colorAccent"
                         android:textSize="16sp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Product Card 3 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_4"
                 android:layout_width="match_parent"
@@ -159,14 +166,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Product Image -->
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/product_yellow_1" />
 
-                    <!-- Product Name -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -176,13 +181,15 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <!-- Product Price -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="$60"
+<<<<<<< Updated upstream
                         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
                         android:textColor="@color/colorAccent"
                         android:textSize="16sp" />
 

@@ -9,7 +9,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< Updated upstream
         android:fontFamily="@fonts/roboto_light"
+=======
+>>>>>>> Stashed changes
         android:textSize="24sp" />
 
 </LinearLayout>

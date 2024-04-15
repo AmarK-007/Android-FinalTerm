@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.adapters.CustomSpinnerAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentShippingDetailsBinding;
 import com.android.assignment1.shoecart.db.CartDataSource;
 import com.android.assignment1.shoecart.db.OrderDataSource;
@@ -46,15 +47,18 @@ public class ShippingDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentShippingDetailsBinding.inflate(inflater, container, false);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.canadian_provinces, // Array resource containing province names
-                R.layout.spinner_item // Default spinner layout
-        );
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+//                requireContext(),
+//                R.array.canadian_provinces, // Array resource containing province names
+//                R.layout.spinner_item // Default spinner layout
+//        );
+//
+//        adapter.setDropDownViewResource(R.layout.spinner_item);
+//        binding.provinceSpinner.setAdapter(adapter);
 
-        adapter.setDropDownViewResource(R.layout.spinner_item);
+        String[] provinces = getResources().getStringArray(R.array.canadian_provinces);
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(requireContext(), provinces);
         binding.provinceSpinner.setAdapter(adapter);
-
         binding.provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -63,7 +67,7 @@ public class ShippingDetailsFragment extends Fragment {
 
                 spinnerSelectedItem = selectedProvince;
                 // Display a toast with the selected province
-                Toast.makeText(requireContext(), "Selected Province: " + selectedProvince, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(requireContext(), "Selected Province: " + selectedProvince, Toast.LENGTH_SHORT).show();
             }
 
             @Override

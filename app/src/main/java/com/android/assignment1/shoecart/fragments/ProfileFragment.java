@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.adapters.CustomSpinnerAdapter;
 
 public class ProfileFragment extends Fragment {
 
@@ -45,12 +46,16 @@ public class ProfileFragment extends Fragment {
                 Dialog updateDialog = new Dialog(getContext());
                 updateDialog.setContentView(R.layout.update_address_dialog);
 
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                        requireContext(),
-                        R.array.canadian_provinces, // Array resource containing province names
-                        R.layout.spinner_item // Custom spinner layout
-                );
-                adapter.setDropDownViewResource(R.layout.spinner_item);
+//                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+//                        requireContext(),
+//                        R.array.canadian_provinces, // Array resource containing province names
+//                        R.layout.spinner_item // Custom spinner layout
+//                );
+//                adapter.setDropDownViewResource(R.layout.spinner_item);
+
+                String[] provinces = getResources().getStringArray(R.array.canadian_provinces);
+                CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(requireContext(), provinces);
+//                binding.provinceSpinner.setAdapter(adapter);
 
                 EditText updatedAddress1 = updateDialog.findViewById(R.id.update_address1);
                 EditText updatedAddress2 = updateDialog.findViewById(R.id.update_address2);
