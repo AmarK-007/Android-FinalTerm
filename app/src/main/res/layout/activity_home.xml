@@ -28,7 +28,7 @@
             app:navigationIcon="@drawable/hamburger_menu"
             app:navigationIconTint="@color/colorAccent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Shoe Cart"
+            app:title="@string/app_name"
             app:titleTextColor="@color/colorAccent"/>
 
         <FrameLayout

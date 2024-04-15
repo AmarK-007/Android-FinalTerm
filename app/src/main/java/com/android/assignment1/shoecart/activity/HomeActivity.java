@@ -32,6 +32,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.android.assignment1.shoecart.fragments.CategoryFragment;
 import com.android.assignment1.shoecart.fragments.HomeFragment;
 import com.android.assignment1.shoecart.fragments.OrdersFragment;
@@ -66,7 +67,13 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setDrawer();
         changeFragment(new HomeFragment());
-
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frames);
+                updateTitle(currentFragment);
+            }
+        });
     }
 
     private void setDrawer() {
@@ -128,14 +135,44 @@ public class HomeActivity extends AppCompatActivity {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frames);
         if (currentFragment instanceof HomeFragment) {
             showAppExitingAlert(this);
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
     }
 
+    public void updateTitle(Fragment fragment) {
+        String title = "";
+
+        if (fragment instanceof ProfileFragment) {
+            title = "Profile";
+        } else if (fragment instanceof OrdersFragment) {
+            title = "Orders";
+        } else if (fragment instanceof CategoryFragment) {
+            title = "Categories";
+        } else if (fragment instanceof WishlistFragment) {
+            title = "Wishlist";
+        } else if (fragment instanceof SupportFragment) {
+            title = "Support";
+        } else if (fragment instanceof AboutFragment) {
+            title = "About";
+        } else if (fragment instanceof HomeFragment) {
+            title = getResources().getString(R.string.app_name);
+        } else if (fragment instanceof CartFragment) {
+            title = "Cart";
+        }
+
+        if (!title.isEmpty()) {
+            getSupportActionBar().setTitle(title);
+        }
+    }
 
     public void changeFragment(Fragment fragment) {
+        updateTitle(fragment);
+
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frames, fragment);
+        fragmentTransaction.addToBackStack(null); // Add this line
         fragmentTransaction.commit();
         drawerLayout.closeDrawers();
     }
@@ -144,7 +181,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showAppExitingAlert(final Context context) {
         alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
-        alertDialog.setTitle(Utility.getAppNameString(context));
+        alertDialog.setCustomTitle(Utility.showStyledAlertDialog(context));
         alertDialog.setMessage(getString(R.string.msg_app_exit));
         alertDialog.setPositiveButton(getString(R.string.button_ok),
                 (dialog, which) -> {
@@ -164,7 +201,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showAppExitingAlertLogout(final Context context) {
         alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
-        alertDialog.setTitle(Utility.getAppNameString(context));
+        alertDialog.setCustomTitle(Utility.showStyledAlertDialog(context));
         alertDialog.setMessage(getString(R.string.msg_app_exit));
         alertDialog.setPositiveButton(getString(R.string.button_ok),
                 (dialog, which) -> {

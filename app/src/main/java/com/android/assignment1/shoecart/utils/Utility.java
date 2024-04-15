@@ -4,7 +4,13 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.models.User;
@@ -83,5 +89,19 @@ public class Utility {
 //        Type listType = new TypeToken<ArrayList<Employee>>(){}.getType();
         Log.e("TAG", new Gson().fromJson(sp.getString("user", ""), User.class) + "");
         return new Gson().fromJson(sp.getString("user", ""), User.class);
+    }
+
+    public static TextView showStyledAlertDialog(Context context) {
+        TextView titleTextView = new TextView(context);
+        titleTextView.setText(getAppNameString(context));
+        titleTextView.setGravity(Gravity.LEFT);
+        // add some leftpadding to the title matching the left padding of the message
+        titleTextView.setPadding(60, 40, 0, 0);
+        titleTextView.setMaxLines(1);
+        titleTextView.setShadowLayer(20, 4, 3, ContextCompat.getColor(context, R.color.colorAccent));
+        titleTextView.setTextColor(ContextCompat.getColor(context, R.color.white));
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        titleTextView.setTypeface(null, Typeface.BOLD);
+        return titleTextView;
     }
 }

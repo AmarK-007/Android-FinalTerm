@@ -85,6 +85,11 @@ public class CategoryFragment extends Fragment implements AdapterInterface<Strin
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onItemRemoved() {
+
+    }
 }
 
 

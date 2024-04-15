@@ -91,4 +91,9 @@ public class ShowProductFragment extends Fragment implements AdapterInterface<Pr
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onItemRemoved() {
+
+    }
 }

@@ -87,7 +87,9 @@ public class OrderDetailsFragment extends Fragment implements OnDialogClickListe
 
 
     public void showPopUp() {
-        CustomAlertDialogFragment.newInstance(this).show(getChildFragmentManager(), "customAlertDialog");
+        CustomAlertDialogFragment dialogFragment = CustomAlertDialogFragment.newInstance(this);
+        dialogFragment.setCancelable(false);
+        dialogFragment.show(getChildFragmentManager(), "customAlertDialog");
     }
 
     public void setData() {
@@ -132,6 +134,9 @@ public class OrderDetailsFragment extends Fragment implements OnDialogClickListe
 
         // Replace the current fragment with HomeFragment
         fragmentTransaction.replace(R.id.frames, homeFragment);
+
+        // Add this transaction to the back stack
+        fragmentTransaction.addToBackStack(null);
 
         // Commit the transaction
         fragmentTransaction.commit();
