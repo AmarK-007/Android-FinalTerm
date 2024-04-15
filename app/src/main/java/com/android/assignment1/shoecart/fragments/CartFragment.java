@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.CartAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentCartBinding;
@@ -50,7 +51,18 @@ public class CartFragment extends Fragment implements AdapterInterface<Cart> {
 //        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 //        arrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
 
+        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view);
+        animationView.setAnimation(R.raw.shoecart_orderplaced);
 
+
+        if (arrayList.isEmpty()) {
+            animationView.setVisibility(View.VISIBLE);
+            binding.btnProceed.setVisibility(View.GONE);
+            animationView.playAnimation();
+        } else {
+            animationView.setVisibility(View.GONE);
+            binding.btnProceed.setVisibility(View.VISIBLE);
+        }
         adapter = new CartAdapter(arrayList, this, requireContext());
         LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
 

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.WishlistAdapter;
 import com.android.assignment1.shoecart.databinding.FragmentWishlistBinding;
 import com.android.assignment1.shoecart.db.WishlistDataSource;
@@ -54,7 +56,16 @@ public class WishlistFragment extends Fragment implements AdapterInterface<Wishl
         binding.rvWishlistItem.setLayoutManager(manager);
         binding.rvWishlistItem.setAdapter(adapter);
 
+        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view);
+        animationView.setAnimation(R.raw.shoecart_orderplaced);
 
+
+        if (arrayList.isEmpty()) {
+            animationView.setVisibility(View.VISIBLE);
+            animationView.playAnimation();
+        } else {
+            animationView.setVisibility(View.GONE);
+        }
         return binding.getRoot();
     }
 
