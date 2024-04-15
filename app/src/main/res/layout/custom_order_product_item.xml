@@ -11,10 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-<<<<<<< Updated upstream
         android:fontFamily="@fonts/roboto_light"
-=======
->>>>>>> Stashed changes
         android:text="Title"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -33,11 +30,7 @@
         android:id="@+id/tvShortDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
         android:layout_below="@id/tvTitle"
         android:fontFamily="@fonts/roboto_light" />
-=======
-        android:layout_below="@id/tvTitle" />
->>>>>>> Stashed changes
 
 </RelativeLayout>

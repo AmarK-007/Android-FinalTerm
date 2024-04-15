@@ -31,7 +31,6 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-<<<<<<< Updated upstream
                     android:fontFamily="@fonts/roboto_light"
                     android:minLines="0"
                     android:text="Nike Air 200"
@@ -59,44 +58,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@fonts/roboto_light"
-=======
                     android:minLines="0"
-
                     android:text="Nike Air 200"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvShortDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="shoe for men" />
 
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Order Arrived"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
->>>>>>> Stashed changes
-                    android:text="Delivered on: 23/01/2024"
-                    android:textColor="?android:attr/textColorHint"
-                    android:textSize="12sp" />
 
 
             </LinearLayout>
-
-            <!--    <com.google.android.material.divider.MaterialDivider-->
-            <!--        android:layout_below="@id/ivProduct"-->
-            <!--        android:layout_width="match_parent"-->
-            <!--        android:layout_margin="5dp"-->
-            <!--        android:layout_height="1dp"/>-->
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
