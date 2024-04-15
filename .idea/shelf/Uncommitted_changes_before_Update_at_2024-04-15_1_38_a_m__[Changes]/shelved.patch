@@ -1,0 +1,185 @@
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.fragments;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.SeekBar;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.android.assignment1.shoecart.R;\r\nimport com.android.assignment1.shoecart.databinding.FragmentProductDetailsBinding;\r\n\r\npublic class ProductDetails extends Fragment {\r\n\r\n    private SeekBar seekBar;\r\n    private TextView valueTextView;\r\n    FragmentProductDetailsBinding binding;\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n\r\n        binding = FragmentProductDetailsBinding.inflate(inflater, container, false);\r\n        // Inflate the layout for this fragment\r\n        View view = inflater.inflate(R.layout.fragment_product_details, container, false);\r\n\r\n        seekBar = view.findViewById(R.id.shoeSizeSeekBar);\r\n        valueTextView = view.findViewById(R.id.shoeSize);\r\n\r\n        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {\r\n            @Override\r\n            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {\r\n                int value = progress;\r\n                valueTextView.setText(String.valueOf(value));\r\n            }\r\n\r\n            @Override\r\n            public void onStartTrackingTouch(SeekBar seekBar) {\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onStopTrackingTouch(SeekBar seekBar) {\r\n\r\n            }\r\n        });\r\n        return binding.getRoot();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ b/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java	(date 1713148983506)
+@@ -1,37 +1,67 @@
+ package com.android.assignment1.shoecart.fragments;
+ 
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+ import android.widget.SeekBar;
+ import android.widget.TextView;
++import android.widget.Toast;
+ 
+ import androidx.fragment.app.Fragment;
+ 
+ import com.android.assignment1.shoecart.R;
+ import com.android.assignment1.shoecart.databinding.FragmentProductDetailsBinding;
++import com.android.assignment1.shoecart.db.CartDataSource;
++import com.android.assignment1.shoecart.db.ProductDataSource;
++import com.android.assignment1.shoecart.db.UserDataSource;
++import com.android.assignment1.shoecart.db.WishlistDataSource;
++import com.android.assignment1.shoecart.models.Cart;
++import com.android.assignment1.shoecart.models.Order;
++import com.android.assignment1.shoecart.models.Product;
++import com.android.assignment1.shoecart.models.Wishlist;
++import com.android.assignment1.shoecart.utils.Utility;
+ 
+ public class ProductDetails extends Fragment {
+ 
+     private SeekBar seekBar;
+     private TextView valueTextView;
+     FragmentProductDetailsBinding binding;
++    Product product;
++     int[] quantity = {1};
++
++    CartDataSource cartDataSource;
++    WishlistDataSource wishlistDataSource;
++    int value = 6;
+     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
+ 
+         binding = FragmentProductDetailsBinding.inflate(inflater, container, false);
+-        // Inflate the layout for this fragment
+-        View view = inflater.inflate(R.layout.fragment_product_details, container, false);
++
++        if (getArguments() != null) {
++            //geting arguments
++            product = (Product) getArguments().getParcelable("product");
++
++
++            if (product != null){
++                setData();
++            }
++        }
++
+ 
+-        seekBar = view.findViewById(R.id.shoeSizeSeekBar);
+-        valueTextView = view.findViewById(R.id.shoeSize);
++
++        seekBar = binding.getRoot().findViewById(R.id.shoeSizeSeekBar);
++        valueTextView = binding.getRoot().findViewById(R.id.shoeSize);
++
++        cartDataSource = new CartDataSource(requireContext());
++        wishlistDataSource = new WishlistDataSource(requireContext());
+ 
+         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+             @Override
+             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+-                int value = progress;
++                value = progress;
+                 valueTextView.setText(String.valueOf(value));
+             }
+ 
+@@ -47,4 +77,45 @@
+         });
+         return binding.getRoot();
+     }
++
++    public void setData(){
++        binding.productDetailName.setText(product.getTitle());
++        binding.productDetailDescription.setText(product.getDescription());
++        String imageName = product.getImages().get(0).getImageUrl();
++        binding.pdQuantity.setText(String.valueOf(quantity[0]));
++//        String imageNameWithoutExtension = imageName.substring(0, imageName.lastIndexOf('.'));
++        int resourceId = Utility.getImageResourceFromName(imageName, requireContext());
++
++
++        binding.productDetailImg.setImageResource(resourceId);
++
++
++
++        binding.pdAdd.setOnClickListener(v -> {
++            quantity[0]++;
++            binding.pdQuantity.setText(String.valueOf(quantity[0]));
++//            updateCart(new Cart(wishlistList.get(position).getCartId(), wishlistList.get(position).getProductId(), wishlistList.get(position).getProductSize(),quantity[0], wishlistList.get(position).getUserId()));
++        });
++
++        binding.pdMinus.setOnClickListener(v -> {
++            if (quantity[0] > 1) {
++                quantity[0]--;
++                binding.pdQuantity.setText(String.valueOf(quantity[0]));
++//                updateCart(new Cart(wishlistList.get(position).getCartId(), wishlistList.get(position).getProductId(), wishlistList.get(position).getProductSize(),quantity[0], wishlistList.get(position).getUserId()));
++
++            } else {
++                Toast.makeText(requireContext(), "Item can't be 0. Please click remove item button to remove item from cart", Toast.LENGTH_SHORT).show();
++            }
++        });
++
++        binding.addToCartBtn.setOnClickListener(v -> {
++            cartDataSource.insertCart(new Cart(product.getProductId(),String.valueOf(value),quantity[0],Utility.getUser(requireContext()).getUserId()));
++            Toast.makeText(requireContext(), "Added to Cart", Toast.LENGTH_SHORT).show();
++        });
++
++        binding.addToWishListBtn.setOnClickListener(v -> {
++            wishlistDataSource.insertWishlist(new Wishlist(product.getProductId(), value, Utility.getUser(requireContext()).getUserId()));
++            Toast.makeText(requireContext(), "Added to Wishlist", Toast.LENGTH_SHORT).show();
++        });
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.models;\r\n\r\nimport android.os.Parcel;\r\nimport android.os.Parcelable;\r\n\r\npublic class Wishlist implements Parcelable {\r\n\r\n    private int wishlistId;\r\n    private int productId;\r\n    private int sizeId;\r\n    private int userId;\r\n\r\n    public Wishlist() {\r\n    }\r\n\r\n    public Wishlist(int wishlistId, int productId, int sizeId, int userId) {\r\n        this.wishlistId = wishlistId;\r\n        this.productId = productId;\r\n        this.sizeId = sizeId;\r\n        this.userId = userId;\r\n    }\r\n\r\n    protected Wishlist(Parcel in) {\r\n        wishlistId = in.readInt();\r\n        productId = in.readInt();\r\n        sizeId = in.readInt();\r\n        userId = in.readInt();\r\n    }\r\n\r\n    public static final Creator<Wishlist> CREATOR = new Creator<Wishlist>() {\r\n        @Override\r\n        public Wishlist createFromParcel(Parcel in) {\r\n            return new Wishlist(in);\r\n        }\r\n\r\n        @Override\r\n        public Wishlist[] newArray(int size) {\r\n            return new Wishlist[size];\r\n        }\r\n    };\r\n\r\n    @Override\r\n    public int describeContents() {\r\n        return 0;\r\n    }\r\n\r\n    @Override\r\n    public void writeToParcel(Parcel parcel, int i) {\r\n        parcel.writeInt(wishlistId);\r\n        parcel.writeInt(productId);\r\n        parcel.writeInt(sizeId);\r\n        parcel.writeInt(userId);\r\n    }\r\n\r\n    // Getters and setters\r\n\r\n    public int getWishlistId() {\r\n        return wishlistId;\r\n    }\r\n\r\n    public void setWishlistId(int wishlistId) {\r\n        this.wishlistId = wishlistId;\r\n    }\r\n\r\n    public int getProductId() {\r\n        return productId;\r\n    }\r\n\r\n    public void setProductId(int productId) {\r\n        this.productId = productId;\r\n    }\r\n\r\n    public int getSizeId() {\r\n        return sizeId;\r\n    }\r\n\r\n    public void setSizeId(int sizeId) {\r\n        this.sizeId = sizeId;\r\n    }\r\n\r\n    public int getUserId() {\r\n        return userId;\r\n    }\r\n\r\n    public void setUserId(int userId) {\r\n        this.userId = userId;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java b/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ b/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java	(date 1713148281850)
+@@ -20,6 +20,12 @@
+         this.userId = userId;
+     }
+ 
++    public Wishlist(int productId, int sizeId, int userId) {
++        this.productId = productId;
++        this.sizeId = sizeId;
++        this.userId = userId;
++    }
++
+     protected Wishlist(Parcel in) {
+         wishlistId = in.readInt();
+         productId = in.readInt();
+Index: app/src/main/res/layout/fragment_product_details.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".fragments.ProductDetails\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <ImageView\r\n                android:id=\"@+id/productDetailImg\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"200dp\"\r\n                android:adjustViewBounds=\"true\"\r\n                android:scaleType=\"centerCrop\"\r\n                android:src=\"@drawable/product_blue_2\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/productDetailName\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Blue Shoes\"\r\n                android:textSize=\"22dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Description\"\r\n                android:textSize=\"25dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:textStyle=\"bold\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_margin=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/productDetailDescription\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\"\r\n                android:textSize=\"15dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"\r\n                android:textAlignment=\"viewStart\"\r\n                android:justificationMode=\"inter_word\"/>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Select Size\"\r\n                android:textSize=\"25dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:textStyle=\"bold\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_margin=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/shoeSize\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginBottom=\"10dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:text=\"6\"\r\n                android:layout_marginStart=\"20dp\"/>\r\n\r\n            <SeekBar\r\n                android:id=\"@+id/shoeSizeSeekBar\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"20dp\"\r\n                android:layout_marginEnd=\"20dp\"\r\n                android:min=\"6\"\r\n                android:max=\"14\"/>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_gravity=\"center\">\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"Quantity\"\r\n                    android:textSize=\"20dp\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:layout_marginStart=\"10dp\"\r\n                    android:layout_marginTop=\"20dp\"/>\r\n                <View\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"0dp\"\r\n                    android:layout_weight=\"1\"/>\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_alignParentEnd=\"true\"\r\n                    android:layout_marginStart=\"20dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    android:layout_marginEnd=\"40dp\"\r\n                    android:layout_gravity=\"center\">\r\n\r\n                    <ImageView\r\n                        android:id=\"@+id/pdAdd\"\r\n                        android:layout_width=\"30dp\"\r\n                        android:layout_height=\"30dp\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:backgroundTint=\"@color/white\"\r\n                        android:src=\"@drawable/add\" />\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/pdQuantity\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginHorizontal=\"10dp\"\r\n                        android:textColor=\"@color/white\"\r\n                        android:text=\"3\"\r\n                        android:textSize=\"20sp\"\r\n                        android:textStyle=\"bold\" />\r\n\r\n                    <ImageView\r\n                        android:id=\"@+id/pdMinus\"\r\n                        android:layout_width=\"30dp\"\r\n                        android:backgroundTint=\"@color/white\"\r\n                        android:layout_height=\"30dp\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:src=\"@drawable/minus\" />\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <Button\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:id=\"@+id/addToCartBtn\"\r\n                    android:text=\"Add to Cart\"\r\n                    android:layout_weight=\"1\"\r\n                    android:backgroundTint=\"@color/colorAccent\"\r\n                    android:textColor=\"@color/white\"/>\r\n\r\n\r\n                <Button\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:id=\"@+id/addToWishListBtn\"\r\n                    android:text=\"Add to WishList\"\r\n                    android:layout_weight=\"1\"\r\n                    android:backgroundTint=\"@color/colorAccent\"\r\n                    android:textColor=\"@color/white\"/>\r\n            </LinearLayout>\r\n\r\n\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_product_details.xml b/app/src/main/res/layout/fragment_product_details.xml
+--- a/app/src/main/res/layout/fragment_product_details.xml	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ b/app/src/main/res/layout/fragment_product_details.xml	(date 1713149359654)
+@@ -15,11 +15,12 @@
+             android:orientation="vertical">
+ 
+             <ImageView
++
+                 android:id="@+id/productDetailImg"
+                 android:layout_width="match_parent"
+                 android:layout_height="200dp"
+                 android:adjustViewBounds="true"
+-                android:scaleType="centerCrop"
++                android:scaleType="fitXY"
+                 android:src="@drawable/product_blue_2"
+                 android:layout_marginTop="20dp"
+                 android:layout_marginStart="10dp"
+@@ -154,6 +155,7 @@
+                 android:orientation="horizontal">
+ 
+                 <Button
++
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/addToCartBtn"

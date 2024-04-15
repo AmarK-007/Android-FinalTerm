@@ -1,0 +1,184 @@
+Index: app/src/main/java/com/android/assignment1/shoecart/db/UserDataSource.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.db;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.ContentValues;\r\nimport android.content.Context;\r\nimport android.database.Cursor;\r\nimport android.database.sqlite.SQLiteDatabase;\r\n\r\nimport com.android.assignment1.shoecart.models.User;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class UserDataSource {\r\n    private DBHelper dbHelper;\r\n\r\n    public UserDataSource(Context context) {\r\n        dbHelper = new DBHelper(context);\r\n    }\r\n\r\n\r\n    public static final String TABLE_NAME = \"users\";\r\n    public static final String COLUMN_USER_ID = \"user_id\";\r\n    public static final String COLUMN_NAME = \"name\";\r\n    public static final String COLUMN_EMAIL = \"email\";\r\n    public static final String COLUMN_PASSWORD = \"password\";\r\n    public static final String COLUMN_USERNAME = \"username\";\r\n    public static final String COLUMN_PURCHASE_HISTORY = \"purchase_history\";\r\n    public static final String COLUMN_SHIPPING_ADDRESS_1 = \"shipping_address_1\";\r\n    public static final String COLUMN_SHIPPING_ADDRESS_2 = \"shipping_address_2\";\r\n    public static final String COLUMN_CITY = \"city\";\r\n    public static final String COLUMN_PROVINCE = \"province\";\r\n    public static final String COLUMN_PINCODE = \"pincode\";\r\n\r\n    // Create table SQL query\r\n    public static final String CREATE_TABLE =\r\n            \"CREATE TABLE IF NOT EXISTS \" + TABLE_NAME + \"(\"\r\n                    + COLUMN_USER_ID + \" INTEGER PRIMARY KEY AUTOINCREMENT,\"\r\n                    + COLUMN_NAME + \" TEXT,\"\r\n                    + COLUMN_EMAIL + \" TEXT UNIQUE,\"\r\n                    + COLUMN_PASSWORD + \" TEXT,\"\r\n                    + COLUMN_USERNAME + \" TEXT,\"\r\n                    + COLUMN_PURCHASE_HISTORY + \" TEXT,\"\r\n                    + COLUMN_SHIPPING_ADDRESS_1 + \" TEXT,\"\r\n                    + COLUMN_SHIPPING_ADDRESS_2 + \" TEXT,\"\r\n                    + COLUMN_CITY + \" TEXT,\"\r\n                    + COLUMN_PROVINCE + \" TEXT,\"\r\n                    + COLUMN_PINCODE + \" TEXT\"\r\n                    + \")\";\r\n    \r\n    public boolean insertUser(User user) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_NAME, user.getName());\r\n        values.put(COLUMN_EMAIL, user.getEmail());\r\n        values.put(COLUMN_PASSWORD, user.getPassword());\r\n        values.put(COLUMN_USERNAME, user.getUsername());\r\n        values.put(COLUMN_PURCHASE_HISTORY, user.getPurchaseHistory());\r\n        values.put(COLUMN_SHIPPING_ADDRESS_1, user.getShippingAddress1());\r\n        values.put(COLUMN_SHIPPING_ADDRESS_2, user.getShippingAddress2());\r\n        values.put(COLUMN_CITY, user.getCity());\r\n        values.put(COLUMN_PROVINCE, user.getProvince());\r\n        values.put(COLUMN_PINCODE, user.getPincode());\r\n\r\n        long result = db.insert(TABLE_NAME, null, values);\r\n        db.close();\r\n\r\n        if (result == -1) {\r\n            return false; // Insertion failed\r\n        } else {\r\n            return true; // Insertion successful\r\n        }\r\n    }\r\n\r\n    @SuppressLint(\"Range\")\r\n    public User getUser(String username, String password) {\r\n        SQLiteDatabase db = dbHelper.getReadableDatabase();\r\n\r\n        Cursor cursor = db.query(TABLE_NAME,\r\n                new String[]{COLUMN_USER_ID, COLUMN_NAME, COLUMN_EMAIL, COLUMN_PASSWORD, COLUMN_USERNAME, /* Add the rest of the user fields... */},\r\n                COLUMN_USERNAME + \"=? AND \" + COLUMN_PASSWORD + \"=?\",\r\n                new String[]{username, password},\r\n                null, null, null);\r\n\r\n        if (cursor != null && cursor.moveToFirst()) {\r\n            User user = new User();\r\n            user.setUserId(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));\r\n            user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));\r\n            user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));\r\n            user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)));\r\n            user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)));\r\n            user.setPurchaseHistory(cursor.getString(cursor.getColumnIndex(COLUMN_PURCHASE_HISTORY)));\r\n            user.setShippingAddress1(cursor.getString(cursor.getColumnIndex(COLUMN_SHIPPING_ADDRESS_1)));\r\n            user.setShippingAddress2(cursor.getString(cursor.getColumnIndex(COLUMN_SHIPPING_ADDRESS_2)));\r\n            user.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)));\r\n            user.setProvince(cursor.getString(cursor.getColumnIndex(COLUMN_PROVINCE)));\r\n            user.setPincode(cursor.getString(cursor.getColumnIndex(COLUMN_PINCODE)));\r\n\r\n            cursor.close();\r\n            return user;\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n    @SuppressLint(\"Range\")\r\n    public List<User> getAllUsers() {\r\n        List<User> users = new ArrayList<>();\r\n\r\n        String selectQuery = \"SELECT  * FROM \" + TABLE_NAME;\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n        Cursor cursor = db.rawQuery(selectQuery, null);\r\n\r\n        if (cursor.moveToFirst()) {\r\n            do {\r\n                User user = new User();\r\n                user.setUserId(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));\r\n                user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));\r\n                user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));\r\n                user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)));\r\n                user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)));\r\n                user.setPurchaseHistory(cursor.getString(cursor.getColumnIndex(COLUMN_PURCHASE_HISTORY)));\r\n                user.setShippingAddress1(cursor.getString(cursor.getColumnIndex(COLUMN_SHIPPING_ADDRESS_1)));\r\n                user.setShippingAddress2(cursor.getString(cursor.getColumnIndex(COLUMN_SHIPPING_ADDRESS_2)));\r\n                user.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)));\r\n                user.setProvince(cursor.getString(cursor.getColumnIndex(COLUMN_PROVINCE)));\r\n                user.setPincode(cursor.getString(cursor.getColumnIndex(COLUMN_PINCODE)));\r\n\r\n                users.add(user);\r\n            } while (cursor.moveToNext());\r\n        }\r\n\r\n        cursor.close();\r\n        return users;\r\n    }\r\n\r\n    public int updateUser(User user) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_NAME, user.getName());\r\n        values.put(COLUMN_EMAIL, user.getEmail());\r\n        values.put(COLUMN_PASSWORD, user.getPassword());\r\n        values.put(COLUMN_USERNAME, user.getUsername());\r\n        values.put(COLUMN_PURCHASE_HISTORY, user.getPurchaseHistory());\r\n        values.put(COLUMN_SHIPPING_ADDRESS_1, user.getShippingAddress1());\r\n        values.put(COLUMN_SHIPPING_ADDRESS_2, user.getShippingAddress2());\r\n        values.put(COLUMN_CITY, user.getCity());\r\n        values.put(COLUMN_PROVINCE, user.getProvince());\r\n        values.put(COLUMN_PINCODE, user.getPincode());\r\n\r\n        return db.update(TABLE_NAME, values, COLUMN_USER_ID + \" = ?\",\r\n                new String[]{String.valueOf(user.getUserId())});\r\n    }\r\n\r\n    public void deleteUser(User user) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n        db.delete(TABLE_NAME, COLUMN_USER_ID + \" = ?\",\r\n                new String[]{String.valueOf(user.getUserId())});\r\n        db.close();\r\n    }\r\n\r\n    public boolean validateUser(String username, String password) {\r\n        SQLiteDatabase db = dbHelper.getReadableDatabase();\r\n        Cursor cursor = db.query(TABLE_NAME,\r\n                new String[]{COLUMN_USERNAME},\r\n                COLUMN_USERNAME + \"=? AND \" + COLUMN_PASSWORD + \"=?\",\r\n                new String[]{username, password},\r\n                null, null, null);\r\n\r\n        int cursorCount = cursor.getCount();\r\n        cursor.close();\r\n\r\n        if (cursorCount > 0) {\r\n            return true;\r\n        }\r\n\r\n        return false;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/db/UserDataSource.java b/app/src/main/java/com/android/assignment1/shoecart/db/UserDataSource.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/db/UserDataSource.java	
++++ b/app/src/main/java/com/android/assignment1/shoecart/db/UserDataSource.java	
+@@ -73,12 +73,43 @@
+         }
+     }
+ 
++//    @SuppressLint("Range")
++//    public User getUser(String username, String password) {
++//        SQLiteDatabase db = dbHelper.getReadableDatabase();
++//
++//        Cursor cursor = db.query(TABLE_NAME,
++//                new String[]{COLUMN_USER_ID, COLUMN_NAME, COLUMN_EMAIL, COLUMN_PASSWORD, COLUMN_USERNAME, /* Add the rest of the user fields... */},
++//                COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?",
++//                new String[]{username, password},
++//                null, null, null);
++//
++//        if (cursor != null && cursor.moveToFirst()) {
++//            User user = new User();
++//            user.setUserId(cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID)));
++//            user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
++//            user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)));
++//            user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)));
++//            user.setUsername(cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)));
++//            user.setPurchaseHistory(cursor.getString(cursor.getColumnIndex(COLUMN_PURCHASE_HISTORY)));
++//            user.setShippingAddress1(cursor.getString(cursor.getColumnIndex(COLUMN_SHIPPING_ADDRESS_1)));
++//            user.setShippingAddress2(cursor.getString(cursor.getColumnIndex(COLUMN_SHIPPING_ADDRESS_2)));
++//            user.setCity(cursor.getString(cursor.getColumnIndex(COLUMN_CITY)));
++//            user.setProvince(cursor.getString(cursor.getColumnIndex(COLUMN_PROVINCE)));
++//            user.setPincode(cursor.getString(cursor.getColumnIndex(COLUMN_PINCODE)));
++//
++//            cursor.close();
++//            return user;
++//        } else {
++//            return null;
++//        }
++//    }
++
+     @SuppressLint("Range")
+     public User getUser(String username, String password) {
+         SQLiteDatabase db = dbHelper.getReadableDatabase();
+ 
+         Cursor cursor = db.query(TABLE_NAME,
+-                new String[]{COLUMN_USER_ID, COLUMN_NAME, COLUMN_EMAIL, COLUMN_PASSWORD, COLUMN_USERNAME, /* Add the rest of the user fields... */},
++                null,
+                 COLUMN_USERNAME + "=? AND " + COLUMN_PASSWORD + "=?",
+                 new String[]{username, password},
+                 null, null, null);
+Index: app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.activity;\r\n\r\nimport androidx.appcompat.app.ActionBarDrawerToggle;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\n\r\nimport android.content.Context;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.GridLayout;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.ViewFlipper;\r\n\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.android.assignment1.shoecart.R;\r\nimport com.android.assignment1.shoecart.models.HomeProduct;\r\nimport com.android.assignment1.shoecart.utils.Utility;\r\nimport com.google.android.material.appbar.MaterialToolbar;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class HomeActivity extends AppCompatActivity {\r\n    ActionBarDrawerToggle toggle;\r\n    MaterialToolbar materialToolbar;\r\n    DrawerLayout drawerLayout;\r\n    ViewFlipper viewFlipper;\r\n    ImageView imageView;\r\n    GridLayout newArrivalsGrid;\r\n    GridLayout bestSellersGrid;\r\n\r\n    List<HomeProduct> gridNewShoes = new ArrayList<>();\r\n    List<HomeProduct> gridBestShoes = new ArrayList<>();\r\n    private static final String TAG = HomeActivity.class.getSimpleName();\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_home);\r\n\r\n        int caraousalImages[] = {R.drawable.shoe1, R.drawable.shoe2, R.drawable.shoe3};\r\n\r\n        HomeProduct product1 = new HomeProduct(R.drawable.product_blue_1, \"Blue Shoes\", 122.99);\r\n        HomeProduct product2 = new HomeProduct(R.drawable.product_grey_1, \"Grey Shoes\", 122.99);\r\n        HomeProduct product3 = new HomeProduct(R.drawable.product_red_1, \"Red Shoes\", 122.99);\r\n        HomeProduct product4 = new HomeProduct(R.drawable.product_white_blue_1, \"White Shoes\", 122.99);\r\n\r\n        gridNewShoes.add(product1);\r\n        gridNewShoes.add(product2);\r\n        gridNewShoes.add(product3);\r\n        gridNewShoes.add(product4);\r\n\r\n        gridBestShoes.add(product1);\r\n        gridBestShoes.add(product2);\r\n        gridBestShoes.add(product3);\r\n        gridBestShoes.add(product4);\r\n\r\n        materialToolbar = findViewById(R.id.homeToolBar);\r\n        drawerLayout = findViewById(R.id.drawerMenu);\r\n        toggle = new ActionBarDrawerToggle(this, drawerLayout, materialToolbar, R.string.open, R.string.close);\r\n        drawerLayout.addDrawerListener(toggle);\r\n        toggle.syncState();\r\n        setSupportActionBar(materialToolbar);\r\n        getSupportActionBar().setDisplayHomeAsUpEnabled(true);\r\n        setDrawer();\r\n\r\n        newArrivalsGrid = findViewById(R.id.newArrivalsGrid);\r\n        bestSellersGrid = findViewById(R.id.bestSellersGrid);\r\n\r\n        viewFlipper = findViewById(R.id.categoryCaraousal);\r\n        for (int i: caraousalImages) {\r\n            flipperCaraousalImages(i);\r\n        }\r\n\r\n        for(int i = 0; i < gridNewShoes.size(); i++){\r\n\r\n            HomeProduct product = gridNewShoes.get(i);\r\n            CardView gridNewShoesCard =(CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);\r\n\r\n            ImageView newShoesImage = gridNewShoesCard.findViewById(R.id.productImage);\r\n            TextView newShoesName = gridNewShoesCard.findViewById(R.id.productName);\r\n            TextView newShoesCost = gridNewShoesCard.findViewById(R.id.productPrice);\r\n\r\n            gridNewShoesCard.setId(View.generateViewId());\r\n            newShoesImage.setImageResource(product.getImageId());\r\n            newShoesName.setText(product.getProductName());\r\n            newShoesCost.setText(Double.toString(product.getCost()));\r\n\r\n            newArrivalsGrid.addView(gridNewShoesCard);\r\n        }\r\n\r\n        for(int i = 0; i < gridBestShoes.size(); i++){\r\n\r\n            HomeProduct product = gridBestShoes.get(i);\r\n            CardView gridBestShoes =(CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);\r\n\r\n            ImageView bestShoesImage = gridBestShoes.findViewById(R.id.productImage);\r\n            TextView bestShoesName = gridBestShoes.findViewById(R.id.productName);\r\n            TextView bestShoesCost = gridBestShoes.findViewById(R.id.productPrice);\r\n\r\n            gridBestShoes.setId(View.generateViewId());\r\n            bestShoesImage.setImageResource(product.getImageId());\r\n            bestShoesName.setText(product.getProductName());\r\n            bestShoesCost.setText(Double.toString(product.getCost()));\r\n\r\n            bestSellersGrid.addView(gridBestShoes);\r\n        }\r\n    }\r\n\r\n    private void setDrawer() {\r\n\r\n    }\r\n\r\n    public void flipperCaraousalImages(int image){\r\n\r\n        imageView = findViewById(R.id.caraousalImage);\r\n        imageView.setBackgroundResource(image);\r\n\r\n        viewFlipper.setInAnimation(this, android.R.anim.slide_in_left);\r\n        viewFlipper.setOutAnimation(this, android.R.anim.slide_out_right);\r\n    }\r\n\r\n\r\n//    @Override\r\n//    public void onBackPressed() {\r\n//        super.onBackPressed();\r\n//        onSupportNavigateUp();\r\n//    }\r\n//\r\n//    @Override\r\n//    public boolean onSupportNavigateUp() {\r\n//        showAppExitingAlert(this);\r\n//        return true;\r\n//    }\r\n//\r\n//    AlertDialog.Builder alertDialog;\r\n//\r\n//    public void showAppExitingAlert(final Context context) {\r\n//        alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);\r\n//        alertDialog.setTitle(Utility.getAppNameString(context));\r\n//        alertDialog.setMessage(getString(R.string.msg_app_exit));\r\n//        alertDialog.setPositiveButton(getString(R.string.button_ok),\r\n//                (dialog, which) -> {\r\n//                    dialog.dismiss();\r\n//                    alertDialog = null;\r\n//                    Log.v(TAG, \"App Exited via Alert Dialog\");\r\n//                    Log.v(TAG, \"from exitDialog HomeActivity called\");\r\n//                    //HomeActivity.this.finishAffinity();\r\n//                    HomeActivity.this.finishAndRemoveTask();\r\n//                });\r\n//        alertDialog.setNegativeButton(getString(R.string.button_cancel), (dialog, which) -> {\r\n//            dialog.dismiss();\r\n//            alertDialog = null;\r\n//        });\r\n//        alertDialog.show();\r\n//    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java b/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java	
++++ b/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java	
+@@ -1,5 +1,6 @@
+ package com.android.assignment1.shoecart.activity;
+ 
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.ActionBarDrawerToggle;
+ import androidx.appcompat.app.AlertDialog;
+ import androidx.appcompat.app.AppCompatActivity;
+@@ -9,6 +10,7 @@
+ import android.content.Context;
+ import android.os.Bundle;
+ import android.util.Log;
++import android.view.MenuItem;
+ import android.view.View;
+ import android.widget.GridLayout;
+ import android.widget.ImageView;
+@@ -17,11 +19,19 @@
+ 
+ import androidx.appcompat.app.AlertDialog;
+ import androidx.appcompat.app.AppCompatActivity;
++import androidx.fragment.app.Fragment;
++import androidx.fragment.app.FragmentManager;
++import androidx.fragment.app.FragmentTransaction;
+ 
+ import com.android.assignment1.shoecart.R;
++import com.android.assignment1.shoecart.fragments.CartFragment;
++import com.android.assignment1.shoecart.fragments.OrdersFragment;
++import com.android.assignment1.shoecart.fragments.WishlistFragment;
+ import com.android.assignment1.shoecart.models.HomeProduct;
+ import com.android.assignment1.shoecart.utils.Utility;
+ import com.google.android.material.appbar.MaterialToolbar;
++import com.google.android.material.internal.NavigationMenu;
++import com.google.android.material.navigation.NavigationView;
+ 
+ import java.util.ArrayList;
+ import java.util.List;
+@@ -30,6 +40,8 @@
+     ActionBarDrawerToggle toggle;
+     MaterialToolbar materialToolbar;
+     DrawerLayout drawerLayout;
++
++    NavigationView navigationView;
+     ViewFlipper viewFlipper;
+     ImageView imageView;
+     GridLayout newArrivalsGrid;
+@@ -63,12 +75,15 @@
+ 
+         materialToolbar = findViewById(R.id.homeToolBar);
+         drawerLayout = findViewById(R.id.drawerMenu);
++        navigationView = findViewById(R.id.navMenu);
+         toggle = new ActionBarDrawerToggle(this, drawerLayout, materialToolbar, R.string.open, R.string.close);
+         drawerLayout.addDrawerListener(toggle);
+         toggle.syncState();
+         setSupportActionBar(materialToolbar);
+         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+         setDrawer();
++        drawerItemClick();
++
+ 
+         newArrivalsGrid = findViewById(R.id.newArrivalsGrid);
+         bestSellersGrid = findViewById(R.id.bestSellersGrid);
+@@ -114,7 +129,43 @@
+     }
+ 
+     private void setDrawer() {
++    }
+ 
++    public void drawerItemClick(){
++       navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
++           @Override
++           public boolean onNavigationItemSelected(@NonNull MenuItem item) {
++               Fragment fragment = null;
++               int itemId = item.getItemId();
++               if(itemId == R.id.myProfile){
++//                   fragment = new AddFragment(employeeService);
++               }else if(itemId == R.id.myOrders){
++                   fragment = new OrdersFragment();
++               }else if(itemId == R.id.categories){
++//                   fragment = new UpdateFragment();
++               }else if(itemId == R.id.wishList){
++                   fragment = new WishlistFragment();
++               }else if(itemId == R.id.support){
++                   fragment = new CartFragment();
++               }else if(itemId == R.id.about){
++//                   fragment = new ListFragment();
++               }else if(itemId == R.id.logout){
++//                   fragment = new ListFragment();
++               }else{
++
++               }
++               if(fragment != null){
++//                    opening or moving to a fragment
++                   FragmentManager supportFragmentManager = getSupportFragmentManager();
++                   FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
++                   fragmentTransaction.replace(R.id.frames, fragment);
++                   fragmentTransaction.commit();
++                   drawerLayout.closeDrawers();
++                   return true;
++               }
++               return false;
++           }
++       });
+     }
+ 
+     public void flipperCaraousalImages(int image){
+@@ -160,4 +211,13 @@
+ //        });
+ //        alertDialog.show();
+ //    }
++
++
++    @Override
++    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
++        if (toggle.onOptionsItemSelected(item)) {
++            return true;
++        }
++        return super.onOptionsItemSelected(item);
++    }
+ }
+\ No newline at end of file

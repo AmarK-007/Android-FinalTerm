@@ -1,0 +1,80 @@
+Index: app/src/main/res/layout/custom_cart_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    android:orientation=\"vertical\">\r\n\r\n    <androidx.cardview.widget.CardView style=\"@style/cardViewStyle\">\r\n\r\n        <RelativeLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\">\r\n\r\n            <ImageView\r\n                android:id=\"@+id/ivProduct\"\r\n                android:layout_width=\"90dp\"\r\n                android:layout_height=\"90dp\"\r\n                android:layout_alignParentStart=\"true\"\r\n                android:layout_centerVertical=\"true\"\r\n                android:padding=\"10dp\"\r\n                android:src=\"@drawable/place_holder_image\" />\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_toStartOf=\"@id/layoutAddSub\"\r\n                android:layout_toEndOf=\"@id/ivProduct\"\r\n                android:orientation=\"vertical\">\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvTitle\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:minLines=\"0\"\r\n                    android:text=\"Nike Air 200\"\r\n                    android:textSize=\"16dp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvPrice\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"$200\" />\r\n            </LinearLayout>\r\n\r\n\r\n            <LinearLayout\r\n                android:id=\"@+id/layoutAddSub\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginEnd=\"40dp\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/ivAdd\"\r\n                    android:layout_width=\"30dp\"\r\n                    android:layout_height=\"30dp\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:src=\"@drawable/add\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvQuantity\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:layout_marginHorizontal=\"10dp\"\r\n                    android:text=\"3\"\r\n                    android:textSize=\"20sp\"\r\n                    android:textStyle=\"bold\" />\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/ivMinus\"\r\n                    android:layout_width=\"30dp\"\r\n                    android:layout_height=\"30dp\"\r\n                    android:layout_gravity=\"center\"\r\n                    android:src=\"@drawable/minus\" />\r\n            </LinearLayout>\r\n\r\n            <Button\r\n                android:id=\"@+id/btnRemoveItem\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@id/layoutAddSub\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:layout_marginHorizontal=\"20dp\"\r\n                android:layout_marginVertical=\"5dp\"\r\n                android:text=\"Remove Item\" />\r\n\r\n            <!--    <com.google.android.material.divider.MaterialDivider-->\r\n            <!--        android:layout_below=\"@id/ivProduct\"-->\r\n            <!--        android:layout_width=\"match_parent\"-->\r\n            <!--        android:layout_margin=\"5dp\"-->\r\n            <!--        android:layout_height=\"1dp\"/>-->\r\n        </RelativeLayout>\r\n    </androidx.cardview.widget.CardView>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/custom_cart_item.xml b/app/src/main/res/layout/custom_cart_item.xml
+--- a/app/src/main/res/layout/custom_cart_item.xml	(revision 62527f9a2c430285c227a6d7a42c83df53f17997)
++++ b/app/src/main/res/layout/custom_cart_item.xml	(date 1713070182502)
+@@ -2,6 +2,7 @@
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:orientation="vertical">
+ 
+     <androidx.cardview.widget.CardView style="@style/cardViewStyle">
+@@ -52,15 +53,27 @@
+                 android:layout_marginTop="10dp"
+                 android:layout_marginEnd="40dp">
+ 
+-                <ImageView
++                <ImageButton
+                     android:id="@+id/ivAdd"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"
+                     android:layout_gravity="center"
+                     android:src="@drawable/add" />
+ 
+-                <TextView
++                <com.google.android.material.textfield.TextInputLayout
++                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
++                    android:layout_width="wrap_content"
++                    android:padding="2dp"
++                    android:layout_gravity="center"
++                    android:gravity="center"
++                    app:boxBackgroundColor="@color/colorPrimaryLight"
++                    android:layout_height="wrap_content">
++                <com.google.android.material.textfield.TextInputEditText
+                     android:id="@+id/tvQuantity"
++                    android:enabled="false"
++
++
++                    android:textColor="@color/black"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+@@ -68,13 +81,14 @@
+                     android:text="3"
+                     android:textSize="20sp"
+                     android:textStyle="bold" />
++                </com.google.android.material.textfield.TextInputLayout>
+ 
+-                <ImageView
++                <ImageButton
+                     android:id="@+id/ivMinus"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"
+                     android:layout_gravity="center"
+-                    android:src="@drawable/minus" />
++                    android:src="@drawable/minus_resized" />
+             </LinearLayout>
+ 
+             <Button
+Index: app/src/main/res/drawable/minus_resized.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/minus_resized.xml b/app/src/main/res/drawable/minus_resized.xml
+new file mode 100644
+--- /dev/null	(date 1712978387759)
++++ b/app/src/main/res/drawable/minus_resized.xml	(date 1712978387759)
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
++<item android:drawable="@drawable/minus" android:width="24dp" android:height="24dp"/>
++</layer-list>
+\ No newline at end of file

@@ -1,0 +1,319 @@
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/ShowProductFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.fragments;\r\n\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\nimport androidx.recyclerview.widget.StaggeredGridLayoutManager;\r\n\r\nimport com.android.assignment1.shoecart.R;\r\nimport com.android.assignment1.shoecart.adapters.ShowProductAdapter;\r\nimport com.android.assignment1.shoecart.databinding.FragmentShowProductBinding;\r\nimport com.android.assignment1.shoecart.db.ProductDataSource;\r\nimport com.android.assignment1.shoecart.interfaces.AdapterInterface;\r\nimport com.android.assignment1.shoecart.models.Product;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Objects;\r\n\r\n\r\npublic class ShowProductFragment extends Fragment implements AdapterInterface<Product> {\r\n\r\n    FragmentShowProductBinding binding;\r\n    List<Product> productList = new ArrayList<>();\r\n    String category;\r\n\r\n    ShowProductAdapter showProductAdapter;\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        // Inflate the layout for this fragment\r\n        binding = FragmentShowProductBinding.inflate(inflater, container, false);\r\n\r\n        if (getArguments() != null) {\r\n            //geting arguments\r\n            category = getArguments().getString(\"category\");\r\n            Log.e(\"TAG\", category + \" 1\");\r\n\r\n        }\r\n\r\n        productList = new ProductDataSource(requireContext()).getAllProducts();\r\n\r\n        List<Product> categoryProduct = new ArrayList<>();\r\n\r\n        productList.forEach(product -> {\r\n            if (Objects.equals(product.getCategory(), category)) {\r\n                categoryProduct.add(product);\r\n                Log.e(\"TAG\", categoryProduct.get(0).getCategory() + \" 23\");\r\n            }\r\n            Log.e(\"TAG\", product.getCategory());\r\n        });\r\n\r\n        categoryProduct.forEach(product -> {\r\n            Log.e(\"CAt\", product.getTitle());\r\n        });\r\n\r\n        showProductAdapter = new ShowProductAdapter(categoryProduct, requireContext(), this);\r\n        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);\r\n\r\n        binding.rvCategory.setAdapter(showProductAdapter);\r\n        binding.rvCategory.setLayoutManager(layoutManager);\r\n\r\n        return binding.getRoot();\r\n    }\r\n\r\n    @Override\r\n    public void onItemSelected(Product data, int position) {\r\n        Bundle bundle = new Bundle();\r\n        bundle.putParcelable(\"product\", data);\r\n//        moving to add fragment\r\n        Fragment fragment = new ProductDetails();\r\n\r\n        //passing arguments\r\n        fragment.setArguments(bundle);\r\n        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.replace(R.id.frames, fragment);\r\n        fragmentTransaction.addToBackStack(null);\r\n        fragmentTransaction.commit();\r\n    }\r\n\r\n    @Override\r\n    public void onItemRemoved() {\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/ShowProductFragment.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/ShowProductFragment.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/fragments/ShowProductFragment.java	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ b/app/src/main/java/com/android/assignment1/shoecart/fragments/ShowProductFragment.java	(date 1713160089693)
+@@ -6,6 +6,8 @@
+ import android.view.View;
+ import android.view.ViewGroup;
+ 
++import androidx.appcompat.app.ActionBar;
++import androidx.appcompat.app.AppCompatActivity;
+ import androidx.fragment.app.Fragment;
+ import androidx.fragment.app.FragmentManager;
+ import androidx.fragment.app.FragmentTransaction;
+@@ -76,12 +78,25 @@
+         return binding.getRoot();
+     }
+ 
++    @Override
++    public void onResume() {
++        super.onResume();
++        // Retrieve the category from the arguments
++        String category = getArguments().getString("category");
++
++        // Set action bar title to the category
++        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
++        if (actionBar != null && category != null) {
++            actionBar.setTitle(category);
++        }
++    }
++
+     @Override
+     public void onItemSelected(Product data, int position) {
+         Bundle bundle = new Bundle();
+         bundle.putParcelable("product", data);
+ //        moving to add fragment
+-        Fragment fragment = new ProductDetails();
++        Fragment fragment = new ProductDetailsFragment();
+ 
+         //passing arguments
+         fragment.setArguments(bundle);
+@@ -90,6 +105,12 @@
+         fragmentTransaction.replace(R.id.frames, fragment);
+         fragmentTransaction.addToBackStack(null);
+         fragmentTransaction.commit();
++
++        // Set action bar title to the selected product's title
++        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
++        if (actionBar != null) {
++            actionBar.setTitle(data.getTitle());
++        }
+     }
+ 
+     @Override
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/CategoryFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.fragments;\r\n\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.android.assignment1.shoecart.R;\r\nimport com.android.assignment1.shoecart.adapters.CategoryAdapter;\r\nimport com.android.assignment1.shoecart.db.ProductDataSource;\r\nimport com.android.assignment1.shoecart.interfaces.AdapterInterface;\r\nimport com.android.assignment1.shoecart.models.Category;\r\nimport com.android.assignment1.shoecart.models.Product;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashSet;\r\nimport java.util.List;\r\nimport java.util.Set;\r\n\r\npublic class CategoryFragment extends Fragment implements AdapterInterface<String> {\r\n\r\n    RecyclerView recyclerView;\r\n    CategoryAdapter adapter;\r\n    List<Category> categories = new ArrayList<>();\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        View view = inflater.inflate(R.layout.fragment_category, container, false);\r\n\r\n        recyclerView = view.findViewById(R.id.categoryList);\r\n\r\n\r\n        ProductDataSource productDataSource = new ProductDataSource(requireContext());\r\n        List<Product> productList = productDataSource.getAllProducts();\r\n        List<Category> category = new ArrayList<>();\r\n        productList.forEach(product -> {\r\n            category.add(new Category(0, product.getImages().get(0).getImageUrl(), product.getCategory()));\r\n        });\r\n\r\n        // Create a Set to store unique category names\r\n        Set<String> distinctCategoryNames = new HashSet<>();\r\n\r\n        // Iterate over the list of categories and add each category name to the set\r\n        for (Category item : category) {\r\n            distinctCategoryNames.add(item.getCategoryName());\r\n        }\r\n\r\n        // Now distinctCategoryNames set contains unique category names\r\n        // Print the distinct category names\r\n        List<String> distinctCategory = new ArrayList<>();\r\n        for (String categoryName : distinctCategoryNames) {\r\n            System.out.println(categoryName);\r\n            distinctCategory.add(categoryName);\r\n        }\r\n\r\n        adapter = new CategoryAdapter(distinctCategory, requireContext(), this);\r\n        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);\r\n        recyclerView.setLayoutManager(layoutManager);\r\n        recyclerView.setAdapter(adapter);\r\n\r\n        return view;\r\n    }\r\n\r\n    @Override\r\n    public void onItemSelected(String data, int position) {\r\n        Bundle bundle = new Bundle();\r\n        bundle.putString(\"category\", data);\r\n//        moving to add fragment\r\n        Fragment fragment = new ShowProductFragment();\r\n        Log.e(\"TAG\", data);\r\n        //passing arguments\r\n        fragment.setArguments(bundle);\r\n        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.replace(R.id.frames, fragment);\r\n        fragmentTransaction.addToBackStack(null);\r\n        fragmentTransaction.commit();\r\n    }\r\n\r\n    @Override\r\n    public void onItemRemoved() {\r\n\r\n    }\r\n}\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/CategoryFragment.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/CategoryFragment.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/fragments/CategoryFragment.java	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ b/app/src/main/java/com/android/assignment1/shoecart/fragments/CategoryFragment.java	(date 1713159483786)
+@@ -7,6 +7,8 @@
+ import android.view.ViewGroup;
+ 
+ import androidx.annotation.Nullable;
++import androidx.appcompat.app.ActionBar;
++import androidx.appcompat.app.AppCompatActivity;
+ import androidx.fragment.app.Fragment;
+ import androidx.fragment.app.FragmentManager;
+ import androidx.fragment.app.FragmentTransaction;
+@@ -84,6 +86,12 @@
+         fragmentTransaction.replace(R.id.frames, fragment);
+         fragmentTransaction.addToBackStack(null);
+         fragmentTransaction.commit();
++
++        // Set action bar title to the selected category
++        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
++        if (actionBar != null) {
++            actionBar.setTitle(data);
++        }
+     }
+ 
+     @Override
+Index: app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.models;\r\n\r\nimport android.os.Parcel;\r\nimport android.os.Parcelable;\r\n\r\npublic class Wishlist implements Parcelable {\r\n\r\n    private int wishlistId;\r\n    private int productId;\r\n    private int sizeId;\r\n    private int userId;\r\n\r\n    public Wishlist() {\r\n    }\r\n\r\n    public Wishlist(int wishlistId, int productId, int sizeId, int userId) {\r\n        this.wishlistId = wishlistId;\r\n        this.productId = productId;\r\n        this.sizeId = sizeId;\r\n        this.userId = userId;\r\n    }\r\n\r\n    protected Wishlist(Parcel in) {\r\n        wishlistId = in.readInt();\r\n        productId = in.readInt();\r\n        sizeId = in.readInt();\r\n        userId = in.readInt();\r\n    }\r\n\r\n    public static final Creator<Wishlist> CREATOR = new Creator<Wishlist>() {\r\n        @Override\r\n        public Wishlist createFromParcel(Parcel in) {\r\n            return new Wishlist(in);\r\n        }\r\n\r\n        @Override\r\n        public Wishlist[] newArray(int size) {\r\n            return new Wishlist[size];\r\n        }\r\n    };\r\n\r\n    @Override\r\n    public int describeContents() {\r\n        return 0;\r\n    }\r\n\r\n    @Override\r\n    public void writeToParcel(Parcel parcel, int i) {\r\n        parcel.writeInt(wishlistId);\r\n        parcel.writeInt(productId);\r\n        parcel.writeInt(sizeId);\r\n        parcel.writeInt(userId);\r\n    }\r\n\r\n    // Getters and setters\r\n\r\n    public int getWishlistId() {\r\n        return wishlistId;\r\n    }\r\n\r\n    public void setWishlistId(int wishlistId) {\r\n        this.wishlistId = wishlistId;\r\n    }\r\n\r\n    public int getProductId() {\r\n        return productId;\r\n    }\r\n\r\n    public void setProductId(int productId) {\r\n        this.productId = productId;\r\n    }\r\n\r\n    public int getSizeId() {\r\n        return sizeId;\r\n    }\r\n\r\n    public void setSizeId(int sizeId) {\r\n        this.sizeId = sizeId;\r\n    }\r\n\r\n    public int getUserId() {\r\n        return userId;\r\n    }\r\n\r\n    public void setUserId(int userId) {\r\n        this.userId = userId;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java b/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ b/app/src/main/java/com/android/assignment1/shoecart/models/Wishlist.java	(date 1713159655855)
+@@ -20,6 +20,12 @@
+         this.userId = userId;
+     }
+ 
++    public Wishlist(int productId, int sizeId, int userId) {
++        this.productId = productId;
++        this.sizeId = sizeId;
++        this.userId = userId;
++    }
++
+     protected Wishlist(Parcel in) {
+         wishlistId = in.readInt();
+         productId = in.readInt();
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java
+deleted file mode 100644
+--- a/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetails.java	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ /dev/null	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
+@@ -1,50 +0,0 @@
+-package com.android.assignment1.shoecart.fragments;
+-
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.SeekBar;
+-import android.widget.TextView;
+-
+-import androidx.fragment.app.Fragment;
+-
+-import com.android.assignment1.shoecart.R;
+-import com.android.assignment1.shoecart.databinding.FragmentProductDetailsBinding;
+-
+-public class ProductDetails extends Fragment {
+-
+-    private SeekBar seekBar;
+-    private TextView valueTextView;
+-    FragmentProductDetailsBinding binding;
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState) {
+-
+-        binding = FragmentProductDetailsBinding.inflate(inflater, container, false);
+-        // Inflate the layout for this fragment
+-        View view = inflater.inflate(R.layout.fragment_product_details, container, false);
+-
+-        seekBar = view.findViewById(R.id.shoeSizeSeekBar);
+-        valueTextView = view.findViewById(R.id.shoeSize);
+-
+-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+-            @Override
+-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+-                int value = progress;
+-                valueTextView.setText(String.valueOf(value));
+-            }
+-
+-            @Override
+-            public void onStartTrackingTouch(SeekBar seekBar) {
+-
+-            }
+-
+-            @Override
+-            public void onStopTrackingTouch(SeekBar seekBar) {
+-
+-            }
+-        });
+-        return binding.getRoot();
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_product_details.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<FrameLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".fragments.ProductDetails\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <ImageView\r\n                android:id=\"@+id/productDetailImg\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"200dp\"\r\n                android:adjustViewBounds=\"true\"\r\n                android:scaleType=\"centerCrop\"\r\n                android:src=\"@drawable/product_blue_2\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/productDetailName\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Blue Shoes\"\r\n                android:textSize=\"22dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Description\"\r\n                android:textSize=\"25dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:textStyle=\"bold\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_margin=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/productDetailDescription\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\"\r\n                android:textSize=\"15dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"\r\n                android:textAlignment=\"viewStart\"\r\n                android:justificationMode=\"inter_word\"/>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Select Size\"\r\n                android:textSize=\"25dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:textStyle=\"bold\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_margin=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/shoeSize\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginBottom=\"10dp\"\r\n                android:textColor=\"@color/white\"\r\n                android:text=\"6\"\r\n                android:layout_marginStart=\"20dp\"/>\r\n\r\n            <SeekBar\r\n                android:id=\"@+id/shoeSizeSeekBar\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"20dp\"\r\n                android:layout_marginEnd=\"20dp\"\r\n                android:min=\"6\"\r\n                android:max=\"14\"/>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n                android:layout_gravity=\"center\">\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"Quantity\"\r\n                    android:textSize=\"20dp\"\r\n                    android:textColor=\"@color/white\"\r\n                    android:layout_marginStart=\"10dp\"\r\n                    android:layout_marginTop=\"20dp\"/>\r\n                <View\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"0dp\"\r\n                    android:layout_weight=\"1\"/>\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_alignParentEnd=\"true\"\r\n                    android:layout_marginStart=\"20dp\"\r\n                    android:layout_marginTop=\"10dp\"\r\n                    android:layout_marginEnd=\"40dp\"\r\n                    android:layout_gravity=\"center\">\r\n\r\n                    <ImageView\r\n                        android:id=\"@+id/pdAdd\"\r\n                        android:layout_width=\"30dp\"\r\n                        android:layout_height=\"30dp\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:backgroundTint=\"@color/white\"\r\n                        android:src=\"@drawable/add\" />\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/pdQuantity\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:layout_marginHorizontal=\"10dp\"\r\n                        android:textColor=\"@color/white\"\r\n                        android:text=\"3\"\r\n                        android:textSize=\"20sp\"\r\n                        android:textStyle=\"bold\" />\r\n\r\n                    <ImageView\r\n                        android:id=\"@+id/pdMinus\"\r\n                        android:layout_width=\"30dp\"\r\n                        android:backgroundTint=\"@color/white\"\r\n                        android:layout_height=\"30dp\"\r\n                        android:layout_gravity=\"center\"\r\n                        android:src=\"@drawable/minus\" />\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"10dp\"\r\n                android:layout_marginEnd=\"10dp\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:orientation=\"horizontal\">\r\n\r\n                <Button\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:id=\"@+id/addToCartBtn\"\r\n                    android:text=\"Add to Cart\"\r\n                    android:layout_weight=\"1\"\r\n                    android:backgroundTint=\"@color/colorAccent\"\r\n                    android:textColor=\"@color/white\"/>\r\n\r\n\r\n                <Button\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:id=\"@+id/addToWishListBtn\"\r\n                    android:text=\"Add to WishList\"\r\n                    android:layout_weight=\"1\"\r\n                    android:backgroundTint=\"@color/colorAccent\"\r\n                    android:textColor=\"@color/white\"/>\r\n            </LinearLayout>\r\n\r\n\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n\r\n\r\n</FrameLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_product_details.xml b/app/src/main/res/layout/fragment_product_details.xml
+--- a/app/src/main/res/layout/fragment_product_details.xml	(revision dd5cf37855f8a07e7ad8a3ebfe364ad1e0a39e33)
++++ b/app/src/main/res/layout/fragment_product_details.xml	(date 1713159483826)
+@@ -3,7 +3,7 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    tools:context=".fragments.ProductDetails">
++    tools:context=".fragments.ProductDetailsFragment">
+ 
+     <ScrollView
+         android:layout_width="match_parent"
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetailsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetailsFragment.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetailsFragment.java
+new file mode 100644
+--- /dev/null	(date 1713160089702)
++++ b/app/src/main/java/com/android/assignment1/shoecart/fragments/ProductDetailsFragment.java	(date 1713160089702)
+@@ -0,0 +1,117 @@
++package com.android.assignment1.shoecart.fragments;
++
++import android.os.Bundle;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.SeekBar;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import androidx.fragment.app.Fragment;
++
++import com.android.assignment1.shoecart.R;
++import com.android.assignment1.shoecart.databinding.FragmentProductDetailsBinding;
++import com.android.assignment1.shoecart.db.CartDataSource;
++import com.android.assignment1.shoecart.db.WishlistDataSource;
++import com.android.assignment1.shoecart.models.Cart;
++import com.android.assignment1.shoecart.models.Product;
++import com.android.assignment1.shoecart.models.Wishlist;
++import com.android.assignment1.shoecart.utils.Utility;
++
++public class ProductDetailsFragment extends Fragment {
++
++    private SeekBar seekBar;
++    private TextView valueTextView;
++    FragmentProductDetailsBinding binding;
++    Product product;
++     int[] quantity = {1};
++
++    CartDataSource cartDataSource;
++    WishlistDataSource wishlistDataSource;
++    int value = 6;
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++
++        binding = FragmentProductDetailsBinding.inflate(inflater, container, false);
++
++        if (getArguments() != null) {
++            //geting arguments
++            product = (Product) getArguments().getParcelable("product");
++
++
++            if (product != null){
++                setData();
++            }
++        }
++
++
++
++        seekBar = binding.getRoot().findViewById(R.id.shoeSizeSeekBar);
++        valueTextView = binding.getRoot().findViewById(R.id.shoeSize);
++
++        cartDataSource = new CartDataSource(requireContext());
++        wishlistDataSource = new WishlistDataSource(requireContext());
++
++        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
++            @Override
++            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
++                value = progress;
++                valueTextView.setText(String.valueOf(value));
++            }
++
++            @Override
++            public void onStartTrackingTouch(SeekBar seekBar) {
++
++            }
++
++            @Override
++            public void onStopTrackingTouch(SeekBar seekBar) {
++
++            }
++        });
++        return binding.getRoot();
++    }
++
++    public void setData(){
++        binding.productDetailName.setText(product.getTitle());
++        binding.productDetailDescription.setText(product.getDescription());
++        String imageName = product.getImages().get(0).getImageUrl();
++        binding.pdQuantity.setText(String.valueOf(quantity[0]));
++//        String imageNameWithoutExtension = imageName.substring(0, imageName.lastIndexOf('.'));
++        int resourceId = Utility.getImageResourceFromName(imageName, requireContext());
++
++
++        binding.productDetailImg.setImageResource(resourceId);
++
++
++
++        binding.pdAdd.setOnClickListener(v -> {
++            quantity[0]++;
++            binding.pdQuantity.setText(String.valueOf(quantity[0]));
++//            updateCart(new Cart(wishlistList.get(position).getCartId(), wishlistList.get(position).getProductId(), wishlistList.get(position).getProductSize(),quantity[0], wishlistList.get(position).getUserId()));
++        });
++
++        binding.pdMinus.setOnClickListener(v -> {
++            if (quantity[0] > 1) {
++                quantity[0]--;
++                binding.pdQuantity.setText(String.valueOf(quantity[0]));
++//                updateCart(new Cart(wishlistList.get(position).getCartId(), wishlistList.get(position).getProductId(), wishlistList.get(position).getProductSize(),quantity[0], wishlistList.get(position).getUserId()));
++
++            } else {
++                Toast.makeText(requireContext(), "Item can't be 0. Please click remove item button to remove item from cart", Toast.LENGTH_SHORT).show();
++            }
++        });
++
++        binding.addToCartBtn.setOnClickListener(v -> {
++            cartDataSource.insertCart(new Cart(product.getProductId(),String.valueOf(value),quantity[0],Utility.getUser(requireContext()).getUserId()));
++            Toast.makeText(requireContext(), "Added to Cart", Toast.LENGTH_SHORT).show();
++        });
++
++        binding.addToWishListBtn.setOnClickListener(v -> {
++            wishlistDataSource.insertWishlist(new Wishlist(product.getProductId(), value, Utility.getUser(requireContext()).getUserId()));
++            Toast.makeText(requireContext(), "Added to Wishlist", Toast.LENGTH_SHORT).show();
++        });
++    }
++}
+\ No newline at end of file

@@ -1,0 +1,228 @@
+Index: app/src/main/java/com/android/assignment1/shoecart/models/Product.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.models;\r\n\r\nimport android.os.Parcel;\r\nimport android.os.Parcelable;\r\n\r\nimport java.util.List;\r\n\r\npublic class Product implements Parcelable {\r\n\r\n    private int productId;\r\n    private String title;\r\n    private String description;\r\n    private double price;\r\n    private double shippingCost;\r\n    private int isDeleted;\r\n\r\n    private List<ProductSize> sizes;\r\n    private List<ProductImage> images;\r\n\r\n\r\n    public Product() {\r\n    }\r\n\r\n    public Product(int productId, String title, String description, double price, double shippingCost, int isDeleted, List<ProductSize> sizes, List<ProductImage> images) {\r\n        this.productId = productId;\r\n        this.title = title;\r\n        this.description = description;\r\n        this.price = price;\r\n        this.shippingCost = shippingCost;\r\n        this.isDeleted = isDeleted;\r\n        this.sizes = sizes;\r\n        this.images = images;\r\n    }\r\n\r\n    public int getProductId() {\r\n        return productId;\r\n    }\r\n\r\n    public void setProductId(int productId) {\r\n        this.productId = productId;\r\n    }\r\n\r\n    public String getTitle() {\r\n        return title;\r\n    }\r\n\r\n    public void setTitle(String title) {\r\n        this.title = title;\r\n    }\r\n\r\n\r\n    public String getDescription() {\r\n        return description;\r\n    }\r\n\r\n    public void setDescription(String description) {\r\n        this.description = description;\r\n    }\r\n\r\n    public double getPrice() {\r\n        return price;\r\n    }\r\n\r\n    public void setPrice(double price) {\r\n        this.price = price;\r\n    }\r\n\r\n    public double getShippingCost() {\r\n        return shippingCost;\r\n    }\r\n\r\n    public void setShippingCost(double shippingCost) {\r\n        this.shippingCost = shippingCost;\r\n    }\r\n\r\n    public int getIsDeleted() {\r\n        return isDeleted;\r\n    }\r\n\r\n    public void setIsDeleted(int isDeleted) {\r\n        this.isDeleted = isDeleted;\r\n    }\r\n\r\n    public List<ProductSize> getSizes() {\r\n        return sizes;\r\n    }\r\n\r\n    public void setSizes(List<ProductSize> sizes) {\r\n        this.sizes = sizes;\r\n    }\r\n\r\n    public List<ProductImage> getImages() {\r\n        return images;\r\n    }\r\n\r\n    public void setImages(List<ProductImage> images) {\r\n        this.images = images;\r\n    }\r\n\r\n    public static final Creator<Product> CREATOR = new Creator<Product>() {\r\n        @Override\r\n        public Product createFromParcel(Parcel in) {\r\n            return new Product(in);\r\n        }\r\n\r\n        @Override\r\n        public Product[] newArray(int size) {\r\n            return new Product[size];\r\n        }\r\n    };\r\n\r\n    @Override\r\n    public int describeContents() {\r\n        return 0;\r\n    }\r\n\r\n    @Override\r\n    public void writeToParcel(Parcel parcel, int i) {\r\n        parcel.writeInt(productId);\r\n        parcel.writeString(title);\r\n        parcel.writeString(description);\r\n        parcel.writeDouble(price);\r\n        parcel.writeDouble(shippingCost);\r\n        parcel.writeInt(isDeleted);\r\n        parcel.writeTypedList(sizes);\r\n        parcel.writeTypedList(images);\r\n    }\r\n\r\n    protected Product(Parcel in) {\r\n        productId = in.readInt();\r\n        title = in.readString();\r\n        description = in.readString();\r\n        price = in.readDouble();\r\n        shippingCost = in.readDouble();\r\n        isDeleted = in.readInt();\r\n        sizes = in.createTypedArrayList(ProductSize.CREATOR);\r\n        images = in.createTypedArrayList(ProductImage.CREATOR);\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/models/Product.java b/app/src/main/java/com/android/assignment1/shoecart/models/Product.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/models/Product.java	(revision 455c871ecce4b6844f204435a6ff715681df5053)
++++ b/app/src/main/java/com/android/assignment1/shoecart/models/Product.java	(date 1713078848604)
+@@ -8,6 +8,7 @@
+ public class Product implements Parcelable {
+ 
+     private int productId;
++    private String category;
+     private String title;
+     private String description;
+     private double price;
+@@ -21,7 +22,7 @@
+     public Product() {
+     }
+ 
+-    public Product(int productId, String title, String description, double price, double shippingCost, int isDeleted, List<ProductSize> sizes, List<ProductImage> images) {
++    public Product(int productId, String category, String title, String description, double price, double shippingCost, int isDeleted, List<ProductSize> sizes, List<ProductImage> images) {
+         this.productId = productId;
+         this.title = title;
+         this.description = description;
+@@ -40,6 +41,14 @@
+         this.productId = productId;
+     }
+ 
++    public String getCategory() {
++        return category;
++    }
++
++    public void setCategory(String category) {
++        this.category = category;
++    }
++
+     public String getTitle() {
+         return title;
+     }
+@@ -117,6 +126,7 @@
+     @Override
+     public void writeToParcel(Parcel parcel, int i) {
+         parcel.writeInt(productId);
++        parcel.writeString(category);
+         parcel.writeString(title);
+         parcel.writeString(description);
+         parcel.writeDouble(price);
+@@ -128,6 +138,7 @@
+ 
+     protected Product(Parcel in) {
+         productId = in.readInt();
++        category = in.readString();
+         title = in.readString();
+         description = in.readString();
+         price = in.readDouble();
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision 455c871ecce4b6844f204435a6ff715681df5053)
++++ b/.idea/vcs.xml	(date 1713078848426)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
++    <component name="VcsDirectoryMappings">
++        <mapping directory="" vcs="Git" />
++    </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/java/com/android/assignment1/shoecart/db/ProductDataSource.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.db;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.ContentValues;\r\nimport android.content.Context;\r\nimport android.database.Cursor;\r\nimport android.database.sqlite.SQLiteDatabase;\r\n\r\nimport com.android.assignment1.shoecart.models.Product;\r\nimport com.android.assignment1.shoecart.models.ProductImage;\r\nimport com.android.assignment1.shoecart.models.ProductSize;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class ProductDataSource {\r\n    private DBHelper dbHelper;\r\n\r\n    public ProductDataSource(Context context) {\r\n        dbHelper = new DBHelper(context);\r\n    }\r\n\r\n    public static final String TABLE_NAME_PRODUCT = \"products\";\r\n    public static final String COLUMN_PRODUCT_ID = \"product_id\";\r\n    public static final String COLUMN_TITLE = \"title\";\r\n    public static final String COLUMN_DESCRIPTION = \"description\";\r\n    public static final String COLUMN_PRICE = \"price\";\r\n    public static final String COLUMN_SHIPPING_COST = \"shipping_cost\";\r\n    public static final String COLUMN_IS_DELETED = \"is_deleted\";\r\n\r\n    public static final String TABLE_NAME_PROD_IMAGE = \"productimages\";\r\n    public static final String COLUMN_IMAGE_ID = \"image_id\";\r\n    public static final String COLUMN_PROD_IMAGE_PRODUCT_ID = \"product_id\";\r\n    public static final String COLUMN_IMAGE_URL = \"image_url\";\r\n\r\n\r\n    public static final String TABLE_NAME_PROD_SIZE = \"productsizes\";\r\n    public static final String COLUMN_SIZE_ID = \"size_id\";\r\n    public static final String COLUMN_PROD_SIZE_PRODUCT_ID = \"product_id\";\r\n    public static final String COLUMN_SIZE_US = \"size_us\";\r\n    public static final String COLUMN_QUANTITY = \"quantity\";\r\n\r\n\r\n    public static final String CREATE_TABLE =\r\n            \"CREATE TABLE IF NOT EXISTS \" + TABLE_NAME_PRODUCT + \"(\"\r\n                    + COLUMN_PRODUCT_ID + \" INTEGER PRIMARY KEY AUTOINCREMENT,\"\r\n                    + COLUMN_TITLE + \" TEXT,\"\r\n                    + COLUMN_DESCRIPTION + \" TEXT,\"\r\n                    + COLUMN_PRICE + \" REAL,\"\r\n                    + COLUMN_SHIPPING_COST + \" REAL,\"\r\n                    + COLUMN_IS_DELETED + \" INTEGER DEFAULT 0\"\r\n                    + \")\";\r\n    public static final String CREATE_TABLE_PROD_IMAGE =\r\n            \"CREATE TABLE IF NOT EXISTS \" + TABLE_NAME_PROD_IMAGE + \"(\"\r\n                    + COLUMN_IMAGE_ID + \" INTEGER PRIMARY KEY AUTOINCREMENT,\"\r\n                    + COLUMN_PROD_IMAGE_PRODUCT_ID + \" INTEGER,\"\r\n                    + COLUMN_IMAGE_URL + \" TEXT\"\r\n                    + \" FOREIGN KEY(\" + COLUMN_PROD_IMAGE_PRODUCT_ID + \") REFERENCES \" + TABLE_NAME_PRODUCT + \"(\" + COLUMN_PRODUCT_ID + \") \"\r\n                    + \")\";\r\n    public static final String CREATE_TABLE_PROD_SIZE =\r\n            \"CREATE TABLE IF NOT EXISTS \" + TABLE_NAME_PROD_SIZE + \"(\"\r\n                    + COLUMN_SIZE_ID + \" INTEGER PRIMARY KEY AUTOINCREMENT,\"\r\n                    + COLUMN_PROD_SIZE_PRODUCT_ID + \" INTEGER,\"\r\n                    + COLUMN_SIZE_US + \" INTEGER,\"\r\n                    + COLUMN_QUANTITY + \" INTEGER\"\r\n                    + \" FOREIGN KEY(\" + COLUMN_PROD_SIZE_PRODUCT_ID + \") REFERENCES \" + TABLE_NAME_PRODUCT + \"(\" + COLUMN_PRODUCT_ID + \") \"\r\n                    + \")\";\r\n\r\n    public void insertProduct(Product product) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_PRODUCT_ID, product.getProductId());\r\n        values.put(COLUMN_TITLE, product.getTitle());\r\n        values.put(COLUMN_DESCRIPTION, product.getDescription());\r\n        values.put(COLUMN_PRICE, product.getPrice());\r\n        values.put(COLUMN_SHIPPING_COST, product.getShippingCost());\r\n        values.put(COLUMN_IS_DELETED, product.getIsDeleted());\r\n\r\n        long insertID = db.insert(TABLE_NAME_PRODUCT, null, values);\r\n        db.close();\r\n        for (ProductSize productSize : product.getSizes())\r\n            insertProductSize(insertID, productSize);\r\n        for (ProductImage productImage : product.getImages())\r\n            insertProductImage(insertID, productImage);\r\n    }\r\n\r\n    public void insertProductSize(long insertID, ProductSize productSize) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_SIZE_ID, productSize.getSizeId());\r\n        values.put(COLUMN_PROD_SIZE_PRODUCT_ID, productSize.getProductId());\r\n        values.put(COLUMN_SIZE_US, productSize.getSizeUs());\r\n        values.put(COLUMN_QUANTITY, productSize.getQuantity());\r\n\r\n        db.insert(TABLE_NAME_PRODUCT, null, values);\r\n        db.close();\r\n    }\r\n\r\n    public void insertProductImage(long insertID, ProductImage productImage) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_IMAGE_ID, productImage.getImageId());\r\n        values.put(COLUMN_PROD_IMAGE_PRODUCT_ID, productImage.getProductId());\r\n        values.put(COLUMN_IMAGE_URL, productImage.getImageUrl());\r\n\r\n        db.insert(TABLE_NAME_PRODUCT, null, values);\r\n        db.close();\r\n    }\r\n\r\n    @SuppressLint(\"Range\")\r\n    public Product getProduct(int productId) {\r\n        SQLiteDatabase db = dbHelper.getReadableDatabase();\r\n\r\n        Cursor cursor = db.query(TABLE_NAME_PRODUCT,\r\n                null, COLUMN_PRODUCT_ID + \"=?\",\r\n                new String[]{String.valueOf(productId)},\r\n                null, null, null);\r\n\r\n        if (cursor != null && cursor.moveToFirst()) {\r\n            Product product = new Product();\r\n            product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));\r\n            product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));\r\n            product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));\r\n            product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));\r\n            product.setShippingCost(cursor.getDouble(cursor.getColumnIndex(COLUMN_SHIPPING_COST)));\r\n            product.setIsDeleted(cursor.getInt(cursor.getColumnIndex(COLUMN_IS_DELETED)));\r\n\r\n            product.setSizes(getProductSizes(productId));\r\n            product.setImages(getProductImages(productId));\r\n\r\n            cursor.close();\r\n            return product;\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n    @SuppressLint(\"Range\")\r\n    public List<Product> getAllProducts() {\r\n        List<Product> products = new ArrayList<>();\r\n\r\n        String selectQuery = \"SELECT  * FROM \" + TABLE_NAME_PRODUCT;\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n        Cursor cursor = db.rawQuery(selectQuery, null);\r\n\r\n        if (cursor.moveToFirst()) {\r\n            do {\r\n                Product product = new Product();\r\n                product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));\r\n                product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));\r\n                product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));\r\n                product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));\r\n                product.setShippingCost(cursor.getDouble(cursor.getColumnIndex(COLUMN_SHIPPING_COST)));\r\n                product.setIsDeleted(cursor.getInt(cursor.getColumnIndex(COLUMN_IS_DELETED)));\r\n\r\n                product.setSizes(getProductSizes(product.getProductId()));\r\n                product.setImages(getProductImages(product.getProductId()));\r\n\r\n                products.add(product);\r\n            } while (cursor.moveToNext());\r\n        }\r\n\r\n        cursor.close();\r\n        return products;\r\n    }\r\n\r\n    public int updateProduct(Product product) {\r\n\r\n        for (ProductSize productSize : product.getSizes())\r\n            updateProductSize(productSize);\r\n        for (ProductImage productImage : product.getImages())\r\n            updateProductImage(productImage);\r\n\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_PRODUCT_ID, product.getProductId());\r\n        values.put(COLUMN_TITLE, product.getTitle());\r\n        values.put(COLUMN_DESCRIPTION, product.getDescription());\r\n        values.put(COLUMN_PRICE, product.getPrice());\r\n        values.put(COLUMN_SHIPPING_COST, product.getShippingCost());\r\n        values.put(COLUMN_IS_DELETED, product.getIsDeleted());\r\n        return db.update(TABLE_NAME_PRODUCT, values, COLUMN_PRODUCT_ID + \" = ?\",\r\n                new String[]{String.valueOf(product.getProductId())});\r\n    }\r\n\r\n    public void deleteProduct(Product product) {\r\n        for (ProductSize productSize : product.getSizes())\r\n            deleteProductSize(productSize);\r\n        for (ProductImage productImage : product.getImages())\r\n            deleteProductImage(productImage);\r\n\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n        db.delete(TABLE_NAME_PRODUCT, COLUMN_PRODUCT_ID + \" = ?\",\r\n                new String[]{String.valueOf(product.getProductId())});\r\n        db.close();\r\n    }\r\n\r\n    @SuppressLint(\"Range\")\r\n    public List<ProductSize> getProductSizes(long productId) {\r\n        List<ProductSize> productSizes = new ArrayList<>();\r\n\r\n        SQLiteDatabase db = dbHelper.getReadableDatabase();\r\n        Cursor cursor = db.query(TABLE_NAME_PROD_SIZE,\r\n                null,\r\n                COLUMN_PRODUCT_ID + \"=?\",\r\n                new String[]{String.valueOf(productId)},\r\n                null, null, null);\r\n\r\n        if (cursor.moveToFirst()) {\r\n            do {\r\n                ProductSize productSize = new ProductSize();\r\n                productSize.setSizeId(cursor.getInt(cursor.getColumnIndex(COLUMN_SIZE_ID)));\r\n                productSize.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PROD_SIZE_PRODUCT_ID)));\r\n                productSize.setSizeUs(cursor.getInt(cursor.getColumnIndex(COLUMN_SIZE_US)));\r\n                productSize.setQuantity(cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY)));\r\n\r\n                productSizes.add(productSize);\r\n            } while (cursor.moveToNext());\r\n        }\r\n\r\n        cursor.close();\r\n        return productSizes;\r\n    }\r\n\r\n    @SuppressLint(\"Range\")\r\n    public List<ProductImage> getProductImages(long productId) {\r\n        List<ProductImage> productImages = new ArrayList<>();\r\n\r\n        SQLiteDatabase db = dbHelper.getReadableDatabase();\r\n        Cursor cursor = db.query(TABLE_NAME_PROD_IMAGE,\r\n                null,\r\n                COLUMN_PRODUCT_ID + \"=?\",\r\n                new String[]{String.valueOf(productId)},\r\n                null, null, null);\r\n\r\n        if (cursor.moveToFirst()) {\r\n            do {\r\n                ProductImage productImage = new ProductImage();\r\n                productImage.setImageId(cursor.getInt(cursor.getColumnIndex(COLUMN_IMAGE_ID)));\r\n                productImage.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PROD_IMAGE_PRODUCT_ID)));\r\n                productImage.setImageUrl(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_URL)));\r\n\r\n                productImages.add(productImage);\r\n            } while (cursor.moveToNext());\r\n        }\r\n\r\n        cursor.close();\r\n        return productImages;\r\n    }\r\n\r\n    public void updateProductSize(ProductSize productSize) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_SIZE_US, productSize.getSizeUs());\r\n        values.put(COLUMN_QUANTITY, productSize.getQuantity());\r\n        values.put(COLUMN_PROD_SIZE_PRODUCT_ID, productSize.getProductId());\r\n        values.put(COLUMN_SIZE_ID, productSize.getSizeId());\r\n        values.put(COLUMN_QUANTITY, productSize.getQuantity());\r\n\r\n        db.update(TABLE_NAME_PROD_SIZE, values, COLUMN_SIZE_ID + \" = ?\",\r\n                new String[]{String.valueOf(productSize.getSizeId())});\r\n        db.close();\r\n    }\r\n\r\n    public void updateProductImage(ProductImage productImage) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n\r\n        ContentValues values = new ContentValues();\r\n        values.put(COLUMN_PROD_IMAGE_PRODUCT_ID, productImage.getProductId());\r\n        values.put(COLUMN_IMAGE_URL, productImage.getImageUrl());\r\n\r\n        db.update(TABLE_NAME_PROD_IMAGE, values, COLUMN_IMAGE_ID + \" = ?\",\r\n                new String[]{String.valueOf(productImage.getImageId())});\r\n        db.close();\r\n    }\r\n\r\n    public void deleteProductSize(ProductSize productSize) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n        db.delete(TABLE_NAME_PROD_SIZE, COLUMN_SIZE_ID + \" = ?\",\r\n                new String[]{String.valueOf(productSize.getSizeId())});\r\n        db.close();\r\n    }\r\n\r\n    public void deleteProductImage(ProductImage productImage) {\r\n        SQLiteDatabase db = dbHelper.getWritableDatabase();\r\n        db.delete(TABLE_NAME_PROD_IMAGE, COLUMN_IMAGE_ID + \" = ?\",\r\n                new String[]{String.valueOf(productImage.getImageId())});\r\n        db.close();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/db/ProductDataSource.java b/app/src/main/java/com/android/assignment1/shoecart/db/ProductDataSource.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/db/ProductDataSource.java	(revision 455c871ecce4b6844f204435a6ff715681df5053)
++++ b/app/src/main/java/com/android/assignment1/shoecart/db/ProductDataSource.java	(date 1713078848581)
+@@ -22,6 +22,7 @@
+ 
+     public static final String TABLE_NAME_PRODUCT = "products";
+     public static final String COLUMN_PRODUCT_ID = "product_id";
++    public static final String COLUMN_CATEGORY = "categories";
+     public static final String COLUMN_TITLE = "title";
+     public static final String COLUMN_DESCRIPTION = "description";
+     public static final String COLUMN_PRICE = "price";
+@@ -48,7 +49,8 @@
+                     + COLUMN_DESCRIPTION + " TEXT,"
+                     + COLUMN_PRICE + " REAL,"
+                     + COLUMN_SHIPPING_COST + " REAL,"
+-                    + COLUMN_IS_DELETED + " INTEGER DEFAULT 0"
++                    + COLUMN_IS_DELETED + " INTEGER DEFAULT 0 ,"
++                    + COLUMN_CATEGORY + " TEXT,"
+                     + ")";
+     public static final String CREATE_TABLE_PROD_IMAGE =
+             "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_PROD_IMAGE + "("
+@@ -71,6 +73,7 @@
+ 
+         ContentValues values = new ContentValues();
+         values.put(COLUMN_PRODUCT_ID, product.getProductId());
++        values.put(COLUMN_CATEGORY, product.getCategory());
+         values.put(COLUMN_TITLE, product.getTitle());
+         values.put(COLUMN_DESCRIPTION, product.getDescription());
+         values.put(COLUMN_PRICE, product.getPrice());
+@@ -122,6 +125,7 @@
+         if (cursor != null && cursor.moveToFirst()) {
+             Product product = new Product();
+             product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
++            product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
+             product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+             product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+             product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));
+@@ -150,6 +154,7 @@
+             do {
+                 Product product = new Product();
+                 product.setProductId(cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID)));
++                product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
+                 product.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+                 product.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)));
+                 product.setPrice(cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)));
+@@ -178,6 +183,7 @@
+ 
+         ContentValues values = new ContentValues();
+         values.put(COLUMN_PRODUCT_ID, product.getProductId());
++        values.put(COLUMN_CATEGORY, product.getCategory());
+         values.put(COLUMN_TITLE, product.getTitle());
+         values.put(COLUMN_DESCRIPTION, product.getDescription());
+         values.put(COLUMN_PRICE, product.getPrice());
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.fragments;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\n\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\n\r\nimport com.android.assignment1.shoecart.R;\r\nimport com.android.assignment1.shoecart.adapters.OrdersAdapter;\r\nimport com.android.assignment1.shoecart.databinding.FragmentOrdersBinding;\r\nimport com.android.assignment1.shoecart.db.OrderDataSource;\r\nimport com.android.assignment1.shoecart.interfaces.AdapterInterface;\r\nimport com.android.assignment1.shoecart.models.Order;\r\nimport com.android.assignment1.shoecart.models.Product;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\nimport java.util.List;\r\n\r\n\r\npublic class OrdersFragment extends Fragment implements AdapterInterface<Order> {\r\n\r\n\r\n    FragmentOrdersBinding binding;\r\n    List<Order> ordersList = new ArrayList<>();\r\n    ArrayList<Product> productArrayList = new ArrayList<>();\r\n\r\n    OrdersAdapter adapter;\r\n    LinearLayoutManager layoutManager;\r\n\r\n    public OrdersFragment() {\r\n        // Required empty public constructor\r\n    }\r\n\r\n\r\n\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container,\r\n                             Bundle savedInstanceState) {\r\n        binding = FragmentOrdersBinding.inflate(inflater,container,false);\r\n\r\n        OrderDataSource orderDataSource = new OrderDataSource(requireContext());\r\n        ordersList = new ArrayList<>();\r\n        ordersList = orderDataSource.getAllOrders();\r\n        Collections.reverse(ordersList);\r\n\r\n        setData();\r\n\r\n        // Inflate the layout for this fragment\r\n        return binding.getRoot();\r\n    }\r\n\r\n    public void setData(){\r\n        adapter = new OrdersAdapter(ordersList, this, requireContext());\r\n        layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);\r\n        binding.rvOrders.setLayoutManager(layoutManager);\r\n        binding.rvOrders.setAdapter(adapter);\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onItemSelected(Order data, int position) {\r\n        Bundle bundle = new Bundle();\r\n        bundle.putParcelable(\"order\", data);\r\n//        moving to add fragment\r\n        Fragment fragment = new OrderDetailsFragment();\r\n        //passing arguments\r\n        fragment.setArguments(bundle);\r\n        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();\r\n        fragmentTransaction.replace(R.id.frames, fragment);\r\n        fragmentTransaction.addToBackStack(null);\r\n        fragmentTransaction.commit();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java	(revision 455c871ecce4b6844f204435a6ff715681df5053)
++++ b/app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java	(date 1713078848593)
+@@ -17,6 +17,7 @@
+ import com.android.assignment1.shoecart.interfaces.AdapterInterface;
+ import com.android.assignment1.shoecart.models.Order;
+ import com.android.assignment1.shoecart.models.Product;
++import com.android.assignment1.shoecart.models.ProductSize;
+ 
+ import java.util.ArrayList;
+ import java.util.Collections;
+@@ -38,8 +39,6 @@
+     }
+ 
+ 
+-
+-
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -49,11 +48,27 @@
+     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
+-        binding = FragmentOrdersBinding.inflate(inflater,container,false);
++        binding = FragmentOrdersBinding.inflate(inflater, container, false);
+ 
+         OrderDataSource orderDataSource = new OrderDataSource(requireContext());
+         ordersList = new ArrayList<>();
+         ordersList = orderDataSource.getAllOrders();
++
++
++        productArrayList = new ArrayList<>();
++
++        ArrayList<ProductSize> sizes = new ArrayList<>();
++        sizes.add(new ProductSize(2, 3, 14, 2));
++//        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
++//        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
++//        productArrayList.add(new Product(3, "Nike 1", "Mens Shoe", 30.2, 2.0, 0, sizes, new ArrayList<>()));
++
++
++//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
++//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
++//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
++//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
++//        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
+         Collections.reverse(ordersList);
+ 
+         setData();
+@@ -62,9 +77,9 @@
+         return binding.getRoot();
+     }
+ 
+-    public void setData(){
++    public void setData() {
+         adapter = new OrdersAdapter(ordersList, this, requireContext());
+-        layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);
++        layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false);
+         binding.rvOrders.setLayoutManager(layoutManager);
+         binding.rvOrders.setAdapter(adapter);
+     }
+Index: app/src/main/java/com/android/assignment1/shoecart/activity/SplashScreenActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.activity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.AsyncTask;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.util.Log;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.airbnb.lottie.LottieAnimationView;\r\nimport com.android.assignment1.shoecart.R;\r\nimport com.android.assignment1.shoecart.utils.Utility;\r\n\r\nimport java.io.File;\r\nimport java.io.FileOutputStream;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.OutputStream;\r\n\r\npublic class SplashScreenActivity extends AppCompatActivity {\r\n    private static final String TAG = SplashScreenActivity.class.getSimpleName();\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_splashscreen);\r\n\r\n        LottieAnimationView animationView = findViewById(R.id.animation_view);\r\n        animationView.setAnimation(R.raw.shoecart_orderplaced);\r\n        animationView.playAnimation();\r\n\r\n        new CopyDatabaseTask().execute();\r\n\r\n        int SPLASH_TIME_OUT = 7000; // This is 7 seconds\r\n        new Handler().postDelayed(new Runnable() {\r\n            @Override\r\n            public void run() {\r\n                if (Utility.getUser(SplashScreenActivity.this) == null) {\r\n                    Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);\r\n                    startActivity(homeIntent);\r\n                    finish();\r\n                } else {\r\n                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);\r\n                    startActivity(homeIntent);\r\n                    finish();\r\n                }\r\n            }\r\n        }, SPLASH_TIME_OUT);\r\n    }\r\n\r\n    private class CopyDatabaseTask extends AsyncTask<Void, Void, Void> {\r\n        @Override\r\n        protected Void doInBackground(Void... voids) {\r\n            String dbPath = getApplicationContext().getDatabasePath(\"shoecart.db\").getPath();\r\n\r\n            File file = new File(dbPath);\r\n            if (file.exists()) {\r\n                Log.d(TAG, \"Database already exists. No need to copy.\");\r\n                return null;\r\n            }\r\n\r\n            try {\r\n                Log.d(TAG, \"Copying database from assets...\");\r\n\r\n                InputStream in = getAssets().open(\"shoecart.db\");\r\n                OutputStream out = new FileOutputStream(dbPath);\r\n\r\n                byte[] buffer = new byte[1024];\r\n                int read;\r\n                while ((read = in.read(buffer)) != -1) {\r\n                    out.write(buffer, 0, read);\r\n                }\r\n\r\n                out.flush();\r\n                out.close();\r\n                in.close();\r\n\r\n                Log.d(TAG, \"Database copied successfully.\");\r\n            } catch (IOException e) {\r\n                Log.e(TAG, \"Error copying database\", e);\r\n            }\r\n\r\n            return null;\r\n        }\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/activity/SplashScreenActivity.java b/app/src/main/java/com/android/assignment1/shoecart/activity/SplashScreenActivity.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/activity/SplashScreenActivity.java	(revision 455c871ecce4b6844f204435a6ff715681df5053)
++++ b/app/src/main/java/com/android/assignment1/shoecart/activity/SplashScreenActivity.java	(date 1713078848565)
+@@ -32,7 +32,9 @@
+ 
+         new CopyDatabaseTask().execute();
+ 
+-        int SPLASH_TIME_OUT = 7000; // This is 7 seconds
++
++        int SPLASH_TIME_OUT = 8000; // This is 8 seconds
++
+         new Handler().postDelayed(new Runnable() {
+             @Override
+             public void run() {

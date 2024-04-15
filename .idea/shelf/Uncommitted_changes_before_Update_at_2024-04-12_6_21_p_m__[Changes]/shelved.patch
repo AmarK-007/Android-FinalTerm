@@ -1,0 +1,193 @@
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.drawerlayout.widget.DrawerLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    android:fitsSystemWindows=\"true\"\r\n    android:id=\"@+id/drawerMenu\"\r\n    android:background=\"@color/colorPrimaryDark\"\r\n    tools:context=\".activity.HomeActivity\">\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <com.google.android.material.appbar.MaterialToolbar\r\n            android:id=\"@+id/homeToolBar\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:background=\"@color/colorPrimaryDark\"\r\n            android:theme=\"@style/ThemeOverlay.AppCompat.Dark.ActionBar\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:menu=\"@menu/appbar_menu\"\r\n            app:navigationIcon=\"@drawable/hamburger_menu\"\r\n            app:navigationIconTint=\"@color/white\"\r\n            app:popupTheme=\"@style/ThemeOverlay.AppCompat.Light\"\r\n            app:title=\"Shoe Cart\" />\r\n\r\n        <FrameLayout\r\n            android:id=\"@+id/frames\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"1dp\"\r\n            android:layout_marginTop=\"1dp\"\r\n            android:layout_marginEnd=\"1dp\"\r\n            android:layout_marginBottom=\"20dp\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/homeToolBar\">\r\n        </FrameLayout>\r\n\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    <com.google.android.material.navigation.NavigationView\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_gravity=\"start\"\r\n        android:id=\"@+id/navMenu\"\r\n        android:background=\"@color/black\"\r\n        app:headerLayout=\"@layout/menu_drawer_header\"\r\n        app:menu=\"@menu/drawer_menu\"\r\n        app:itemIconTint=\"@color/white\"\r\n        app:itemTextColor=\"@color/white\"/>\r\n\r\n<<<<<<< Updated upstream\r\n    <!--    <FrameLayout-->\r\n    <!--        android:id=\"@+id/frames\"-->\r\n    <!--        android:layout_width=\"match_parent\"-->\r\n    <!--        android:layout_height=\"match_parent\"-->\r\n    <!--        android:layout_marginTop=\"55dp\" />-->\r\n\r\n=======\r\n>>>>>>> Stashed changes\r\n</androidx.drawerlayout.widget.DrawerLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_home.xml b/app/src/main/res/layout/activity_home.xml
+--- a/app/src/main/res/layout/activity_home.xml	(revision 0b17377afff904d2d2cb3218c1d515686a9f3ad3)
++++ b/app/src/main/res/layout/activity_home.xml	(date 1712960025031)
+@@ -57,13 +57,5 @@
+         app:itemIconTint="@color/white"
+         app:itemTextColor="@color/white"/>
+ 
+-<<<<<<< Updated upstream
+-    <!--    <FrameLayout-->
+-    <!--        android:id="@+id/frames"-->
+-    <!--        android:layout_width="match_parent"-->
+-    <!--        android:layout_height="match_parent"-->
+-    <!--        android:layout_marginTop="55dp" />-->
+ 
+-=======
+->>>>>>> Stashed changes
+ </androidx.drawerlayout.widget.DrawerLayout>
+Index: app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.android.assignment1.shoecart.activity;\r\n\r\n<<<<<<< Updated upstream\r\nimport android.content.Context;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.GridLayout;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport android.widget.ViewFlipper;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.ActionBarDrawerToggle;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\n=======\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.ActionBarDrawerToggle;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\n\r\nimport android.content.Context;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.Menu;\r\nimport android.view.MenuItem;\r\n\r\n>>>>>>> Stashed changes\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentManager;\r\nimport androidx.fragment.app.FragmentTransaction;\r\n\r\nimport com.android.assignment1.shoecart.R;\r\nimport com.android.assignment1.shoecart.fragments.CartFragment;\r\n<<<<<<< Updated upstream\r\nimport com.android.assignment1.shoecart.fragments.OrdersFragment;\r\nimport com.android.assignment1.shoecart.fragments.WishlistFragment;\r\nimport com.android.assignment1.shoecart.models.HomeProduct;\r\nimport com.android.assignment1.shoecart.utils.Utility;\r\nimport com.google.android.material.appbar.MaterialToolbar;\r\nimport com.google.android.material.navigation.NavigationView;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n=======\r\nimport com.android.assignment1.shoecart.fragments.CategoryFragment;\r\nimport com.android.assignment1.shoecart.fragments.HomeFragment;\r\nimport com.android.assignment1.shoecart.fragments.OrdersFragment;\r\nimport com.android.assignment1.shoecart.utils.Utility;\r\nimport com.google.android.material.appbar.MaterialToolbar;\r\nimport com.google.android.material.navigation.NavigationView;\r\n>>>>>>> Stashed changes\r\n\r\npublic class HomeActivity extends AppCompatActivity {\r\n    ActionBarDrawerToggle toggle;\r\n    MaterialToolbar materialToolbar;\r\n    DrawerLayout drawerLayout;\r\n<<<<<<< Updated upstream\r\n\r\n    NavigationView navigationView;\r\n    ViewFlipper viewFlipper;\r\n    ImageView imageView;\r\n    GridLayout newArrivalsGrid;\r\n    GridLayout bestSellersGrid;\r\n=======\r\n>>>>>>> Stashed changes\r\n\r\n    NavigationView navDrawerMenu;\r\n\r\n    private static final String TAG = HomeActivity.class.getSimpleName();\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_home);\r\n\r\n\r\n\r\n        materialToolbar = findViewById(R.id.homeToolBar);\r\n        drawerLayout = findViewById(R.id.drawerMenu);\r\n        navigationView = findViewById(R.id.navMenu);\r\n        toggle = new ActionBarDrawerToggle(this, drawerLayout, materialToolbar, R.string.open, R.string.close);\r\n        drawerLayout.addDrawerListener(toggle);\r\n        toggle.syncState();\r\n        setSupportActionBar(materialToolbar);\r\n        getSupportActionBar().setDisplayHomeAsUpEnabled(true);\r\n        setDrawer();\r\n<<<<<<< Updated upstream\r\n        drawerItemClick();\r\n\r\n\r\n        newArrivalsGrid = findViewById(R.id.newArrivalsGrid);\r\n        bestSellersGrid = findViewById(R.id.bestSellersGrid);\r\n\r\n        viewFlipper = findViewById(R.id.categoryCaraousal);\r\n        for (int i : caraousalImages) {\r\n            flipperCaraousalImages(i);\r\n        }\r\n\r\n        for (int i = 0; i < gridNewShoes.size(); i++) {\r\n\r\n            HomeProduct product = gridNewShoes.get(i);\r\n            CardView gridNewShoesCard = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);\r\n\r\n            ImageView newShoesImage = gridNewShoesCard.findViewById(R.id.productImage);\r\n            TextView newShoesName = gridNewShoesCard.findViewById(R.id.productName);\r\n            TextView newShoesCost = gridNewShoesCard.findViewById(R.id.productPrice);\r\n\r\n            gridNewShoesCard.setId(View.generateViewId());\r\n            newShoesImage.setImageResource(product.getImageId());\r\n            newShoesName.setText(product.getProductName());\r\n            newShoesCost.setText(Double.toString(product.getCost()));\r\n\r\n            newArrivalsGrid.addView(gridNewShoesCard);\r\n        }\r\n\r\n        for (int i = 0; i < gridBestShoes.size(); i++) {\r\n\r\n            HomeProduct product = gridBestShoes.get(i);\r\n            CardView gridBestShoes = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);\r\n\r\n            ImageView bestShoesImage = gridBestShoes.findViewById(R.id.productImage);\r\n            TextView bestShoesName = gridBestShoes.findViewById(R.id.productName);\r\n            TextView bestShoesCost = gridBestShoes.findViewById(R.id.productPrice);\r\n\r\n            gridBestShoes.setId(View.generateViewId());\r\n            bestShoesImage.setImageResource(product.getImageId());\r\n            bestShoesName.setText(product.getProductName());\r\n            bestShoesCost.setText(Double.toString(product.getCost()));\r\n\r\n            bestSellersGrid.addView(gridBestShoes);\r\n        }\r\n    }\r\n\r\n    private void setDrawer() {\r\n    }\r\n\r\n    public void drawerItemClick() {\r\n        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n                Fragment fragment = null;\r\n                int itemId = item.getItemId();\r\n                if (itemId == R.id.myProfile) {\r\n//                   fragment = new AddFragment(employeeService);\r\n                } else if (itemId == R.id.myOrders) {\r\n                    fragment = new OrdersFragment();\r\n                } else if (itemId == R.id.categories) {\r\n//                   fragment = new UpdateFragment();\r\n                } else if (itemId == R.id.wishList) {\r\n                    fragment = new WishlistFragment();\r\n                } else if (itemId == R.id.support) {\r\n                    fragment = new CartFragment();\r\n                } else if (itemId == R.id.about) {\r\n//                   fragment = new ListFragment();\r\n                } else if (itemId == R.id.logout) {\r\n//                   fragment = new ListFragment();\r\n                } else {\r\n\r\n                }\r\n                if (fragment != null) {\r\n//                    opening or moving to a fragment\r\n                    FragmentManager supportFragmentManager = getSupportFragmentManager();\r\n                    FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();\r\n                    fragmentTransaction.replace(R.id.frames, fragment);\r\n                    fragmentTransaction.commit();\r\n                    drawerLayout.closeDrawers();\r\n                    return true;\r\n                }\r\n                return false;\r\n            }\r\n        });\r\n    }\r\n\r\n    public void flipperCaraousalImages(int image) {\r\n=======\r\n        changeFragment(new HomeFragment());\r\n\r\n    }\r\n\r\n    private void setDrawer() {\r\n        navDrawerMenu = findViewById(R.id.navMenu);\r\n        navDrawerMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {\r\n            @Override\r\n            public boolean onNavigationItemSelected(@NonNull MenuItem item) {\r\n\r\n                int i = item.getItemId();\r\n\r\n                if(i == R.id.myProfile){\r\n\r\n                }\r\n                else if(i == R.id.myOrders){\r\n                    changeFragment(new OrdersFragment());\r\n                }\r\n                else if(i == R.id.categories){\r\n                    changeFragment(new CategoryFragment());\r\n                }\r\n                else if(i == R.id.whislist){\r\n\r\n                }\r\n                else if(i == R.id.support){\r\n\r\n                }\r\n                else if(i == R.id.about){\r\n\r\n                }\r\n                else if(i == R.id.logout){\r\n                    onBackPressed();\r\n                }\r\n                return false;\r\n            }\r\n        });\r\n    }\r\n\r\n    @Override\r\n    public boolean onCreateOptionsMenu(Menu menu) {\r\n>>>>>>> Stashed changes\r\n\r\n        getMenuInflater().inflate(R.menu.appbar_menu, menu);\r\n\r\n        return super.onCreateOptionsMenu(menu);\r\n    }\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(@NonNull MenuItem item) {\r\n\r\n        int id = item.getItemId();\r\n\r\n        if(id == R.id.home){\r\n            changeFragment(new HomeFragment());\r\n        }\r\n        else if(id == R.id.search){\r\n\r\n        } else if(id == R.id.cart){\r\n            changeFragment(new CartFragment());\r\n        }\r\n\r\n        if(toggle.onOptionsItemSelected(item)){\r\n            return true;\r\n        }\r\n        return super.onOptionsItemSelected(item);\r\n    }\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n        super.onBackPressed();\r\n        showAppExitingAlert(this);\r\n    }\r\n\r\n<<<<<<< Updated upstream\r\n=======\r\n\r\n    public void changeFragment(Fragment fragment){\r\n        FragmentManager supportFragmentManager = getSupportFragmentManager();\r\n        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();\r\n        fragmentTransaction.replace(R.id.frames, fragment);\r\n        fragmentTransaction.commit();\r\n        drawerLayout.closeDrawers();\r\n    }\r\n\r\n    @Override\r\n    public void onBackPressed() {\r\n        showAppExitingAlert(this);\r\n    }\r\n\r\n>>>>>>> Stashed changes\r\n    AlertDialog.Builder alertDialog;\r\n\r\n    public void showAppExitingAlert(final Context context) {\r\n        alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);\r\n        alertDialog.setTitle(Utility.getAppNameString(context));\r\n        alertDialog.setMessage(getString(R.string.msg_app_exit));\r\n        alertDialog.setPositiveButton(getString(R.string.button_ok),\r\n                (dialog, which) -> {\r\n                    dialog.dismiss();\r\n                    alertDialog = null;\r\n                    Log.v(TAG, \"App Exited via Alert Dialog\");\r\n                    Log.v(TAG, \"from exitDialog HomeActivity called\");\r\n                    //HomeActivity.this.finishAffinity();\r\n                    HomeActivity.this.finishAndRemoveTask();\r\n                });\r\n        alertDialog.setNegativeButton(getString(R.string.button_cancel), (dialog, which) -> {\r\n            dialog.dismiss();\r\n            alertDialog = null;\r\n        });\r\n        alertDialog.show();\r\n    }\r\n<<<<<<< Updated upstream\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(@NonNull MenuItem item) {\r\n        if (toggle.onOptionsItemSelected(item)) {\r\n            return true;\r\n        }\r\n        return super.onOptionsItemSelected(item);\r\n    }\r\n=======\r\n>>>>>>> Stashed changes\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java b/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java
+--- a/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java	(revision 0b17377afff904d2d2cb3218c1d515686a9f3ad3)
++++ b/app/src/main/java/com/android/assignment1/shoecart/activity/HomeActivity.java	(date 1712960332020)
+@@ -1,9 +1,9 @@
+ package com.android.assignment1.shoecart.activity;
+ 
+-<<<<<<< Updated upstream
+ import android.content.Context;
+ import android.os.Bundle;
+ import android.util.Log;
++import android.view.Menu;
+ import android.view.MenuItem;
+ import android.view.View;
+ import android.widget.GridLayout;
+@@ -17,58 +17,33 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.cardview.widget.CardView;
+ import androidx.drawerlayout.widget.DrawerLayout;
+-=======
+-import androidx.annotation.NonNull;
+-import androidx.appcompat.app.ActionBarDrawerToggle;
+-import androidx.appcompat.app.AlertDialog;
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.drawerlayout.widget.DrawerLayout;
+-
+-import android.content.Context;
+-import android.os.Bundle;
+-import android.util.Log;
+-import android.view.Menu;
+-import android.view.MenuItem;
+-
+->>>>>>> Stashed changes
+ import androidx.fragment.app.Fragment;
+ import androidx.fragment.app.FragmentManager;
+ import androidx.fragment.app.FragmentTransaction;
+ 
+ import com.android.assignment1.shoecart.R;
+ import com.android.assignment1.shoecart.fragments.CartFragment;
+-<<<<<<< Updated upstream
+-import com.android.assignment1.shoecart.fragments.OrdersFragment;
+-import com.android.assignment1.shoecart.fragments.WishlistFragment;
+-import com.android.assignment1.shoecart.models.HomeProduct;
+-import com.android.assignment1.shoecart.utils.Utility;
+-import com.google.android.material.appbar.MaterialToolbar;
+-import com.google.android.material.navigation.NavigationView;
+-
+-import java.util.ArrayList;
+-import java.util.List;
+-=======
+ import com.android.assignment1.shoecart.fragments.CategoryFragment;
+ import com.android.assignment1.shoecart.fragments.HomeFragment;
+ import com.android.assignment1.shoecart.fragments.OrdersFragment;
++import com.android.assignment1.shoecart.fragments.WishlistFragment;
++import com.android.assignment1.shoecart.models.HomeProduct;
+ import com.android.assignment1.shoecart.utils.Utility;
+ import com.google.android.material.appbar.MaterialToolbar;
+ import com.google.android.material.navigation.NavigationView;
+->>>>>>> Stashed changes
++
+ 
+ public class HomeActivity extends AppCompatActivity {
+     ActionBarDrawerToggle toggle;
+     MaterialToolbar materialToolbar;
+     DrawerLayout drawerLayout;
+-<<<<<<< Updated upstream
+ 
+     NavigationView navigationView;
+     ViewFlipper viewFlipper;
+     ImageView imageView;
+     GridLayout newArrivalsGrid;
+     GridLayout bestSellersGrid;
+-=======
+->>>>>>> Stashed changes
++
+ 
+     NavigationView navDrawerMenu;
+ 
+@@ -90,7 +65,6 @@
+         setSupportActionBar(materialToolbar);
+         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+         setDrawer();
+-<<<<<<< Updated upstream
+         drawerItemClick();
+ 
+ 
+@@ -137,8 +111,7 @@
+         }
+     }
+ 
+-    private void setDrawer() {
+-    }
++
+ 
+     public void drawerItemClick() {
+         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+@@ -178,7 +151,7 @@
+     }
+ 
+     public void flipperCaraousalImages(int image) {
+-=======
++
+         changeFragment(new HomeFragment());
+ 
+     }
+@@ -200,7 +173,7 @@
+                 else if(i == R.id.categories){
+                     changeFragment(new CategoryFragment());
+                 }
+-                else if(i == R.id.whislist){
++                else if(i == R.id.wishList){
+ 
+                 }
+                 else if(i == R.id.support){
+@@ -219,7 +192,7 @@
+ 
+     @Override
+     public boolean onCreateOptionsMenu(Menu menu) {
+->>>>>>> Stashed changes
++
+ 
+         getMenuInflater().inflate(R.menu.appbar_menu, menu);
+ 
+@@ -252,8 +225,7 @@
+         showAppExitingAlert(this);
+     }
+ 
+-<<<<<<< Updated upstream
+-=======
++
+ 
+     public void changeFragment(Fragment fragment){
+         FragmentManager supportFragmentManager = getSupportFragmentManager();
+@@ -263,12 +235,6 @@
+         drawerLayout.closeDrawers();
+     }
+ 
+-    @Override
+-    public void onBackPressed() {
+-        showAppExitingAlert(this);
+-    }
+-
+->>>>>>> Stashed changes
+     AlertDialog.Builder alertDialog;
+ 
+     public void showAppExitingAlert(final Context context) {
+@@ -290,15 +256,5 @@
+         });
+         alertDialog.show();
+     }
+-<<<<<<< Updated upstream
+ 
+-    @Override
+-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+-        if (toggle.onOptionsItemSelected(item)) {
+-            return true;
+-        }
+-        return super.onOptionsItemSelected(item);
+-    }
+-=======
+->>>>>>> Stashed changes
+ }
+\ No newline at end of file

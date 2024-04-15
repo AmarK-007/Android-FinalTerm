@@ -1,0 +1,1091 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\"\r\n        tools:targetApi=\"33\">\r\n        <activity\r\n            android:name=\".activity.SplashScreenActivity\"\r\n            android:configChanges=\"orientation|keyboardHidden|screenSize\"\r\n            android:exported=\"true\"\r\n            android:label=\"@string/app_name\"\r\n            android:theme=\"@style/AppTheme.SplashTheme\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".activity.LoginScreenActivity\"\r\n            android:exported=\"false\"\r\n            android:theme=\"@style/AppTheme.Login\"></activity>\r\n        <activity\r\n            android:name=\".activity.SignUpScreenActivity\"\r\n            android:exported=\"false\"\r\n            android:theme=\"@style/AppTheme.Login\"></activity>\r\n        <activity\r\n            android:name=\".activity.HomeActivity\"\r\n            android:exported=\"false\"\r\n            android:theme=\"@style/AppTheme\" />\r\n    </application>\r\n\r\n</manifest>\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision d8cdc403bf1bc1943e217eddd483151f7fec07f1)
++++ b/app/src/main/AndroidManifest.xml	(date 1712770110077)
+@@ -35,6 +35,7 @@
+             android:name=".activity.HomeActivity"
+             android:exported="false"
+             android:theme="@style/AppTheme" />
++
+     </application>
+ 
+ </manifest>
+Index: app/src/main/java/com/android/assignment1/shoecart/interfaces/AdapterInterface.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/interfaces/AdapterInterface.java b/app/src/main/java/com/android/assignment1/shoecart/interfaces/AdapterInterface.java
+new file mode 100644
+--- /dev/null	(date 1712733643268)
++++ b/app/src/main/java/com/android/assignment1/shoecart/interfaces/AdapterInterface.java	(date 1712733643268)
+@@ -0,0 +1,5 @@
++package com.android.assignment1.shoecart.interfaces;
++
++public interface AdapterInterface<T>{
++    void onItemSelected(T data, int position);
++}
+Index: app/src/main/res/layout/custom_order_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/custom_order_item.xml b/app/src/main/res/layout/custom_order_item.xml
+new file mode 100644
+--- /dev/null	(date 1712732934522)
++++ b/app/src/main/res/layout/custom_order_item.xml	(date 1712732934522)
+@@ -0,0 +1,66 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:id="@+id/parentLayout"
++    android:orientation="vertical">
++
++    <ImageView
++        android:id="@+id/ivProduct"
++        android:layout_width="90dp"
++        android:layout_height="90dp"
++        android:layout_alignParentStart="true"
++        android:layout_centerVertical="true"
++        android:padding="10dp"
++        android:src="@drawable/place_holder_image" />
++
++    <LinearLayout
++        android:layout_centerVertical="true"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_toEndOf="@id/ivProduct"
++        android:orientation="vertical">
++
++        <TextView
++            android:minLines="0"
++            android:id="@+id/tvTitle"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++
++            android:text="Nike Air 200"
++            android:textSize="16dp"
++            android:textStyle="bold" />
++
++        <TextView
++            android:id="@+id/tvShortDescription"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:text="shoe for men"/>
++
++        <TextView
++            android:id="@+id/tvStatus"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:text="Order Arrived"
++            android:textSize="18sp"
++            android:textStyle="bold" />
++
++        <TextView
++            android:id="@+id/tvDate"
++            android:textSize="12sp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:text="Delivered on: 23/01/2024"
++            android:textColor="?android:attr/textColorHint" />
++
++
++    </LinearLayout>
++
++    <com.google.android.material.divider.MaterialDivider
++        android:layout_below="@id/ivProduct"
++        android:layout_width="match_parent"
++        android:layout_margin="5dp"
++        android:layout_height="1dp"/>
++
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.android.assignment1.shoecart'\r\n    compileSdk 34\r\n\r\n    defaultConfig {\r\n        applicationId \"com.android.assignment1.shoecart\"\r\n        minSdk 24\r\n        targetSdk 33\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    buildFeatures {\r\n        viewBinding true\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.6.1'\r\n    implementation 'com.google.android.material:material:1.11.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.5'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'\r\n\r\n    /* For Splashscreen Animation */\r\n    implementation \"com.airbnb.android:lottie:3.5.0\"\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision d8cdc403bf1bc1943e217eddd483151f7fec07f1)
++++ b/app/build.gradle	(date 1712706171517)
+@@ -28,6 +28,7 @@
+     }
+     buildFeatures {
+         viewBinding true
++
+     }
+ }
+ 
+Index: app/src/main/res/drawable/place_holder_image.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/place_holder_image.xml b/app/src/main/res/drawable/place_holder_image.xml
+new file mode 100644
+--- /dev/null	(date 1712706087873)
++++ b/app/src/main/res/drawable/place_holder_image.xml	(date 1712706087873)
+@@ -0,0 +1,5 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android" android:height="24dp" android:tint="#000000" android:viewportHeight="24" android:viewportWidth="24" android:width="24dp">
++      
++    <path android:fillColor="@android:color/white" android:pathData="M12.5,3.5c0,-1.1 0.9,-2 2,-2s2,0.9 2,2c0,1.1 -0.9,2 -2,2S12.5,4.6 12.5,3.5zM6.32,19.03l-1.14,-1.47L4,18.5l2.38,3.04c0.51,0.65 1.16,1.15 1.88,1.41c0.28,0.1 0.53,0.04 0.72,-0.11c0.3,-0.23 0.42,-0.7 0.12,-1.07c-0.08,-0.1 -0.2,-0.17 -0.31,-0.22c-0.43,-0.18 -0.82,-0.45 -1.14,-0.83l-0.08,-0.1L11,18.2l0.89,-3.22l2.11,2v4.52h-2V23h3.87c0.82,0 1.61,-0.21 2.26,-0.61c0.26,-0.16 0.37,-0.39 0.37,-0.64c0,-0.38 -0.3,-0.75 -0.77,-0.75c-0.13,0 -0.26,0.04 -0.37,0.1c-0.4,0.23 -0.87,0.37 -1.36,0.4l0,-6.02l-2.11,-2l0.6,-3C15.79,11.98 17.8,13 20,13v-2c-1.9,0 -3.51,-1.02 -4.31,-2.42l-1,-1.58c-0.4,-0.6 -1,-1 -1.7,-1C12.24,6 11.58,6.34 7,8.28V13h2V9.58l1.79,-0.7L9.2,17L6.32,19.03z"/>
++    
++</vector>
+Index: app/src/main/java/com/android/assignment1/shoecart/adapters/OrdersAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/adapters/OrdersAdapter.java b/app/src/main/java/com/android/assignment1/shoecart/adapters/OrdersAdapter.java
+new file mode 100644
+--- /dev/null	(date 1712733871830)
++++ b/app/src/main/java/com/android/assignment1/shoecart/adapters/OrdersAdapter.java	(date 1712733871830)
+@@ -0,0 +1,67 @@
++package com.android.assignment1.shoecart.adapters;
++
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ImageView;
++import android.widget.RelativeLayout;
++import android.widget.TextView;
++
++import androidx.annotation.NonNull;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.android.assignment1.shoecart.R;
++import com.android.assignment1.shoecart.fragments.OrdersFragment;
++import com.android.assignment1.shoecart.interfaces.AdapterInterface;
++import com.android.assignment1.shoecart.models.Orders;
++
++import java.util.ArrayList;
++
++public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.MyViewHolder> {
++
++    ArrayList<Orders> arrayList;
++    AdapterInterface<Orders> adapterInterface;
++
++    public OrdersAdapter(ArrayList<Orders> arrayList,AdapterInterface<Orders> adapterInterface) {
++        this.arrayList = arrayList;
++        this.adapterInterface = adapterInterface;
++    }
++
++    @NonNull
++    @Override
++    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
++        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_order_item,parent,false);
++        return new MyViewHolder(view);
++    }
++
++    @Override
++    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
++        holder.title.setText("#" + arrayList.get(position).getOrderId());
++        holder.shortDescription.setText(arrayList.get(position).getProductList().size() + "Items");
++        holder.status.setText(arrayList.get(position).getStatus());
++        holder.orderDate.setText(arrayList.get(position).getOrderDate());
++        holder.parent.setOnClickListener(v -> {
++            adapterInterface.onItemSelected(arrayList.get(position),position);
++        });
++    }
++
++    @Override
++    public int getItemCount() {
++        return arrayList.size();
++    }
++
++    public class MyViewHolder extends RecyclerView.ViewHolder {
++        ImageView ivProduct;
++        TextView title,shortDescription,status,orderDate;
++        RelativeLayout parent;
++        public MyViewHolder(@NonNull View itemView) {
++            super(itemView);
++            ivProduct = itemView.findViewById(R.id.ivProduct);
++            title = itemView.findViewById(R.id.tvTitle);
++            shortDescription = itemView.findViewById(R.id.tvShortDescription);
++            status = itemView.findViewById(R.id.tvStatus);
++            orderDate = itemView.findViewById(R.id.tvDate);
++            parent = itemView.findViewById(R.id.parentLayout);
++        }
++    }
++}
+Index: app/src/main/java/com/android/assignment1/shoecart/models/Product.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/models/Product.java b/app/src/main/java/com/android/assignment1/shoecart/models/Product.java
+new file mode 100644
+--- /dev/null	(date 1712733168478)
++++ b/app/src/main/java/com/android/assignment1/shoecart/models/Product.java	(date 1712733168478)
+@@ -0,0 +1,95 @@
++package com.android.assignment1.shoecart.models;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++
++public class Product implements Serializable {
++    String productId;
++    ArrayList<String> imageArray= new ArrayList<>();
++    String title;
++    Double price;
++
++
++    String description;
++    String size;
++    int quantity;
++
++    public Product(String productId, ArrayList<String> imageArray, String title, Double price, String description, String size, int quantity) {
++        this.productId = productId;
++        this.imageArray = imageArray;
++        this.title = title;
++        this.price = price;
++        this.description = description;
++        this.size = size;
++        this.quantity = quantity;
++    }
++
++    public String getProductId() {
++        return productId;
++    }
++
++    public void setProductId(String productId) {
++        this.productId = productId;
++    }
++
++    public ArrayList<String> getImageArray() {
++        return imageArray;
++    }
++
++    public void setImageArray(ArrayList<String> imageArray) {
++        this.imageArray = imageArray;
++    }
++
++    public String getTitle() {
++        return title;
++    }
++
++    public void setTitle(String title) {
++        this.title = title;
++    }
++
++    public Double getPrice() {
++        return price;
++    }
++
++    public void setPrice(Double price) {
++        this.price = price;
++    }
++
++    public String getDescription() {
++        return description;
++    }
++
++    public void setDescription(String description) {
++        this.description = description;
++    }
++
++    public String getSize() {
++        return size;
++    }
++
++    public void setSize(String size) {
++        this.size = size;
++    }
++
++    public int getQuantity() {
++        return quantity;
++    }
++
++    public void setQuantity(int quantity) {
++        this.quantity = quantity;
++    }
++
++    @Override
++    public String toString() {
++        return "Product{" +
++                "productId='" + productId + '\'' +
++                ", imageArray=" + imageArray +
++                ", title='" + title + '\'' +
++                ", price=" + price +
++                ", description='" + description + '\'' +
++                ", size='" + size + '\'' +
++                ", quantity=" + quantity +
++                '}';
++    }
++}
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">ShoeCart</string>\r\n    <string name=\"version\">Version 1.0</string>\r\n    <string name=\"first_name\">First Name</string>\r\n    <string name=\"last_name\">Last Name</string>\r\n    <string name=\"username\">Username</string>\r\n    <string name=\"password\">Password</string>\r\n    <string name=\"login\">Login</string>\r\n    <string name=\"signup\">Sign Up</string>\r\n\r\n    <string name=\"msg_first_name_empty\">First Name can\\&apos;t be empty!</string>\r\n    <string name=\"msg_last_name_empty\">Last Name can\\&apos;t be empty!</string>\r\n    <string name=\"msg_not_valid_username\">Not a valid user name!</string>\r\n    <string name=\"msg_enter_alpha_numeric\">Enter only AlphaNumeric!</string>\r\n    <string name=\"msg_space_not_allowed\">Space not allowed!</string>\r\n    <string name=\"msg_password_field_cant_be_empty\">Password field can\\&apos;t be empty!</string>\r\n    <string name=\"msg_enter_min_5characters\">\"Enter minimum 5 Characters\"</string>\r\n    <string name=\"msg_enter_valid_email\">\"Enter valid email\"</string>\r\n    <string name=\"msg_passwords_are_same\">\"Password entered should not match\"</string>\r\n    <string name=\"msg_login_failed\">Login Failed! Wrong User Name or Password.</string>\r\n    <string name=\"msg_signup_failed\">Sign Up Failed! Please try again.</string>\r\n    <string name=\"msg_signup_success\">Sign Up Successful! Please Login.</string>\r\n    <string name=\"msg_app_exit\">Do you want to Exit App?</string>\r\n    <string name=\"button_ok\">OK</string>\r\n    <string name=\"button_cancel\">Cancel</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision d8cdc403bf1bc1943e217eddd483151f7fec07f1)
++++ b/app/src/main/res/values/strings.xml	(date 1712727667039)
+@@ -1,4 +1,5 @@
+ <resources>
++
+     <string name="app_name">ShoeCart</string>
+     <string name="version">Version 1.0</string>
+     <string name="first_name">First Name</string>
+@@ -23,4 +24,7 @@
+     <string name="msg_app_exit">Do you want to Exit App?</string>
+     <string name="button_ok">OK</string>
+     <string name="button_cancel">Cancel</string>
++    <!-- TODO: Remove or change this placeholder text -->
++    <string name="hello_blank_fragment">Hello blank fragment</string>
++
+ </resources>
+\ No newline at end of file
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+new file mode 100644
+--- /dev/null	(date 1712706087858)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1712706087858)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="deploymentTargetDropDown">
++    <value>
++      <entry key="app">
++        <State />
++      </entry>
++    </value>
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_order_details.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_order_details.xml b/app/src/main/res/layout/fragment_order_details.xml
+new file mode 100644
+--- /dev/null	(date 1712734652991)
++++ b/app/src/main/res/layout/fragment_order_details.xml	(date 1712734652991)
+@@ -0,0 +1,170 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:orientation="vertical"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".fragments.OrderDetailsFragment">
++
++<ScrollView
++    android:layout_above="@id/btnReOrder"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++    <LinearLayout
++        android:layout_margin="20dp"
++        android:orientation="vertical"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content">
++        <TextView
++            android:layout_weight="1"
++            android:id="@+id/tvOrderId"
++            android:textSize="20sp"
++            android:text="#123456"
++            android:textStyle="bold"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"/>
++            <TextView
++                android:layout_weight="1"
++                android:id="@+id/tvStatus"
++                android:gravity="end"
++                android:textSize="20sp"
++                android:text="Active"
++                android:textStyle="bold"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"/>
++        </LinearLayout>
++        <TextView
++            android:id="@+id/tvDate"
++            android:text="23/01/2000"
++            android:textSize="16sp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"/>
++
++        <TextView
++            android:layout_marginTop="10dp"
++            android:text="Delivered to"
++            android:textSize="16sp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"/>
++
++        <TextView
++            android:id="@+id/tvAddress"
++            android:text="139 Jackson"
++            android:textSize="18sp"
++            android:textStyle="bold"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"/>
++
++        <TextView
++            android:layout_marginTop="10dp"
++            android:text="Payment method"
++            android:textSize="16sp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"/>
++
++        <TextView
++            android:id="@+id/tvPaymentMethod"
++            android:text="Google Pay"
++            android:textSize="18sp"
++            android:textStyle="bold"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"/>
++
++        <com.google.android.material.divider.MaterialDivider
++            android:layout_width="match_parent"
++            android:layout_marginTop="15dp"
++            android:layout_height="1dp"/>
++
++        <androidx.recyclerview.widget.RecyclerView
++            android:id="@+id/rvOrdersList"
++            android:layout_marginTop="20dp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"/>
++
++        <com.google.android.material.divider.MaterialDivider
++            android:layout_width="match_parent"
++            android:layout_marginTop="15dp"
++            android:layout_height="1dp"/>
++        
++        <RelativeLayout
++            android:layout_marginTop="15dp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content">
++            <TextView
++                android:text="Item total"
++                android:layout_centerVertical="true"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"/>
++            <TextView
++                android:id="@+id/tvItemTotal"
++                android:text="$23.22"
++                android:layout_centerVertical="true"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_alignParentEnd="true"/>
++        </RelativeLayout>
++        <RelativeLayout
++            android:layout_marginTop="5dp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content">
++            <TextView
++                android:text="Delivery Charges"
++                android:layout_centerVertical="true"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"/>
++            <TextView
++                android:id="@+id/tvDeliveryCharges"
++                android:text="$23.22"
++                android:layout_centerVertical="true"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_alignParentEnd="true"/>
++        </RelativeLayout>
++        <RelativeLayout
++            android:layout_marginTop="5dp"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content">
++            <TextView
++                android:text="Paid"
++                android:layout_centerVertical="true"
++                android:layout_width="wrap_content"
++                android:textStyle="bold"
++                android:layout_height="wrap_content"/>
++            <TextView
++                android:id="@+id/tvPaid"
++                android:text="$23.22"
++                android:textStyle="bold"
++                android:layout_centerVertical="true"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_alignParentEnd="true"/>
++        </RelativeLayout>
++
++
++        <com.google.android.material.divider.MaterialDivider
++            android:layout_width="match_parent"
++            android:layout_marginTop="15dp"
++            android:layout_height="1dp"/>
++
++
++
++
++
++    </LinearLayout>
++</ScrollView>
++
++
++    <Button
++        android:layout_alignParentBottom="true"
++        android:layout_margin="25dp"
++        android:id="@+id/btnReOrder"
++        android:layout_width="250dp"
++        android:text="Re-order"
++        android:layout_centerHorizontal="true"
++        android:layout_height="wrap_content"/>
++
++</RelativeLayout>
+\ No newline at end of file
+Index: .idea/migrations.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/migrations.xml b/.idea/migrations.xml
+new file mode 100644
+--- /dev/null	(date 1712706087865)
++++ b/.idea/migrations.xml	(date 1712706087865)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectMigrations">
++    <option name="MigrateToGradleLocalJavaHome">
++      <set>
++        <option value="$PROJECT_DIR$" />
++      </set>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/OrderDetailsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/OrderDetailsFragment.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/OrderDetailsFragment.java
+new file mode 100644
+--- /dev/null	(date 1712734428732)
++++ b/app/src/main/java/com/android/assignment1/shoecart/fragments/OrderDetailsFragment.java	(date 1712734428732)
+@@ -0,0 +1,72 @@
++package com.android.assignment1.shoecart.fragments;
++
++import android.os.Bundle;
++
++import androidx.fragment.app.Fragment;
++import androidx.recyclerview.widget.LinearLayoutManager;
++
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.LinearLayout;
++
++import com.android.assignment1.shoecart.R;
++import com.android.assignment1.shoecart.adapters.OrderProductAdapter;
++import com.android.assignment1.shoecart.databinding.FragmentOrderDetailsBinding;
++import com.android.assignment1.shoecart.models.Orders;
++
++
++public class OrderDetailsFragment extends Fragment {
++
++FragmentOrderDetailsBinding binding;
++Orders order;
++
++OrderProductAdapter adapter;
++    @Override
++    public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++
++    }
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        // Inflate the layout for this fragment
++        binding = FragmentOrderDetailsBinding.inflate(inflater,container,false);
++        if (getArguments() != null) {
++            //geting arguments
++            order = (Orders) getArguments().getSerializable("order");
++
++            if (order != null){
++                setData();
++            }
++        }
++
++
++
++
++        return binding.getRoot();
++    }
++
++    public void setData(){
++        binding.tvOrderId.setText("#" + order.getOrderId());
++        binding.tvDate.setText(order.getOrderDate());
++        binding.tvStatus.setText(order.getStatus());
++        binding.tvAddress.setText(order.getShippingAddress());
++        binding.tvPaymentMethod.setText(order.getPaymentMethod());
++        double total = 0.0;
++        for (int i = 0 ; i < order.getProductList().size() ; i++){
++            total += order.getProductList().get(i).getPrice() * order.getProductList().get(i).getQuantity();
++        }
++        binding.tvItemTotal.setText("$ "+total);
++        binding.tvDeliveryCharges.setText("$2");
++        binding.tvPaid.setText("$"+ (total + 2));
++
++        adapter = new OrderProductAdapter(order.getProductList());
++        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);
++
++        binding.rvOrdersList.setAdapter(adapter);
++        binding.rvOrdersList.setLayoutManager(layoutManager);
++
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/android/assignment1/shoecart/models/Orders.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/models/Orders.java b/app/src/main/java/com/android/assignment1/shoecart/models/Orders.java
+new file mode 100644
+--- /dev/null	(date 1712733168473)
++++ b/app/src/main/java/com/android/assignment1/shoecart/models/Orders.java	(date 1712733168473)
+@@ -0,0 +1,86 @@
++package com.android.assignment1.shoecart.models;
++
++import java.io.Serializable;
++import java.util.ArrayList;
++
++public class Orders implements Serializable {
++ ArrayList<Product> productList;
++
++    String status;
++    String orderDate;
++
++    String orderId;
++    String shippingAddress;
++    String paymentMethod;
++
++    public Orders(ArrayList<Product> productList, String status, String orderDate, String orderId, String shippingAddress, String paymentMethod) {
++        this.productList = productList;
++        this.status = status;
++        this.orderDate = orderDate;
++        this.orderId = orderId;
++        this.shippingAddress = shippingAddress;
++        this.paymentMethod = paymentMethod;
++    }
++
++    public ArrayList<Product> getProductList() {
++        return productList;
++    }
++
++
++
++    public void setProductList(ArrayList<Product> productList) {
++        this.productList = productList;
++    }
++
++    public String getStatus() {
++        return status;
++    }
++
++    public void setStatus(String status) {
++        this.status = status;
++    }
++
++    public String getOrderDate() {
++        return orderDate;
++    }
++
++    public void setOrderDate(String orderDate) {
++        this.orderDate = orderDate;
++    }
++
++    public String getOrderId() {
++        return orderId;
++    }
++
++    public void setOrderId(String orderId) {
++        this.orderId = orderId;
++    }
++
++    public String getShippingAddress() {
++        return shippingAddress;
++    }
++
++    public void setShippingAddress(String shippingAddress) {
++        this.shippingAddress = shippingAddress;
++    }
++
++    public String getPaymentMethod() {
++        return paymentMethod;
++    }
++
++    public void setPaymentMethod(String paymentMethod) {
++        this.paymentMethod = paymentMethod;
++    }
++
++    @Override
++    public String toString() {
++        return "Orders{" +
++                "productList=" + productList +
++                ", status='" + status + '\'' +
++                ", orderDate='" + orderDate + '\'' +
++                ", orderId='" + orderId + '\'' +
++                ", shippingAddress='" + shippingAddress + '\'' +
++                ", paymentMethod='" + paymentMethod + '\'' +
++                '}';
++    }
++}
+Index: app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java b/app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java
+new file mode 100644
+--- /dev/null	(date 1712769404814)
++++ b/app/src/main/java/com/android/assignment1/shoecart/fragments/OrdersFragment.java	(date 1712769404814)
+@@ -0,0 +1,90 @@
++package com.android.assignment1.shoecart.fragments;
++
++import android.os.Bundle;
++
++import androidx.fragment.app.Fragment;
++import androidx.fragment.app.FragmentManager;
++import androidx.fragment.app.FragmentTransaction;
++import androidx.recyclerview.widget.LinearLayoutManager;
++
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++
++import com.android.assignment1.shoecart.R;
++import com.android.assignment1.shoecart.adapters.OrdersAdapter;
++import com.android.assignment1.shoecart.databinding.FragmentOrdersBinding;
++import com.android.assignment1.shoecart.interfaces.AdapterInterface;
++import com.android.assignment1.shoecart.models.Orders;
++import com.android.assignment1.shoecart.models.Product;
++
++import java.util.ArrayList;
++
++
++public class OrdersFragment extends Fragment implements AdapterInterface<Orders> {
++
++
++    FragmentOrdersBinding binding;
++    ArrayList<Orders> ordersList = new ArrayList<>();
++    ArrayList<Product> productArrayList = new ArrayList<>();
++
++    OrdersAdapter adapter;
++    LinearLayoutManager layoutManager;
++
++    public OrdersFragment() {
++        // Required empty public constructor
++    }
++
++
++
++
++    @Override
++    public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++
++    }
++
++    @Override
++    public View onCreateView(LayoutInflater inflater, ViewGroup container,
++                             Bundle savedInstanceState) {
++        binding = FragmentOrdersBinding.inflate(inflater,container,false);
++        productArrayList = new ArrayList<>();
++        ordersList = new ArrayList<>();
++        productArrayList.add(new Product("3",new ArrayList<>(),"Nike 01", 20.0,"Men shoe","Xl",3));
++        productArrayList.add(new Product("1",new ArrayList<>(),"Nike 03", 20.0,"women shoe","Xl",2));
++        productArrayList.add(new Product("2",new ArrayList<>(),"Nike 02", 10.0,"kids shoe","Xl",7));
++
++        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
++        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
++        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
++        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","cash"));
++        ordersList.add(new Orders(productArrayList,"Arrived","23/01/2024","3","139 jackson","card"));
++
++        setData();
++
++        // Inflate the layout for this fragment
++        return binding.getRoot();
++    }
++
++    public void setData(){
++        adapter = new OrdersAdapter(ordersList,this);
++        layoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false);
++        binding.rvOrders.setLayoutManager(layoutManager);
++        binding.rvOrders.setAdapter(adapter);
++    }
++
++    @Override
++    public void onItemSelected(Orders data, int position) {
++        Bundle bundle = new Bundle();
++        bundle.putSerializable("order", data);
++//        moving to add fragment
++        Fragment fragment = new OrderDetailsFragment();
++        //passing arguments
++        fragment.setArguments(bundle);
++        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
++        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
++        fragmentTransaction.replace(R.id.frames, fragment);
++        fragmentTransaction.addToBackStack(null);
++        fragmentTransaction.commit();
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_orders.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_orders.xml b/app/src/main/res/layout/fragment_orders.xml
+new file mode 100644
+--- /dev/null	(date 1712706087876)
++++ b/app/src/main/res/layout/fragment_orders.xml	(date 1712706087876)
+@@ -0,0 +1,24 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:orientation="vertical"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++
++    tools:context=".fragments.OrdersFragment">
++
++
++
++
++    <com.google.android.material.divider.MaterialDivider
++        android:layout_width="match_parent"
++        android:layout_height="1dp"/>
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/rvOrders"
++        tools:listitem="@layout/custom_order_item"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"/>
++
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/custom_order_product_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/custom_order_product_item.xml b/app/src/main/res/layout/custom_order_product_item.xml
+new file mode 100644
+--- /dev/null	(date 1712732047216)
++++ b/app/src/main/res/layout/custom_order_product_item.xml	(date 1712732047216)
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:orientation="vertical"
++    android:layout_marginTop="20dp"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content">
++
++    <TextView
++        android:id="@+id/tvTitle"
++        android:layout_alignParentStart="true"
++        android:layout_alignParentTop="true"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Title"
++        android:textStyle="bold"
++        android:textSize="20sp"/>
++    <TextView
++        android:id="@+id/tvPrice"
++        android:layout_alignParentEnd="true"
++        android:text="$12"
++        android:textSize="20sp"
++        android:textStyle="bold"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"/>
++    <TextView
++        android:id="@+id/tvShortDescription"
++        android:layout_below="@id/tvTitle"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"/>
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/drawable/back_arrow.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/back_arrow.xml b/app/src/main/res/drawable/back_arrow.xml
+new file mode 100644
+--- /dev/null	(date 1712706087868)
++++ b/app/src/main/res/drawable/back_arrow.xml	(date 1712706087868)
+@@ -0,0 +1,5 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android" android:autoMirrored="true" android:height="24dp" android:tint="#000000" android:viewportHeight="24" android:viewportWidth="24" android:width="24dp">
++      
++    <path android:fillColor="@android:color/white" android:pathData="M20,11H7.83l5.59,-5.59L12,4l-8,8 8,8 1.41,-1.41L7.83,13H20v-2z"/>
++    
++</vector>
+Index: app/src/main/res/layout/toolbar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/toolbar.xml b/app/src/main/res/layout/toolbar.xml
+new file mode 100644
+--- /dev/null	(date 1712706087876)
++++ b/app/src/main/res/layout/toolbar.xml	(date 1712706087876)
+@@ -0,0 +1,54 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="50dp"
++    android:orientation="horizontal">
++
++
++
++    <ImageView
++        android:id="@+id/btnBack"
++        android:layout_width="30dp"
++        android:layout_height="30dp"
++        android:layout_centerVertical="true"
++        android:src="@drawable/back_arrow" />
++
++    <TextView
++        android:layout_marginStart="10dp"
++        android:id="@+id/tvTitle"
++        android:layout_width="wrap_content"
++        android:layout_height="match_parent"
++        android:layout_centerVertical="true"
++        android:layout_toEndOf="@id/btnBack"
++        android:gravity="center"
++        android:padding="5dp"
++        android:text="Title"
++        android:textSize="20sp"
++        android:textStyle="bold" />
++
++    <LinearLayout
++        android:layout_alignParentEnd="true"
++        android:layout_width="wrap_content"
++        android:layout_height="match_parent">
++        <ImageView
++            android:id="@+id/btnCart"
++            android:layout_width="30dp"
++            android:layout_height="30dp"
++            android:layout_gravity="center"
++            android:layout_marginEnd="10dp"
++            android:src="@drawable/shopping_cart" />
++
++        <ImageView
++            android:id="@+id/btnSearch"
++            android:layout_width="30dp"
++            android:layout_height="30dp"
++            android:layout_gravity="center"
++            android:layout_marginEnd="10dp"
++            android:layout_toStartOf="@id/btnCart"
++            android:src="@drawable/search" />
++    </LinearLayout>
++
++
++
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/android/assignment1/shoecart/adapters/OrderProductAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/android/assignment1/shoecart/adapters/OrderProductAdapter.java b/app/src/main/java/com/android/assignment1/shoecart/adapters/OrderProductAdapter.java
+new file mode 100644
+--- /dev/null	(date 1712734527572)
++++ b/app/src/main/java/com/android/assignment1/shoecart/adapters/OrderProductAdapter.java	(date 1712734527572)
+@@ -0,0 +1,56 @@
++package com.android.assignment1.shoecart.adapters;
++
++import android.annotation.SuppressLint;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.TextView;
++
++import androidx.annotation.NonNull;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.android.assignment1.shoecart.R;
++import com.android.assignment1.shoecart.models.Product;
++
++import java.util.ArrayList;
++
++public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapter.MyViewHolder> {
++
++    ArrayList<Product> productArrayList;
++
++    public OrderProductAdapter(ArrayList<Product> productArrayList) {
++        this.productArrayList = productArrayList;
++    }
++
++    @NonNull
++    @Override
++    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
++        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_order_product_item,parent,false);
++        return new MyViewHolder(view);
++    }
++
++    @SuppressLint("SetTextI18n")
++    @Override
++    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
++        holder.title.setText(productArrayList.get(position).getTitle() + " x " + productArrayList.get(position).getQuantity());
++        holder.price.setText(String.valueOf(productArrayList.get(position).getPrice() * productArrayList.get(position).getQuantity()));
++        holder.shortDescription.setText(productArrayList.get(position).getDescription());
++
++    }
++
++    @Override
++    public int getItemCount() {
++        return productArrayList.size();
++    }
++
++    public class MyViewHolder extends RecyclerView.ViewHolder {
++
++        TextView title,price,shortDescription;
++        public MyViewHolder(@NonNull View itemView) {
++            super(itemView);
++            title = itemView.findViewById(R.id.tvTitle);
++            price = itemView.findViewById(R.id.tvPrice);
++            shortDescription = itemView.findViewById(R.id.tvShortDescription);
++        }
++    }
++}
+Index: app/src/main/res/drawable/shopping_cart.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/shopping_cart.xml b/app/src/main/res/drawable/shopping_cart.xml
+new file mode 100644
+--- /dev/null	(date 1712706087874)
++++ b/app/src/main/res/drawable/shopping_cart.xml	(date 1712706087874)
+@@ -0,0 +1,5 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android" android:height="24dp" android:tint="#000000" android:viewportHeight="24" android:viewportWidth="24" android:width="24dp">
++      
++    <path android:fillColor="@android:color/white" android:pathData="M7,18c-1.1,0 -1.99,0.9 -1.99,2S5.9,22 7,22s2,-0.9 2,-2 -0.9,-2 -2,-2zM1,2v2h2l3.6,7.59 -1.35,2.45c-0.16,0.28 -0.25,0.61 -0.25,0.96 0,1.1 0.9,2 2,2h12v-2L7.42,15c-0.14,0 -0.25,-0.11 -0.25,-0.25l0.03,-0.12 0.9,-1.63h7.45c0.75,0 1.41,-0.41 1.75,-1.03l3.58,-6.49c0.08,-0.14 0.12,-0.31 0.12,-0.48 0,-0.55 -0.45,-1 -1,-1L5.21,4l-0.94,-2L1,2zM17,18c-1.1,0 -1.99,0.9 -1.99,2s0.89,2 1.99,2 2,-0.9 2,-2 -0.9,-2 -2,-2z"/>
++    
++</vector>

@@ -20,6 +20,12 @@ public class Wishlist implements Parcelable {
         this.userId = userId;
     }
 
+    public Wishlist(int productId, int sizeId, int userId) {
+        this.productId = productId;
+        this.sizeId = sizeId;
+        this.userId = userId;
+    }
+
     protected Wishlist(Parcel in) {
         wishlistId = in.readInt();
         productId = in.readInt();
