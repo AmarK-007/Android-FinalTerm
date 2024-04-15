@@ -1,4 +1,5 @@
 package com.android.assignment1.shoecart.fragments;
+// Import necessary libraries and packages
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -19,17 +20,22 @@ import android.widget.TextView;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.CustomSpinnerAdapter;
 
+// ProfileFragment class that extends Fragment
 public class ProfileFragment extends Fragment {
 
+    // Declare variables
     private String selectedProvince;
     TextView firstName, lastName, email, addressLine1, addressLine2, city, postalCode, province;
     ImageButton editButton;
+
+    // onCreateView method for creating the view of the fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        // Initialize TextViews and ImageButton
         firstName = view.findViewById(R.id.profile_firstName);
         lastName = view.findViewById(R.id.profile_lastName);
         email = view.findViewById(R.id.profile_email);
@@ -40,23 +46,21 @@ public class ProfileFragment extends Fragment {
         province = view.findViewById(R.id.profile_address_province);
         editButton = view.findViewById(R.id.update_address);
 
+        // Set onClickListener for the editButton
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Create a new dialog
                 Dialog updateDialog = new Dialog(getContext());
                 updateDialog.setContentView(R.layout.update_address_dialog);
 
-//                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-//                        requireContext(),
-//                        R.array.canadian_provinces, // Array resource containing province names
-//                        R.layout.spinner_item // Custom spinner layout
-//                );
-//                adapter.setDropDownViewResource(R.layout.spinner_item);
 
                 String[] provinces = getResources().getStringArray(R.array.canadian_provinces);
                 CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(requireContext(), provinces);
 //                binding.provinceSpinner.setAdapter(adapter);
 
+
+                // Initialize EditTexts, Spinner, and Button
                 EditText updatedAddress1 = updateDialog.findViewById(R.id.update_address1);
                 EditText updatedAddress2 = updateDialog.findViewById(R.id.update_address2);
                 EditText updatedCity = updateDialog.findViewById(R.id.update_city);
@@ -64,23 +68,28 @@ public class ProfileFragment extends Fragment {
                 Spinner updatedProvince = updateDialog.findViewById(R.id.update_provinceSpinner);
                 Button updateButton = updateDialog.findViewById(R.id.update_btn);
 
+                // Set the adapter for the Spinner
                 updatedProvince.setAdapter(adapter);
 
+                // Set OnItemSelectedListener for the Spinner
                 updatedProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        // Update the selectedProvince when an item is selected
                         selectedProvince = parent.getItemAtPosition(position).toString();
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-
+                        // Implementation here...
                     }
                 });
 
+                // Set onClickListener for the updateButton
                 updateButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        // Update the TextViews with the new values and dismiss the dialog
                         addressLine1.setText(updatedAddress1.getText().toString());
                         addressLine2.setText(updatedAddress2.getText().toString());
                         city.setText(updatedCity.getText().toString());
@@ -89,9 +98,13 @@ public class ProfileFragment extends Fragment {
                         updateDialog.dismiss();
                     }
                 });
+
+                // Show the dialog
                 updateDialog.show();
             }
         });
+
+        // Return the root view
         return view;
     }
 }

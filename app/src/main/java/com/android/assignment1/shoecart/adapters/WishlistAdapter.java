@@ -27,6 +27,9 @@ import com.android.assignment1.shoecart.utils.Utility;
 
 import java.util.List;
 
+/**
+ * Adapter class for wishlist items
+ */
 public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyViewHolder> {
 
     List<Wishlist> wishlistList;
@@ -34,6 +37,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
     Context context;
     WishlistDataSource dataSource;
 
+    /**
+     * Constructor for WishlistAdapter
+     *
+     * @param wishListArrayList
+     * @param adapterInterface
+     * @param context
+     * @return
+     */
     public WishlistAdapter(List<Wishlist> wishListArrayList, AdapterInterface<Wishlist> adapterInterface, Context context) {
         this.wishlistList = wishListArrayList;
         this.adapterInterface = adapterInterface;
@@ -41,6 +52,13 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
         dataSource = new WishlistDataSource(context);
     }
 
+    /**
+     * onCreateViewHolder method
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,6 +67,13 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
         return new MyViewHolder(view);
     }
 
+    /**
+     * onBindViewHolder method
+     *
+     * @param holder
+     * @param position
+     * @return
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ProductDataSource productDataSource = new ProductDataSource(context);
@@ -117,18 +142,31 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
         });
     }
 
-
+    /**
+     * getItemCount method
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return wishlistList.size();
     }
 
+    /**
+     * MyViewHolder class
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvPrice, tvQuantity;
         Button btnAddToCart, btnDelete;
         ImageView ivAdd, ivProduct, ivMinus;
 
+        /**
+         * Constructor for MyViewHolder
+         *
+         * @param itemView
+         * @return
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

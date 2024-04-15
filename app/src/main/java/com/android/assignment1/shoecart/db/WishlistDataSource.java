@@ -11,13 +11,23 @@ import com.android.assignment1.shoecart.models.Wishlist;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DataSource class for Wishlist
+ */
 public class WishlistDataSource {
     private DBHelper dbHelper;
 
+    /**
+     * Constructor for WishlistDataSource
+     *
+     * @param context
+     * @return
+     */
     public WishlistDataSource(Context context) {
         dbHelper = new DBHelper(context);
     }
 
+    // Wishlist table name
     public static final String TABLE_NAME = "wishlist";
     public static final String COLUMN_WISHLIST_ID = "wishlist_id";
     public static final String COLUMN_PRODUCT_ID = "product_id";
@@ -36,6 +46,12 @@ public class WishlistDataSource {
                     + "FOREIGN KEY(" + COLUMN_USER_ID + ") REFERENCES users(user_id)"
                     + ")";
 
+    /**
+     * insertWishlist method
+     *
+     * @param wishlist
+     * @return
+     */
     public boolean insertWishlist(Wishlist wishlist) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -54,6 +70,11 @@ public class WishlistDataSource {
         }
     }
 
+    /**
+     * getWishlist method
+     *
+     * @return
+     */
     @SuppressLint("Range")
     public List<Wishlist> getAllWishlists() {
         List<Wishlist> wishlists = new ArrayList<>();
@@ -78,6 +99,12 @@ public class WishlistDataSource {
         return wishlists;
     }
 
+    /**
+     * getWishlist method
+     *
+     * @param wishlist
+     * @return
+     */
     public void updateWishlist(Wishlist wishlist) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -91,6 +118,12 @@ public class WishlistDataSource {
         db.close();
     }
 
+    /**
+     * deleteWishlist method
+     *
+     * @param wishlist
+     * @return
+     */
     public void deleteWishlist(Wishlist wishlist) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_WISHLIST_ID + " = ?",

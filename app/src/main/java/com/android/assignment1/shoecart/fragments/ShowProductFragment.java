@@ -1,5 +1,6 @@
 package com.android.assignment1.shoecart.fragments;
 
+// Import necessary libraries and packages
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,90 +25,88 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+// ShowProductFragment class that extends Fragment and implements AdapterInterface
 public class ShowProductFragment extends Fragment implements AdapterInterface<Product> {
 
+    // Declare variables
     FragmentShowProductBinding binding;
     List<Product> productList = new ArrayList<>();
     String category;
     String searchQuery;
-
     ShowProductAdapter showProductAdapter;
 
+    // onCreate method for initializing fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
+    // onCreateView method for creating the view of the fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentShowProductBinding.inflate(inflater, container, false);
 
+        // Check if arguments are passed to the fragment
         if (getArguments() != null) {
-            //geting arguments
+            // Retrieve the arguments
             category = getArguments().getString("category");
             searchQuery = getArguments().getString("searchQuery");
-            Log.e("TAG", category + " 1");
         }
 
+        // Get all products
         productList = new ProductDataSource(requireContext()).getAllProducts();
         List<Product> filteredProduct = new ArrayList<>();
 
+        // Filter products based on the search query or category
         if (searchQuery != null) {
-            // Filter products based on the search query
             productList.forEach(product -> {
                 if (product.getTitle().toLowerCase().contains(searchQuery.toLowerCase())) {
                     filteredProduct.add(product);
-                    Log.e("CAt", "searchQuery: " + product.getTitle());
                 }
             });
-
         } else {
-            // Filter products based on the category
             productList.forEach(product -> {
                 if (Objects.equals(product.getCategory(), category)) {
                     filteredProduct.add(product);
-                    Log.e("CAt", "category: " + product.getTitle());
                 }
             });
         }
 
-
+        // Initialize the adapter and set it to the RecyclerView
         showProductAdapter = new ShowProductAdapter(filteredProduct, requireContext(), this);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-
         binding.rvCategory.setAdapter(showProductAdapter);
         binding.rvCategory.setLayoutManager(layoutManager);
 
+        // Return the root view
         return binding.getRoot();
     }
 
+    // onResume method to set the action bar title to the category
     @Override
     public void onResume() {
         super.onResume();
-        // Retrieve the category from the arguments
         String category = getArguments().getString("category");
-
-        // Set action bar title to the category
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null && category != null) {
             actionBar.setTitle(category);
         }
     }
 
+    // Method to handle item selection
     @Override
     public void onItemSelected(Product data, int position) {
+        // Create a bundle and put the selected product in it
         Bundle bundle = new Bundle();
         bundle.putParcelable("product", data);
-//        moving to add fragment
-        Fragment fragment = new ProductDetailsFragment();
 
-        //passing arguments
+        // Create a new instance of ProductDetailsFragment and set the arguments
+        Fragment fragment = new ProductDetailsFragment();
         fragment.setArguments(bundle);
+
+        // Replace the current fragment with ProductDetailsFragment
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frames, fragment);
@@ -121,8 +120,9 @@ public class ShowProductFragment extends Fragment implements AdapterInterface<Pr
         }
     }
 
+    // Method to handle item removal
     @Override
     public void onItemRemoved() {
-
+        // Implementation here...
     }
 }

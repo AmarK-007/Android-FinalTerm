@@ -22,59 +22,128 @@ import com.google.gson.Gson;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility class
+ */
 public class Utility {
-
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
     private static final String SYMBOL_PATTERN = "[^a-z0-9 ]";
     private static Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 
+    /**
+     * validatePassword method
+     *
+     * @param password
+     * @return
+     */
     public static boolean validatePassword(String password) {
         return password.length() >= 5;
     }
 
+    /**
+     * validateIsPasswordEmpty method
+     *
+     * @param password
+     * @return
+     */
     public static boolean validateIsPasswordEmpty(String password) {
         return password.length() == 0;
     }
 
-    public static boolean validateIsNameEmpty(String name){
+    /**
+     * validateIsNameEmpty method
+     *
+     * @param name
+     * @return
+     */
+    public static boolean validateIsNameEmpty(String name) {
         return name.length() == 0;
     }
 
-    public static boolean validateIsTextAreaEmpty(String textArea){
+    /**
+     * validateIsTextAreaEmpty method
+     *
+     * @param textArea
+     * @return
+     */
+    public static boolean validateIsTextAreaEmpty(String textArea) {
         return textArea.length() == 0;
     }
 
+    /**
+     * validateUserName method
+     *
+     * @param username
+     * @return
+     */
     public static boolean validateUserName(String username) {
         return username.length() > 3;
     }
 
+    /**
+     * validateSymbolsInUserName method
+     *
+     * @param username
+     * @return
+     */
     public static boolean validateSymbolsInUserName(String username) {
         Pattern p = Pattern.compile(SYMBOL_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(username);
         return m.find();
     }
 
+    /**
+     * validateSpaceInUserName method
+     *
+     * @param username
+     * @return
+     */
     public static boolean validateSpaceInUserName(String username) {
         return username.contains(" ");
     }
 
+    /**
+     * validateEmail method
+     *
+     * @param email
+     * @return
+     */
     public static boolean validateEmail(String email) {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
+    /**
+     * getAppNameString method
+     *
+     * @param context
+     * @return
+     */
     public static String getAppNameString(Context context) {
         if (context != null)
             return context.getResources().getString(R.string.app_name);
         return "";
     }
 
+    /**
+     * capitalizeFirstLetter method
+     *
+     * @param input
+     * @return
+     */
     public static String capitalizeFirstLetter(final String input) {
         if (!Character.isUpperCase(input.charAt(0)))
             return Character.toUpperCase(input.charAt(0)) + input.substring(1);
         else return input;
     }
 
+    /**
+     * getImageResourceFromName method
+     *
+     * @param imageName
+     * @param context
+     * @return
+     */
     public static int getImageResourceFromName(String imageName, Context context) {
         String imageNameWithoutExtension = imageName.substring(0, imageName.lastIndexOf('.'));
         int resourceId = context.getResources().getIdentifier(imageNameWithoutExtension, "drawable", context.getPackageName());
@@ -82,6 +151,12 @@ public class Utility {
         return resourceId;
     }
 
+    /**
+     * storeUser method
+     *
+     * @param user
+     * @param context
+     */
     //    storing employee inside shared preferences
     public static void storeUser(User user, Context context) {
 
@@ -92,6 +167,12 @@ public class Utility {
 
     }
 
+    /**
+     * getUser method
+     *
+     * @param context
+     * @return
+     */
     //    getting data from shared preferences
     public static User getUser(Context context) {
         SharedPreferences sp = context.getSharedPreferences("MySharedPref", MODE_PRIVATE);
@@ -100,6 +181,12 @@ public class Utility {
         return new Gson().fromJson(sp.getString("user", ""), User.class);
     }
 
+    /**
+     * showStyledAlertDialog method
+     *
+     * @param context
+     * @return
+     */
     public static TextView showStyledAlertDialog(Context context) {
         TextView titleTextView = new TextView(context);
         titleTextView.setText(getAppNameString(context));
@@ -114,7 +201,12 @@ public class Utility {
         return titleTextView;
     }
 
-    public static void callHomeFragment(FragmentManager fragmentManager){
+    /**
+     * callHomeFragment method
+     *
+     * @param fragmentManager
+     */
+    public static void callHomeFragment(FragmentManager fragmentManager) {
         // Create a new instance of HomeFragment
         HomeFragment homeFragment = new HomeFragment();
 

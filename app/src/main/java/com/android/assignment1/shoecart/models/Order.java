@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Model class for Order
+ */
 public class Order implements Parcelable {
 
     private int orderId;
@@ -20,9 +23,25 @@ public class Order implements Parcelable {
     private String returnStatus;
     private List<OrderDetail> orderDetails;
 
+    /**
+     * Constructor for Order
+     */
     public Order() {
     }
 
+    /**
+     * Constructor for Order
+     *
+     * @param orderId
+     * @param userId
+     * @param totalAmount
+     * @param orderDate
+     * @param deliveryDate
+     * @param paymentMethod
+     * @param deliveryStatus
+     * @param returnStatus
+     * @param orderDetails
+     */
     public Order(int orderId, int userId, double totalAmount, Date orderDate, Date deliveryDate, String paymentMethod, String deliveryStatus, String returnStatus, List<OrderDetail> orderDetails) {
         this.orderId = orderId;
         this.userId = userId;
@@ -35,6 +54,19 @@ public class Order implements Parcelable {
         this.orderDetails = orderDetails;
     }
 
+    /**
+     * Constructor for Order
+     *
+     * @param userId
+     * @param totalAmount
+     * @param orderDate
+     * @param deliveryDate
+     * @param paymentMethod
+     * @param deliveryStatus
+     * @param returnStatus
+     * @param orderDetails
+     * @return
+     */
     public Order(int userId, double totalAmount, Date orderDate, Date deliveryDate, String paymentMethod, String deliveryStatus, String returnStatus, List<OrderDetail> orderDetails) {
         this.userId = userId;
         this.totalAmount = totalAmount;
@@ -46,6 +78,12 @@ public class Order implements Parcelable {
         this.orderDetails = orderDetails;
     }
 
+    /**
+     * Constructor for Order
+     *
+     * @param in
+     * @return
+     */
     protected Order(Parcel in) {
         orderId = in.readInt();
         userId = in.readInt();
@@ -58,6 +96,11 @@ public class Order implements Parcelable {
         orderDetails = in.createTypedArrayList(OrderDetail.CREATOR);
     }
 
+    /**
+     * Creator for Order
+     *
+     * @return
+     */
     public static final Creator<Order> CREATOR = new Creator<Order>() {
         @Override
         public Order createFromParcel(Parcel in) {
@@ -70,6 +113,13 @@ public class Order implements Parcelable {
         }
     };
 
+    /**
+     * writeToParcel method
+     *
+     * @param parcel
+     * @param i
+     * @return
+     */
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
 
@@ -84,6 +134,11 @@ public class Order implements Parcelable {
         parcel.writeTypedList(orderDetails);
     }
 
+    /**
+     * describeContents method
+     *
+     * @return
+     */
     @Override
     public int describeContents() {
         return 0;

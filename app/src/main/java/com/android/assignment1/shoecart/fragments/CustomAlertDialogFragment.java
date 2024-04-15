@@ -1,5 +1,5 @@
 package com.android.assignment1.shoecart.fragments;
-
+// Import necessary libraries and packages
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,10 +15,13 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.interfaces.OnDialogClickListener;
 
+// CustomAlertDialogFragment class that extends DialogFragment
 public class CustomAlertDialogFragment extends DialogFragment {
 
+    // Declare OnDialogClickListener variable
     private OnDialogClickListener listener;
 
+    // Method to create a new instance of CustomAlertDialogFragment
     public static CustomAlertDialogFragment newInstance(OnDialogClickListener listener, String type) {
         CustomAlertDialogFragment fragment = new CustomAlertDialogFragment();
         Bundle args = new Bundle();
@@ -28,6 +31,7 @@ public class CustomAlertDialogFragment extends DialogFragment {
         return fragment;
     }
 
+    // onStart method to set the dialog's dimensions and dim amount
     @Override
     public void onStart() {
         super.onStart();
@@ -45,10 +49,10 @@ public class CustomAlertDialogFragment extends DialogFragment {
 
             // Set the background's dim amount
             dialog.getWindow().setDimAmount(0.5f);
-
         }
     }
 
+    // onCreateDialog method to create the dialog
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -59,6 +63,7 @@ public class CustomAlertDialogFragment extends DialogFragment {
         builder.setView(view);
         LottieAnimationView animationView = view.findViewById(R.id.animation_view);
         TextView tvMessage = view.findViewById(R.id.success_message);
+
         // Retrieve the type from the bundle
         String type = getArguments().getString("type");
 
@@ -70,7 +75,8 @@ public class CustomAlertDialogFragment extends DialogFragment {
             animationView.setAnimation(R.raw.shoecart_addtocart);
             tvMessage.setText(type);
         }
-//        animationView.playAnimation();
+
+        // Set onClickListener for the OK button
         view.findViewById(R.id.btnOk).setOnClickListener(v -> {
             listener.onDialogButtonClick();
             dismiss();
@@ -79,6 +85,7 @@ public class CustomAlertDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    // onActivityCreated method to animate the dialog
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

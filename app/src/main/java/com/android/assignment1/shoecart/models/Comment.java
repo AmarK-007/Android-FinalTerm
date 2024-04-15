@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+/**
+ * Model class for Comment
+ */
 public class Comment implements Parcelable {
 
     private int commentId;
@@ -16,9 +19,24 @@ public class Comment implements Parcelable {
     private String comment;
     private Date postedOn;
 
+    /**
+     * Constructor for Comment
+     */
     public Comment() {
     }
 
+    /**
+     * Constructor for Comment
+     *
+     * @param commentId
+     * @param productId
+     * @param userId
+     * @param rating
+     * @param imageId
+     * @param imageUrl
+     * @param comment
+     * @param postedOn
+     */
     public Comment(int commentId, int productId, int userId, int rating, int imageId, String imageUrl, String comment, Date postedOn) {
         this.commentId = commentId;
         this.productId = productId;
@@ -30,6 +48,11 @@ public class Comment implements Parcelable {
         this.postedOn = postedOn;
     }
 
+    /**
+     * Constructor for Comment
+     *
+     * @param in
+     */
     protected Comment(Parcel in) {
         commentId = in.readInt();
         productId = in.readInt();
@@ -42,6 +65,9 @@ public class Comment implements Parcelable {
         postedOn = tmpPostedOn != -1 ? new Date(tmpPostedOn) : null;
     }
 
+    /**
+     * Creator for Comment
+     */
     public static final Creator<Comment> CREATOR = new Creator<Comment>() {
         @Override
         public Comment createFromParcel(Parcel in) {
@@ -54,11 +80,20 @@ public class Comment implements Parcelable {
         }
     };
 
+    /**
+     * describeContents method
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * writeToParcel method
+     *
+     * @param parcel
+     * @param i
+     */
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(commentId);

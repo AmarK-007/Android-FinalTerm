@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import java.util.List;
 
+/**
+ * Model class for Product
+ */
 public class Product implements Parcelable {
 
     private int productId;
@@ -18,10 +21,26 @@ public class Product implements Parcelable {
     private List<ProductSize> sizes;
     private List<ProductImage> images;
 
+    /**
+     * Constructor for Product
+     */
 
     public Product() {
     }
 
+    /**
+     * Constructor for Product
+     *
+     * @param productId
+     * @param category
+     * @param title
+     * @param description
+     * @param price
+     * @param shippingCost
+     * @param isDeleted
+     * @param sizes
+     * @param images
+     */
     public Product(int productId, String category, String title, String description, double price, double shippingCost, int isDeleted, List<ProductSize> sizes, List<ProductImage> images) {
         this.productId = productId;
         this.title = title;
@@ -33,6 +52,7 @@ public class Product implements Parcelable {
         this.images = images;
     }
 
+    // Getters and Setters
     public int getProductId() {
         return productId;
     }
@@ -106,6 +126,9 @@ public class Product implements Parcelable {
         this.images = images;
     }
 
+    /**
+     * Creator for Product
+     */
     public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
         public Product createFromParcel(Parcel in) {
@@ -123,6 +146,9 @@ public class Product implements Parcelable {
         return 0;
     }
 
+    /**
+     * writeToParcel method
+     */
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(productId);

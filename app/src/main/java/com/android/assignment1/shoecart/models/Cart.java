@@ -3,6 +3,9 @@ package com.android.assignment1.shoecart.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Model class for Cart
+ */
 public class Cart implements Parcelable {
 
     private int cartId;
@@ -11,9 +14,20 @@ public class Cart implements Parcelable {
     private int quantity;
     private int userId;
 
+    /**
+     * Constructor for Cart
+     */
     public Cart() {
     }
 
+    /**
+     * Constructor for Cart
+     *
+     * @param productId
+     * @param productSize
+     * @param quantity
+     * @param userId
+     */
     public Cart(int productId, String productSize, int quantity, int userId) {
         this.productId = productId;
         this.productSize = productSize;
@@ -21,6 +35,15 @@ public class Cart implements Parcelable {
         this.userId = userId;
     }
 
+    /**
+     * Constructor for Cart
+     *
+     * @param cartId
+     * @param productId
+     * @param productSize
+     * @param quantity
+     * @param userId
+     */
     public Cart(int cartId, int productId, String productSize, int quantity, int userId) {
         this.cartId = cartId;
         this.productId = productId;
@@ -29,6 +52,11 @@ public class Cart implements Parcelable {
         this.userId = userId;
     }
 
+    /**
+     * Constructor for Cart
+     *
+     * @param in
+     */
     protected Cart(Parcel in) {
         cartId = in.readInt();
         productId = in.readInt();
@@ -37,6 +65,9 @@ public class Cart implements Parcelable {
         userId = in.readInt();
     }
 
+    /**
+     * Creator for Cart
+     */
     public static final Creator<Cart> CREATOR = new Creator<Cart>() {
         @Override
         public Cart createFromParcel(Parcel in) {
@@ -49,11 +80,20 @@ public class Cart implements Parcelable {
         }
     };
 
+    /**
+     * describeContents method
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * writeToParcel method
+     *
+     * @param parcel
+     * @param i
+     */
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(cartId);

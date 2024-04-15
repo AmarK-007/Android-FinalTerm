@@ -19,19 +19,36 @@ import com.android.assignment1.shoecart.utils.Utility;
 
 import java.util.List;
 
-
+/**
+ * Adapter class for products
+ */
 public class ShowProductAdapter extends RecyclerView.Adapter<ShowProductAdapter.MyViewHolder> {
 
     List<Product> arrayList;
     Context context;
     AdapterInterface<Product> adapterInterface;
 
+    /**
+     * Constructor for ShowProductAdapter
+     *
+     * @param products
+     * @param context
+     * @param adapterInterface
+     * @return
+     */
     public ShowProductAdapter(List<Product> products, Context context, AdapterInterface<Product> adapterInterface) {
         this.arrayList = products;
         this.context = context;
         this.adapterInterface = adapterInterface;
     }
 
+    /**
+     * onCreateViewHolder method
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,6 +56,13 @@ public class ShowProductAdapter extends RecyclerView.Adapter<ShowProductAdapter.
         return new MyViewHolder(view);
     }
 
+    /**
+     * onBindViewHolder method
+     *
+     * @param holder
+     * @param position
+     * @return
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         String imageName = new ProductDataSource(context).getProduct(arrayList.get(position).getProductId()).getImages().get(0).getImageUrl();
@@ -52,17 +76,30 @@ public class ShowProductAdapter extends RecyclerView.Adapter<ShowProductAdapter.
 
     }
 
+    /**
+     * getItemCount method
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return arrayList.size();
     }
 
+    /**
+     * MyViewHolder class
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView productName, price;
         CardView cardView;
 
+        /**
+         * Constructor for MyViewHolder
+         *
+         * @param itemView
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

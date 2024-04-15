@@ -12,13 +12,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * DataSource class for Comment
+ */
 public class CommentDataSource {
     private DBHelper dbHelper;
 
+    /**
+     * Constructor for CommentDataSource
+     *
+     * @param context
+     * @return
+     */
     public CommentDataSource(Context context) {
         dbHelper = new DBHelper(context);
     }
 
+    // Comment table name
     public static final String TABLE_NAME = "comments";
     public static final String COLUMN_COMMENT_ID = "comment_id";
     public static final String COLUMN_PRODUCT_ID = "product_id";
@@ -44,6 +54,12 @@ public class CommentDataSource {
                     + "FOREIGN KEY(" + COLUMN_USER_ID + ") REFERENCES users(user_id)"
                     + ")";
 
+    /**
+     * insertComment method
+     *
+     * @param comment
+     * @return
+     */
     public boolean insertComment(Comment comment) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -66,6 +82,12 @@ public class CommentDataSource {
         }
     }
 
+    /**
+     * getComment method
+     *
+     * @param commentId
+     * @return
+     */
     @SuppressLint("Range")
     public List<Comment> getAllComments() {
         List<Comment> comments = new ArrayList<>();
@@ -94,6 +116,12 @@ public class CommentDataSource {
         return comments;
     }
 
+    /**
+     * getComment method
+     *
+     * @param comment
+     * @return
+     */
     public void updateComment(Comment comment) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -110,6 +138,12 @@ public class CommentDataSource {
                 new String[]{String.valueOf(comment.getCommentId())});
     }
 
+    /**
+     * deleteComment method
+     *
+     * @param comment
+     * @return
+     */
     public void deleteComment(Comment comment) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_COMMENT_ID + " = ?",

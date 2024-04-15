@@ -3,6 +3,9 @@ package com.android.assignment1.shoecart.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Model class for Wishlist
+ */
 public class Wishlist implements Parcelable {
 
     private int wishlistId;
@@ -13,6 +16,9 @@ public class Wishlist implements Parcelable {
     public Wishlist() {
     }
 
+    /**
+     * Constructor for Wishlist
+     */
     public Wishlist(int wishlistId, int productId, int sizeId, int userId) {
         this.wishlistId = wishlistId;
         this.productId = productId;
@@ -33,6 +39,9 @@ public class Wishlist implements Parcelable {
         userId = in.readInt();
     }
 
+    /**
+     * Creator for Wishlist
+     */
     public static final Creator<Wishlist> CREATOR = new Creator<Wishlist>() {
         @Override
         public Wishlist createFromParcel(Parcel in) {
@@ -45,11 +54,17 @@ public class Wishlist implements Parcelable {
         }
     };
 
+    /**
+     * Describe contents
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * writeToParcel method
+     */
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(wishlistId);

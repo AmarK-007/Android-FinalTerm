@@ -20,7 +20,9 @@ import com.android.assignment1.shoecart.models.Wishlist;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class WishlistFragment extends Fragment implements AdapterInterface<Wishlist> {
 
 
@@ -32,13 +34,17 @@ public class WishlistFragment extends Fragment implements AdapterInterface<Wishl
 
     }
 
-
+/**
+     * onCreate method for initializing fragment
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
+/**
+     * onCreateView method for creating the view of the fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +66,9 @@ public class WishlistFragment extends Fragment implements AdapterInterface<Wishl
         return binding.getRoot();
     }
 
+    /**
+     * Method to check if the list is empty
+     */
     public void checkIfListIsEmpty() {
         LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view_empty_wishlist);
 
@@ -70,6 +79,7 @@ public class WishlistFragment extends Fragment implements AdapterInterface<Wishl
             animationView.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onItemSelected(Wishlist data, int position) {
 

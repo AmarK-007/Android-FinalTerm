@@ -13,9 +13,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * DataSource class for Order
+ */
 public class OrderDataSource {
     private DBHelper dbHelper;
 
+    // Orders table name
     private static final String ORDERS_TABLE_NAME = "orders";
     private static final String ORDER_ID_COLUMN = "order_id";
     private static final String USER_ID_COLUMN = "user_id";
@@ -26,6 +30,7 @@ public class OrderDataSource {
     private static final String DELIVERY_STATUS_COLUMN = "delivery_status";
     private static final String RETURN_STATUS_COLUMN = "return_status";
 
+    //  OrderDetails table name
     private static final String ORDER_DETAILS_TABLE_NAME = "orderdetails";
     private static final String ORDER_DETAIL_ID_COLUMN = "order_detail_id";
     private static final String PRODUCT_ID_COLUMN = "product_id";
@@ -55,11 +60,22 @@ public class OrderDataSource {
                     + "FOREIGN KEY(" + PRODUCT_ID_COLUMN + ") REFERENCES products(product_id)"
                     + ")";
 
-
+    /**
+     * Constructor for OrderDataSource
+     *
+     * @param context
+     * @return
+     */
     public OrderDataSource(Context context) {
         dbHelper = new DBHelper(context);
     }
 
+    /**
+     * insertOrder method
+     *
+     * @param order
+     * @return
+     */
     public boolean insertOrder(Order order) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -94,6 +110,11 @@ public class OrderDataSource {
         }
     }
 
+    /**
+     * getAllOrders method
+     *
+     * @return
+     */
     @SuppressLint("Range")
     public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
@@ -138,6 +159,12 @@ public class OrderDataSource {
         return orders;
     }
 
+    /**
+     * getOrder method
+     *
+     * @param orderId
+     * @return
+     */
     @SuppressLint("Range")
     private Order getOrder(int orderId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -182,6 +209,12 @@ public class OrderDataSource {
         }
     }
 
+    /**
+     * updateOrder method
+     *
+     * @param order
+     * @return
+     */
     public void updateOrder(Order order) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -198,6 +231,12 @@ public class OrderDataSource {
                 new String[]{String.valueOf(order.getOrderId())});
     }
 
+    /**
+     * deleteOrder method
+     *
+     * @param order
+     * @return
+     */
     public void deleteOrder(Order order) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(ORDERS_TABLE_NAME, ORDER_ID_COLUMN + " = ?",

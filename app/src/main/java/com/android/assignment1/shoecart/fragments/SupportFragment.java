@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.utils.Utility;
 
+// SupportFragment class that extends Fragment
 public class SupportFragment extends Fragment {
 
     private EditText nameEditText;
@@ -23,6 +24,9 @@ public class SupportFragment extends Fragment {
     private EditText issueEditText;
     private Button submitButton;
 
+    /**
+     * onCreate method for initializing fragment
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,17 +45,17 @@ public class SupportFragment extends Fragment {
                 String email = emailEditText.getText().toString();
                 String issue = issueEditText.getText().toString();
 
-                if(Utility.validateIsNameEmpty(name)){
+                if (Utility.validateIsNameEmpty(name)) {
                     Toast.makeText(requireContext(), "Name is Empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(!Utility.validateEmail(email)){
+                if (!Utility.validateEmail(email)) {
                     Toast.makeText(requireContext(), "Invalid Email address", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(Utility.validateIsTextAreaEmpty(issue)){
+                if (Utility.validateIsTextAreaEmpty(issue)) {
                     Toast.makeText(requireContext(), "Your Issue is Empty", Toast.LENGTH_SHORT).show();
                 }
                 showSupportRequestSendDialog(requireContext());
@@ -60,6 +64,10 @@ public class SupportFragment extends Fragment {
         });
         return view;
     }
+
+    /**
+     * Method to empty all the fields
+     */
     public void emptyAllFields() {
         nameEditText.setText("");
         emailEditText.setText("");
@@ -67,7 +75,13 @@ public class SupportFragment extends Fragment {
     }
 
     AlertDialog.Builder alertDialog;
-    public void showSupportRequestSendDialog(final Context context){
+
+    /**
+     * Method to show the dialog for the support request
+     *
+     * @param context
+     */
+    public void showSupportRequestSendDialog(final Context context) {
         alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         alertDialog.setMessage(R.string.request_message);
         alertDialog.setNeutralButton("Ok", (dialog, which) -> {

@@ -3,6 +3,9 @@ package com.android.assignment1.shoecart.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Model class for User
+ */
 public class User implements Parcelable {
 
     // User fields...
@@ -21,6 +24,9 @@ public class User implements Parcelable {
     public User() {
     }
 
+    /**
+     * Constructor for User
+     */
     public User(int userId, String name, String email, String password, String username, String purchaseHistory, String shippingAddress1, String shippingAddress2, String city, String province, String pincode) {
         this.userId = userId;
         this.name = name;
@@ -35,6 +41,7 @@ public class User implements Parcelable {
         this.pincode = pincode;
     }
 
+    // Getters and Setters
     public int getUserId() {
         return userId;
     }
@@ -123,6 +130,9 @@ public class User implements Parcelable {
         this.pincode = pincode;
     }
 
+    /**
+     * Constructor for User
+     */
     protected User(Parcel in) {
         userId = in.readInt();
         name = in.readString();
@@ -137,6 +147,9 @@ public class User implements Parcelable {
         pincode = in.readString();
     }
 
+    /**
+     * Creator for User
+     */
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel in) {
@@ -149,11 +162,17 @@ public class User implements Parcelable {
         }
     };
 
+    /**
+     * describeContents method
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * writeToParcel method
+     */
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(userId);

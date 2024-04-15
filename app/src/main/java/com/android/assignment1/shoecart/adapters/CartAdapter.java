@@ -22,6 +22,9 @@ import com.android.assignment1.shoecart.utils.Utility;
 
 import java.util.List;
 
+/**
+ * Adapter class for cart items
+ */
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
 
     List<Cart> cartArrayList;
@@ -29,6 +32,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     Context context;
     CartDataSource dataSource;
 
+    /**
+     * Constructor for CartAdapter
+     *
+     * @param cartArrayList
+     * @param adapterInterface
+     * @param context
+     * @return
+     */
     public CartAdapter(List<Cart> cartArrayList, AdapterInterface<Cart> adapterInterface, Context context) {
         this.cartArrayList = cartArrayList;
         this.adapterInterface = adapterInterface;
@@ -36,6 +47,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         dataSource = new CartDataSource(context);
     }
 
+    /**
+     * onCreateViewHolder method
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,6 +62,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         return new MyViewHolder(view);
     }
 
+    /**
+     * onBindViewHolder method
+     *
+     * @param holder
+     * @param position
+     * @return
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product product = new ProductDataSource(context).getProduct(cartArrayList.get(position).getProductId());
@@ -82,22 +107,41 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         });
     }
 
+    /**
+     * getItemCount method
+     *
+     * @return
+     */
     public void updateCart(Cart cart) {
 
         dataSource.updateCart(cart);
     }
 
+    /**
+     * getItemCount method
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return cartArrayList.size();
     }
 
+    /**
+     * MyViewHolder class
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvPrice, tvQuantity;
         Button btnRemove;
         ImageView ivAdd, ivProduct, ivMinus;
 
+        /**
+         * Constructor for MyViewHolder
+         *
+         * @param itemView
+         * @return
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

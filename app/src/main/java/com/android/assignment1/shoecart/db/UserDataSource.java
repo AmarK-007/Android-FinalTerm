@@ -11,14 +11,23 @@ import com.android.assignment1.shoecart.models.User;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DataSource class for User
+ */
 public class UserDataSource {
     private DBHelper dbHelper;
 
+    /**
+     * Constructor for UserDataSource
+     *
+     * @param context
+     * @return
+     */
     public UserDataSource(Context context) {
         dbHelper = new DBHelper(context);
     }
 
-
+    // User table name
     public static final String TABLE_NAME = "users";
     public static final String COLUMN_USER_ID = "user_id";
     public static final String COLUMN_NAME = "name";
@@ -47,7 +56,13 @@ public class UserDataSource {
                     + COLUMN_PROVINCE + " TEXT,"
                     + COLUMN_PINCODE + " TEXT"
                     + ")";
-    
+
+    /**
+     * insertUser method
+     *
+     * @param user
+     * @return
+     */
     public boolean insertUser(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -73,6 +88,13 @@ public class UserDataSource {
         }
     }
 
+    /**
+     * getUser method
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @SuppressLint("Range")
     public User getUser(String username, String password) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -104,6 +126,11 @@ public class UserDataSource {
         }
     }
 
+    /**
+     * getAllUsers method
+     *
+     * @return
+     */
     @SuppressLint("Range")
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -135,6 +162,12 @@ public class UserDataSource {
         return users;
     }
 
+    /**
+     * updateUser method
+     *
+     * @param user
+     * @return
+     */
     public int updateUser(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -154,6 +187,12 @@ public class UserDataSource {
                 new String[]{String.valueOf(user.getUserId())});
     }
 
+    /**
+     * deleteUser method
+     *
+     * @param user
+     * @return
+     */
     public void deleteUser(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_USER_ID + " = ?",
@@ -161,6 +200,13 @@ public class UserDataSource {
         db.close();
     }
 
+    /**
+     * validateUser method
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean validateUser(String username, String password) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,

@@ -16,6 +16,9 @@ import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adapter class for categories
+ */
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
 
     List<String> categories = new ArrayList<>();
@@ -23,14 +26,27 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     AdapterInterface<String> adapterInterface;
 
-
+    /**
+     * Constructor for CategoryAdapter
+     *
+     * @param categories
+     * @param context
+     * @param adapterInterface
+     * @return
+     */
     public CategoryAdapter(List<String> categories, Context context, AdapterInterface<String> adapterInterface) {
         this.categories = categories;
         this.context = context;
         this.adapterInterface = adapterInterface;
     }
 
-
+    /**
+     * onCreateViewHolder method
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,6 +54,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         return new MyViewHolder(view);
     }
 
+    /**
+     * onBindViewHolder method
+     *
+     * @param holder
+     * @param position
+     * @return
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 //        String imageName = categories.get(position).getCategoryImage();
@@ -51,16 +74,31 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         });
     }
 
+    /**
+     * getItemCount method
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return categories.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    /**
+     * MyViewHolder class
+     */
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         //        ImageView Image;
         LinearLayout layout;
         TextView Name;
+
+        /**
+         * Constructor for MyViewHolder
+         *
+         * @param itemView
+         * @return
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.rootViewLL);

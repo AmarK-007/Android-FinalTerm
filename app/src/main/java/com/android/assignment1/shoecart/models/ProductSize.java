@@ -2,6 +2,9 @@ package com.android.assignment1.shoecart.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+/**
+ * Model class for ProductSize
+ */
 
 public class ProductSize implements Parcelable {
 
@@ -10,9 +13,21 @@ public class ProductSize implements Parcelable {
     private int sizeUs;
     private int quantity;
 
+/**
+ * Constructor for ProductSize
+ *
+ * */
     public ProductSize() {
     }
 
+/**
+ * Constructor for ProductSize
+ *
+ * @param sizeId
+ * @param productId
+ * @param sizeUs
+ * @param quantity
+ * */
     public ProductSize(int sizeId, int productId, int sizeUs, int quantity) {
         this.sizeId = sizeId;
         this.productId = productId;
@@ -20,6 +35,7 @@ public class ProductSize implements Parcelable {
         this.quantity = quantity;
     }
 
+    // Getter and Setter methods
     public int getSizeId() {
         return sizeId;
     }
@@ -51,6 +67,10 @@ public class ProductSize implements Parcelable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+/**
+ * describeContents method
+ * */
 
     public static final Creator<ProductSize> CREATOR = new Creator<ProductSize>() {
         @Override

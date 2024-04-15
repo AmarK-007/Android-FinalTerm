@@ -13,13 +13,23 @@ import com.android.assignment1.shoecart.models.ProductSize;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DataSource class for Product
+ */
 public class ProductDataSource {
     private DBHelper dbHelper;
 
+    /**
+     * Constructor for ProductDataSource
+     *
+     * @param context
+     * @return
+     */
     public ProductDataSource(Context context) {
         dbHelper = new DBHelper(context);
     }
 
+    // Product table name
     public static final String TABLE_NAME_PRODUCT = "products";
     public static final String COLUMN_PRODUCT_ID = "product_id";
     public static final String COLUMN_CATEGORY = "categories";
@@ -29,12 +39,13 @@ public class ProductDataSource {
     public static final String COLUMN_SHIPPING_COST = "shipping_cost";
     public static final String COLUMN_IS_DELETED = "is_deleted";
 
+    //  ProductImage table name
     public static final String TABLE_NAME_PROD_IMAGE = "productimages";
     public static final String COLUMN_IMAGE_ID = "image_id";
     public static final String COLUMN_PROD_IMAGE_PRODUCT_ID = "product_id";
     public static final String COLUMN_IMAGE_URL = "image_url";
 
-
+    //  ProductSize table name
     public static final String TABLE_NAME_PROD_SIZE = "productsizes";
     public static final String COLUMN_SIZE_ID = "size_id";
     public static final String COLUMN_PROD_SIZE_PRODUCT_ID = "product_id";
@@ -68,6 +79,12 @@ public class ProductDataSource {
                     + " FOREIGN KEY(" + COLUMN_PROD_SIZE_PRODUCT_ID + ") REFERENCES " + TABLE_NAME_PRODUCT + "(" + COLUMN_PRODUCT_ID + ") "
                     + ")";
 
+    /**
+     * insertProduct method
+     *
+     * @param product
+     * @return
+     */
     public void insertProduct(Product product) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -88,6 +105,13 @@ public class ProductDataSource {
             insertProductImage(insertID, productImage);
     }
 
+    /**
+     * insertProductSize method
+     *
+     * @param insertID
+     * @param productSize
+     * @return
+     */
     public void insertProductSize(long insertID, ProductSize productSize) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -101,6 +125,13 @@ public class ProductDataSource {
         db.close();
     }
 
+    /**
+     * insertProductImage method
+     *
+     * @param insertID
+     * @param productImage
+     * @return
+     */
     public void insertProductImage(long insertID, ProductImage productImage) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -113,6 +144,12 @@ public class ProductDataSource {
         db.close();
     }
 
+    /**
+     * getProduct method
+     *
+     * @param productId
+     * @return
+     */
     @SuppressLint("Range")
     public Product getProduct(int productId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -142,6 +179,11 @@ public class ProductDataSource {
         }
     }
 
+    /**
+     * getAllProducts method
+     *
+     * @return
+     */
     @SuppressLint("Range")
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
@@ -172,6 +214,12 @@ public class ProductDataSource {
         return products;
     }
 
+    /**
+     * searchProduct method
+     *
+     * @param title
+     * @return
+     */
     @SuppressLint("Range")
     public ArrayList<Product> searchProduct(String title) {
         ArrayList<Product> products = new ArrayList<>();
@@ -201,6 +249,12 @@ public class ProductDataSource {
         return products;
     }
 
+    /**
+     * updateProduct method
+     *
+     * @param product
+     * @return
+     */
     public int updateProduct(Product product) {
 
         for (ProductSize productSize : product.getSizes())
@@ -222,6 +276,12 @@ public class ProductDataSource {
                 new String[]{String.valueOf(product.getProductId())});
     }
 
+    /**
+     * updateProductSize method
+     *
+     * @param productSize
+     * @return
+     */
     public void deleteProduct(Product product) {
         for (ProductSize productSize : product.getSizes())
             deleteProductSize(productSize);
@@ -234,6 +294,12 @@ public class ProductDataSource {
         db.close();
     }
 
+    /**
+     * deleteProductSize method
+     *
+     * @param productId
+     * @return
+     */
     @SuppressLint("Range")
     public List<ProductSize> getProductSizes(long productId) {
         List<ProductSize> productSizes = new ArrayList<>();
@@ -261,6 +327,12 @@ public class ProductDataSource {
         return productSizes;
     }
 
+    /**
+     * deleteProductImage method
+     *
+     * @param productId
+     * @return
+     */
     @SuppressLint("Range")
     public List<ProductImage> getProductImages(long productId) {
         List<ProductImage> productImages = new ArrayList<>();
@@ -287,6 +359,12 @@ public class ProductDataSource {
         return productImages;
     }
 
+    /**
+     * updateProductSize method
+     *
+     * @param productSize
+     * @return
+     */
     public void updateProductSize(ProductSize productSize) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -302,6 +380,12 @@ public class ProductDataSource {
         db.close();
     }
 
+    /**
+     * updateProductImage method
+     *
+     * @param productImage
+     * @return
+     */
     public void updateProductImage(ProductImage productImage) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -314,6 +398,12 @@ public class ProductDataSource {
         db.close();
     }
 
+    /**
+     * deleteProductSize method
+     *
+     * @param productSize
+     * @return
+     */
     public void deleteProductSize(ProductSize productSize) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_NAME_PROD_SIZE, COLUMN_SIZE_ID + " = ?",
@@ -321,6 +411,12 @@ public class ProductDataSource {
         db.close();
     }
 
+    /**
+     * deleteProductImage method
+     *
+     * @param productImage
+     * @return
+     */
     public void deleteProductImage(ProductImage productImage) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_NAME_PROD_IMAGE, COLUMN_IMAGE_ID + " = ?",

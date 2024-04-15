@@ -16,23 +16,47 @@ import com.android.assignment1.shoecart.models.Product;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adapter class for order products
+ */
 public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapter.MyViewHolder> {
 
     ArrayList<Product> productArrayList;
     List<OrderDetail> orderDetailList;
 
+    /**
+     * Constructor for OrderProductAdapter
+     *
+     * @param productArrayList
+     * @param orderDetailList
+     * @return
+     */
     public OrderProductAdapter(ArrayList<Product> productArrayList, List<OrderDetail> orderDetailList) {
         this.productArrayList = productArrayList;
         this.orderDetailList = orderDetailList;
     }
 
+    /**
+     * onCreateViewHolder method
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_order_product_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_order_product_item, parent, false);
         return new MyViewHolder(view);
     }
 
+    /**
+     * onBindViewHolder method
+     *
+     * @param holder
+     * @param position
+     * @return
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -42,14 +66,23 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
     }
 
+    /**
+     * getItemCount method
+     *
+     * @return
+     */
     @Override
     public int getItemCount() {
         return productArrayList.size();
     }
 
+    /**
+     * MyViewHolder class
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title,price,shortDescription;
+        TextView title, price, shortDescription;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.tvTitle);

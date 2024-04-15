@@ -11,13 +11,23 @@ import com.android.assignment1.shoecart.models.Cart;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DataSource class for Cart
+ */
 public class CartDataSource {
     private DBHelper dbHelper;
 
+    /**
+     * Constructor for CartDataSource
+     *
+     * @param context
+     * @return
+     */
     public CartDataSource(Context context) {
         dbHelper = new DBHelper(context);
     }
 
+    // Cart table name
     public static final String TABLE_NAME = "cart";
     public static final String COLUMN_CART_ID = "cart_id";
     public static final String COLUMN_PRODUCT_ID = "product_id";
@@ -37,6 +47,12 @@ public class CartDataSource {
                     + "FOREIGN KEY(" + COLUMN_USER_ID + ") REFERENCES users(user_id)"
                     + ")";
 
+    /**
+     * insertCart method
+     *
+     * @param cart
+     * @return
+     */
     public boolean insertCart(Cart cart) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -56,6 +72,12 @@ public class CartDataSource {
         }
     }
 
+    /**
+     * getCart method
+     *
+     * @param cartId
+     * @return
+     */
     @SuppressLint("Range")
     public List<Cart> getAllCarts() {
         List<Cart> carts = new ArrayList<>();
@@ -81,6 +103,12 @@ public class CartDataSource {
         return carts;
     }
 
+    /**
+     * getCart method
+     *
+     * @param userID
+     * @return
+     */
     @SuppressLint("Range")
     public List<Cart> getAllCartsForUser(String userID) {
         List<Cart> carts = new ArrayList<>();
@@ -106,6 +134,12 @@ public class CartDataSource {
         return carts;
     }
 
+    /**
+     * updateCart method
+     *
+     * @param cart
+     * @return
+     */
     public void updateCart(Cart cart) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -120,6 +154,12 @@ public class CartDataSource {
         db.close();
     }
 
+    /**
+     * deleteCart method
+     *
+     * @param cart
+     * @return
+     */
     public void deleteCart(Cart cart) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_NAME, COLUMN_CART_ID + " = ?",

@@ -10,8 +10,19 @@ import android.view.ViewGroup;
 
 import com.android.assignment1.shoecart.R;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link AboutFragment} factory method to
+ * create an instance of this fragment.
+ */
 public class AboutFragment extends Fragment {
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @return A new instance of fragment AboutFragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
