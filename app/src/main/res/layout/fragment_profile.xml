@@ -30,6 +30,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="First Name:"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -39,6 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="Admin"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -63,6 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="Last Name:"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -72,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="Admin"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -96,6 +100,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="Email:"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -105,6 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="admin@gmail.com"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -135,6 +141,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
                         android:text="Address"
                         android:textSize="18dp"
                         android:textStyle="bold" />
@@ -165,6 +172,7 @@
                         android:id="@+id/profile_address_firstLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
                         android:text="123 King Street"
                         android:textSize="18dp" />
 
@@ -172,6 +180,7 @@
                         android:id="@+id/profile_address_secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
                         android:text="University Ave. East"
                         android:textSize="18dp" />
 
@@ -184,6 +193,7 @@
                             android:id="@+id/profile_address_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@fonts/roboto_light"
                             android:text="Waterloo"
                             android:textSize="18dp" />
 
@@ -192,6 +202,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
+                            android:fontFamily="@fonts/roboto_light"
                             android:text="N2N 0K9"
                             android:textSize="18dp" />
                     </LinearLayout>
@@ -200,6 +211,7 @@
                         android:id="@+id/profile_address_province"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
                         android:text="Ontario"
                         android:textSize="18dp" />
                 </LinearLayout>

@@ -12,6 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:fontFamily="@fonts/roboto_light"
         android:text="Update Address"
         android:textSize="18dp" />
 

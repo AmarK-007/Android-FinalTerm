@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewLL"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/rootViewLL"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -19,24 +19,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/categoryImage"-->
-            <!--                android:layout_width="150dp"-->
-            <!--                android:layout_height="150dp"-->
-            <!--                android:layout_alignParentStart="true"-->
-            <!--                android:layout_centerVertical="true"-->
-            <!--                android:padding="10dp"-->
-            <!--                android:src="@drawable/product_blue_1" />-->
-
             <TextView
                 android:id="@+id/categoryName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@fonts/roboto_light"
                 android:gravity="center"
                 android:padding="20dp"
-                android:textColor="@color/colorPrimaryDark"
                 android:text="Blue Shoes"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp" />
 
         </LinearLayout>

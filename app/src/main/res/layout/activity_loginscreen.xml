@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/animation_view"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="@fonts/roboto_light"
                 android:gravity="center"
                 android:maxLines="1"
                 android:shadowColor="@color/colorAccent"
@@ -59,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@fonts/roboto_light"
                 android:text="Version 1.0"
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
@@ -86,7 +88,6 @@
                 app:errorTextAppearance="@style/error_appearance">
 
                 <EditText
-                    android:text="admin"
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,6 +95,7 @@
                     android:hint="@string/username"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
+                    android:text="admin"
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/colorAccent"
                     android:textSize="15sp" />
@@ -112,7 +114,6 @@
                 app:passwordToggleEnabled="true">
 
                 <EditText
-                    android:text="admin123"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,6 +121,7 @@
                     android:hint="@string/password"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
+                    android:text="admin123"
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/colorAccent"
                     android:textSize="15sp" />
@@ -145,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="18dp"
+                android:fontFamily="@fonts/roboto_light"
                 android:text="@string/signup"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/colorAccent"

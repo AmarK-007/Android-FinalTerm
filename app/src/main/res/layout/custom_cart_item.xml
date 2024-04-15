@@ -35,6 +35,7 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
                     android:gravity="left"
                     android:minLines="0"
                     android:text="Nike Air 200"
@@ -46,6 +47,7 @@
                     android:id="@+id/tvPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="$200"
                     android:textColor="@color/colorErrorText" />
             </LinearLayout>
@@ -74,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="10dp"
+                    android:fontFamily="@fonts/roboto_light"
                     android:text="3"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp"

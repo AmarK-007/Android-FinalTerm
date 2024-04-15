@@ -4,7 +4,8 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:fontFamily="@fonts/roboto_light"
     android:padding="10dp"
-    app:tint="@color/colorAccent"
+    android:textColor="@color/colorAccentDark"
     android:textColorHint="@color/colorAccent"
-    android:textColor="@color/colorAccentDark" />
+    app:tint="@color/colorAccent" />

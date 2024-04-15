@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/parentLayout"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView style="@style/cardViewStyle">
@@ -11,56 +11,59 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/ivProduct"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:padding="10dp"
-        android:src="@drawable/place_holder_image" />
+            <ImageView
+                android:id="@+id/ivProduct"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:src="@drawable/place_holder_image" />
 
-    <LinearLayout
-        android:layout_centerVertical="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/ivProduct"
-        android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/ivProduct"
+                android:orientation="vertical">
 
-        <TextView
-            android:minLines="0"
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
+                    android:minLines="0"
+                    android:text="Nike Air 200"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
-            android:text="Nike Air 200"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvShortDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
+                    android:text="shoe for men" />
 
-        <TextView
-            android:id="@+id/tvShortDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="shoe for men"/>
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
+                    android:text="Order Arrived"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Order Arrived"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvDate"
-            android:textSize="12sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delivered on: 23/01/2024"
-            android:textColor="?android:attr/textColorHint" />
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@fonts/roboto_light"
+                    android:text="Delivered on: 23/01/2024"
+                    android:textColor="?android:attr/textColorHint"
+                    android:textSize="12sp" />
 
 
-    </LinearLayout>
+            </LinearLayout>
 
             <!--    <com.google.android.material.divider.MaterialDivider-->
             <!--        android:layout_below="@id/ivProduct"-->

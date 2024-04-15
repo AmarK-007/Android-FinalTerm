@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:gravity="center"
     android:layout_height="200dp"
-    android:background="@drawable/header_background">
+    android:background="@drawable/header_background"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -15,21 +15,22 @@
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/avatar"
             android:layout_gravity="start"
+            android:background="@color/colorAccent"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
-            android:background="@color/colorAccent"/>
+            android:src="@drawable/avatar" />
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/welcomeUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@fonts/roboto_light"
         android:text="Usename"
         android:textColor="@color/colorAccent"
         android:textSize="18dp"
-        android:textStyle="bold|italic"
-        android:layout_marginTop="10dp"/>
+        android:textStyle="bold|italic" />
 
 </LinearLayout>

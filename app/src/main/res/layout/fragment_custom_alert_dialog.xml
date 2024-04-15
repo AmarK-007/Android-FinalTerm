@@ -22,6 +22,7 @@
         android:layout_height="60dp"
         android:layout_above="@+id/btnOk"
         android:layout_marginTop="16dp"
+        android:fontFamily="@fonts/roboto_light"
         android:gravity="center"
         android:shadowColor="@color/colorAccent"
         android:shadowDx="4"
