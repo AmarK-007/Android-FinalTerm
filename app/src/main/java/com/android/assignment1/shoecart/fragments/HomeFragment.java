@@ -6,6 +6,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.adapters.HomeRecyclerViewAdapter;
 import com.android.assignment1.shoecart.models.HomeProduct;
 
 import java.util.ArrayList;
@@ -25,8 +32,8 @@ public class HomeFragment extends Fragment {
 
     ViewFlipper viewFlipper;
     ImageView imageView;
-    GridLayout newArrivalsGrid;
-    GridLayout bestSellersGrid;
+    RecyclerView recyclerViewNewArrivals;
+    RecyclerView recyclerViewBestSellers;
 
     List<HomeProduct> gridNewShoes = new ArrayList<>();
     List<HomeProduct> gridBestShoes = new ArrayList<>();
@@ -55,46 +62,23 @@ public class HomeFragment extends Fragment {
         gridBestShoes.add(product4);
 
 
-        newArrivalsGrid = rootView.findViewById(R.id.newArrivalsGrid);
-        bestSellersGrid = rootView.findViewById(R.id.bestSellersGrid);
+        recyclerViewNewArrivals = rootView.findViewById(R.id.recyclerView_newArrivals);
+        recyclerViewBestSellers = rootView.findViewById(R.id.recyclerView_bestSellers);
+
+        LinearLayoutManager layoutManagerNewArrivals = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewNewArrivals.setLayoutManager(layoutManagerNewArrivals);
+        HomeRecyclerViewAdapter adapterNewArrivals = new HomeRecyclerViewAdapter(gridNewShoes);
+        recyclerViewNewArrivals.setAdapter(adapterNewArrivals);
+
+
+        GridLayoutManager layoutManagerBestSellers = new GridLayoutManager(getContext(), 2, GridLayoutManager.HORIZONTAL, false);
+        recyclerViewBestSellers.setLayoutManager(layoutManagerBestSellers);
+        HomeRecyclerViewAdapter adapterBestSellers = new HomeRecyclerViewAdapter(gridBestShoes);
+        recyclerViewBestSellers.setAdapter(adapterBestSellers);
 
         viewFlipper = rootView.findViewById(R.id.categoryCaraousal);
         addImagesToFlipper();
 
-
-        for (int i = 0; i < gridNewShoes.size(); i++) {
-
-            HomeProduct product = gridNewShoes.get(i);
-            CardView gridNewShoesCard = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
-
-            ImageView newShoesImage = gridNewShoesCard.findViewById(R.id.productImage);
-            TextView newShoesName = gridNewShoesCard.findViewById(R.id.productName);
-            TextView newShoesCost = gridNewShoesCard.findViewById(R.id.productPrice);
-
-            gridNewShoesCard.setId(View.generateViewId());
-            newShoesImage.setImageResource(product.getImageId());
-            newShoesName.setText(product.getProductName());
-            newShoesCost.setText(Double.toString(product.getCost()));
-
-            newArrivalsGrid.addView(gridNewShoesCard);
-        }
-
-        for (int i = 0; i < gridBestShoes.size(); i++) {
-
-            HomeProduct product = gridBestShoes.get(i);
-            CardView gridBestShoes = (CardView) getLayoutInflater().inflate(R.layout.custom_product_card, null);
-
-            ImageView bestShoesImage = gridBestShoes.findViewById(R.id.productImage);
-            TextView bestShoesName = gridBestShoes.findViewById(R.id.productName);
-            TextView bestShoesCost = gridBestShoes.findViewById(R.id.productPrice);
-
-            gridBestShoes.setId(View.generateViewId());
-            bestShoesImage.setImageResource(product.getImageId());
-            bestShoesName.setText(product.getProductName());
-            bestShoesCost.setText(Double.toString(product.getCost()));
-
-            bestSellersGrid.addView(gridBestShoes);
-        }
         // Inflate the layout for this fragment
         return rootView;
     }
