@@ -69,6 +69,12 @@ public class Utility {
         return "";
     }
 
+    public static String capitalizeFirstLetter(final String input) {
+        if (!Character.isUpperCase(input.charAt(0)))
+            return Character.toUpperCase(input.charAt(0)) + input.substring(1);
+        else return input;
+    }
+
     public static int getImageResourceFromName(String imageName, Context context) {
         String imageNameWithoutExtension = imageName.substring(0, imageName.lastIndexOf('.'));
         int resourceId = context.getResources().getIdentifier(imageNameWithoutExtension, "drawable", context.getPackageName());

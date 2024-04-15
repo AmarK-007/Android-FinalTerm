@@ -35,8 +35,9 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="20dp"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Blue Shoes"
-                android:textSize="25dp" />
+                android:textSize="18dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

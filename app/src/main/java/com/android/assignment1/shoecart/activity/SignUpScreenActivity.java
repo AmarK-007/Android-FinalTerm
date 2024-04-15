@@ -18,6 +18,9 @@ import com.android.assignment1.shoecart.db.UserDataSource;
 import com.android.assignment1.shoecart.models.User;
 import com.android.assignment1.shoecart.utils.Utility;
 
+/**
+ * This class is responsible for handling the signup screen activity.
+ */
 public class SignUpScreenActivity extends AppCompatActivity {
     private static final String TAG = SignUpScreenActivity.class.getSimpleName();
     private EditText firstnameEditText;
@@ -28,6 +31,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
     private Button signupButton;
     private TextView loginTextView;
 
+    /**
+     * This method is called when the activity is first created.
+     * It sets the content view and initializes the first name, last name, username, email, password, signup button and login text view.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +132,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
     AlertDialog.Builder alertDialog;
 
+    /**
+     * This method is called when the user successfully signs up.
+     * It displays an alert dialog with a success message.
+     *
+     * @param context
+     */
     public void showAppSuccessAlert(final Context context) {
         alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         alertDialog.setTitle(Utility.getAppNameString(context));
@@ -140,6 +155,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * This method is called when the user fails to sign up.
+     * It displays an alert dialog with a failure message.
+     *
+     * @param context
+     */
     public void showAppFailureAlert(final Context context) {
         alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         alertDialog.setTitle(Utility.getAppNameString(context));

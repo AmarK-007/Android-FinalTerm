@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/** SplashScreenActivity is the first screen that user sees when the app is launched
+ * It displays a Lottie animation and copies the database from assets to the app's data directory
+ */
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = SplashScreenActivity.class.getSimpleName();
 
@@ -26,31 +29,31 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
+        // Initialize and play the Lottie animation
         LottieAnimationView animationView = findViewById(R.id.animation_view);
         animationView.setAnimation(R.raw.shoecart_orderplaced);
         animationView.playAnimation();
 
+        // Start the task to copy the database from assets to the app's data directory
         new CopyDatabaseTask().execute();
 
-
+        // Define the splash screen timeout duration
         int SPLASH_TIME_OUT = 8000; // This is 8 seconds
 
+        // After the splash screen timeout, start the LoginScreenActivity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (Utility.getUser(SplashScreenActivity.this) == null) {
-                    Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);
-                    startActivity(homeIntent);
-                    finish();
-                } else {
-                    Intent homeIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
-                    startActivity(homeIntent);
-                    finish();
-                }
+                Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);
+                startActivity(homeIntent);
+                finish();
             }
         }, SPLASH_TIME_OUT);
     }
 
+    /**  AsyncTask to copy the database from assets to the app's data directory
+     * This is done to ensure that the database is available for the app to use
+     */
     private class CopyDatabaseTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
@@ -85,6 +88,5 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             return null;
         }
-
     }
 }

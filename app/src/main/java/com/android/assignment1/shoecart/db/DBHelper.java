@@ -5,13 +5,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.android.assignment1.shoecart.models.User;
+import com.android.assignment1.shoecart.utils.Constants;
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "shoecart.db";
-    private static final int DATABASE_VERSION = 1;
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
     }
 
     @Override

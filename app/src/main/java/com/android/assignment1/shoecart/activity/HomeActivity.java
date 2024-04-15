@@ -1,5 +1,6 @@
 package com.android.assignment1.shoecart.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,6 +42,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
+/**
+ * This is the main activity for the application. It manages the navigation drawer and the fragments that are displayed within the activity.
+ * It also handles the toolbar and the back press.
+ */
 public class HomeActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     MaterialToolbar materialToolbar;
@@ -51,12 +56,18 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
+    /**
+     * This method is called when the activity is first created.
+     * It initializes the toolbar, drawer layout, and navigation view. It also sets up the navigation drawer with its items and their respective click listeners.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        // Initialize the toolbar, drawer layout, and navigation view.
         materialToolbar = findViewById(R.id.homeToolBar);
         drawerLayout = findViewById(R.id.drawerMenu);
         navigationView = findViewById(R.id.navMenu);
@@ -77,6 +88,9 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method sets up the navigation drawer with its items and their respective click listeners.
+     */
     private void setDrawer() {
         navDrawerMenu = findViewById(R.id.navMenu);
 
@@ -106,6 +120,12 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method inflates the menu for the toolbar.
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.appbar_menu, menu);
@@ -113,6 +133,12 @@ public class HomeActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * This method handles the selection of items in the toolbar.
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -132,6 +158,10 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method handles the back press. If the current fragment is the home fragment, it shows an alert dialog to confirm the exit. Otherwise, it pops the back stack.
+     */
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frames);
@@ -142,6 +172,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method updates the title of the toolbar based on the current fragment.
+     *
+     * @param fragment
+     */
     public void updateTitle(Fragment fragment) {
         String title = "";
 
@@ -168,6 +203,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method changes the current fragment that is displayed in the activity.
+     *
+     * @param fragment
+     */
     public void changeFragment(Fragment fragment) {
         updateTitle(fragment);
 
@@ -179,6 +219,9 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout.closeDrawers();
     }
 
+    /**
+     * This method shows a dialog to search for a product.
+     */
     public void showSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         builder.setCustomTitle(Utility.showStyledAlertDialog(this));
@@ -186,7 +229,7 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout container = new LinearLayout(this);
         container.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(20, 20, 20, 20);
+        params.setMargins(50, 20, 50, 20);
 
         final EditText input = new EditText(this);
         input.setLayoutParams(params);
@@ -221,6 +264,11 @@ public class HomeActivity extends AppCompatActivity {
 
     AlertDialog.Builder alertDialog;
 
+    /**
+     * This method shows an alert dialog to confirm the exit of the application.
+     *
+     * @param context
+     */
     public void showAppExitingAlert(final Context context) {
         alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         alertDialog.setCustomTitle(Utility.showStyledAlertDialog(context));
@@ -241,15 +289,23 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * This method shows the username in the navigation drawer.
+     */
     public void setUsernameInDrawer() {
         navDrawerMenu = findViewById(R.id.navMenu);
         View navHeaderView = navDrawerMenu.getHeaderView(0);
         userName = navHeaderView.findViewById(R.id.welcomeUser);
         SharedPreferences sharedPreferences = getSharedPreferences("Login_Username", Context.MODE_PRIVATE);
         String getUsername = sharedPreferences.getString("userName", "");
-        userName.setText("Welcome, " + getUsername);
+        userName.setText("Welcome, " + Utility.capitalizeFirstLetter(getUsername));
     }
 
+    /**
+     * This method shows an alert dialog to confirm the logout of the application.
+     *
+     * @param context
+     */
     public void showAppExitingAlertLogout(final Context context) {
         alertDialog = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         alertDialog.setCustomTitle(Utility.showStyledAlertDialog(context));

@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:text="Usename"
         android:textColor="@color/colorAccent"
-        android:textSize="22dp"
+        android:textSize="18dp"
+        android:textStyle="bold|italic"
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>

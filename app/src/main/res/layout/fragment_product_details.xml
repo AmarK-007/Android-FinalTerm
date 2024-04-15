@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Blue Shoes"
-                android:textSize="22dp"
+                android:textSize="18dp"
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"

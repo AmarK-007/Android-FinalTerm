@@ -16,13 +16,19 @@ import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.db.UserDataSource;
 import com.android.assignment1.shoecart.utils.Utility;
 
-public class LoginScreenActivity extends AppCompatActivity {
+/** This class is responsible for handling the login screen activity.
+ * */
+ public class LoginScreenActivity extends AppCompatActivity {
     private static final String TAG = LoginScreenActivity.class.getSimpleName();
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
 
-    @Override
+    /** This method is called when the activity is first created.
+     * It sets the content view and initializes the username, password and login button.
+     * @param savedInstanceState
+     */
+ @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginscreen);
@@ -78,7 +84,12 @@ public class LoginScreenActivity extends AppCompatActivity {
         });
     }
 
-    private void performLogin(String username, String password) {
+    /** This method is called when the user clicks on the login button.
+     * It validates the user credentials and logs the user in if the credentials are correct.
+     * @param username
+     * @param password
+     */
+ private void performLogin(String username, String password) {
         UserDataSource userDataSource = new UserDataSource(this);
         if (userDataSource.validateUser(username, password)) {
 
