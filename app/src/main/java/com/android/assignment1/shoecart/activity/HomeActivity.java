@@ -76,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
         toggle.syncState();
         setSupportActionBar(materialToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorAccent));
         setDrawer();
         changeFragment(new HomeFragment());
         setUsernameInDrawer();
