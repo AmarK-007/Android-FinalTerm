@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
     tools:context=".fragments.ShippingDetailsFragment">
 
     <ScrollView
@@ -13,220 +13,230 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_marginHorizontal="20dp"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="@dimen/activity_full_margin"
+            app:cardCornerRadius="10dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Shipping Details"
-                android:textSize="23sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="vertical">
 
-            <!-- First Name -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/firsnameWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/colorAccent"
-                app:errorTextAppearance="@style/error_appearance">
-
-                <EditText
-                    android:id="@+id/firstname"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@fonts/roboto_light"
-                    android:hint="Name"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/colorAccent"
-                    android:textSize="15sp" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Shipping Details"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Last Name -->
-            <!--            <com.google.android.material.textfield.TextInputLayout-->
-            <!--                android:id="@+id/lastnameWrapper"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textColor="@android:color/white"-->
-            <!--                android:textColorHint="@color/colorAccent"-->
-            <!--                app:errorTextAppearance="@style/error_appearance">-->
-
-            <!--                <EditText-->
-            <!--                    android:id="@+id/lasname"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:fontFamily="@fonts/roboto_light"-->
-            <!--                    android:hint="Last Name"-->
-            <!--                    android:imeOptions="actionNext"-->
-            <!--                    android:inputType="textEmailAddress"-->
-            <!--                    android:textColor="@android:color/white"-->
-            <!--                    android:textColorHint="@color/colorAccent"-->
-            <!--                    android:textSize="15sp" />-->
-
-            <!--            </com.google.android.material.textfield.TextInputLayout>-->
-
-            <!-- Address 1 -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addressOneWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/colorAccent"
-                app:errorTextAppearance="@style/error_appearance">
-
-                <EditText
-                    android:id="@+id/addressOne"
+                <!-- First Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/firsnameWrapper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@fonts/roboto_light"
-                    android:hint="Address 1"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/colorAccent"
-                    android:textSize="15sp" />
+                    app:errorTextAppearance="@style/error_appearance">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <EditText
+                        android:id="@+id/firstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
+                        android:hint="Name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/colorAccent"
+                        android:textSize="15sp" />
 
-            <!-- Address 2 -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addressTwoWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/colorAccent"
-                app:errorTextAppearance="@style/error_appearance">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/addressTwo"
+                <!-- Last Name -->
+                <!--            <com.google.android.material.textfield.TextInputLayout-->
+                <!--                android:id="@+id/lastnameWrapper"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:textColor="@android:color/white"-->
+                <!--                android:textColorHint="@color/colorAccent"-->
+                <!--                app:errorTextAppearance="@style/error_appearance">-->
+
+                <!--                <EditText-->
+                <!--                    android:id="@+id/lasname"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:fontFamily="@fonts/roboto_light"-->
+                <!--                    android:hint="Last Name"-->
+                <!--                    android:imeOptions="actionNext"-->
+                <!--                    android:inputType="textEmailAddress"-->
+                <!--                    android:textColor="@android:color/white"-->
+                <!--                    android:textColorHint="@color/colorAccent"-->
+                <!--                    android:textSize="15sp" />-->
+
+                <!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+                <!-- Address 1 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addressOneWrapper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@fonts/roboto_light"
-                    android:hint="Address 2"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/colorAccent"
-                    android:textSize="15sp" />
+                    app:errorTextAppearance="@style/error_appearance">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <EditText
+                        android:id="@+id/addressOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
+                        android:hint="Address 1"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/colorAccent"
+                        android:textSize="15sp" />
 
-            <!-- Postal Code -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/postalCodeWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/colorAccent"
-                app:errorTextAppearance="@style/error_appearance">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/postalCode"
+                <!-- Address 2 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addressTwoWrapper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@fonts/roboto_light"
-                    android:hint="Postal Code"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/colorAccent"
-                    android:textSize="15sp" />
+                    app:errorTextAppearance="@style/error_appearance">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <EditText
+                        android:id="@+id/addressTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
+                        android:hint="Address 2"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/colorAccent"
+                        android:textSize="15sp" />
 
-            <!-- City -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cityWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/colorAccent"
-                app:errorTextAppearance="@style/error_appearance">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/city"
+                <!-- Postal Code -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/postalCodeWrapper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@fonts/roboto_light"
-                    android:hint="Ciy"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
                     android:textColor="@android:color/white"
                     android:textColorHint="@color/colorAccent"
-                    android:textSize="15sp" />
+                    app:errorTextAppearance="@style/error_appearance">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <EditText
+                        android:id="@+id/postalCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
+                        android:hint="Postal Code"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/colorAccent"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- City -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/cityWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@color/colorAccent"
+                    app:errorTextAppearance="@style/error_appearance">
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@fonts/roboto_light"
+                        android:hint="Ciy"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@color/colorAccent"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-            <!-- Province -->
-            <!--            <com.google.android.material.textfield.TextInputLayout-->
-            <!--                android:id="@+id/provinceWrapper"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textColor="@android:color/white"-->
-            <!--                android:textColorHint="@color/colorAccent"-->
-            <!--                app:errorTextAppearance="@style/error_appearance">-->
+                <!-- Province -->
+                <!--            <com.google.android.material.textfield.TextInputLayout-->
+                <!--                android:id="@+id/provinceWrapper"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:textColor="@android:color/white"-->
+                <!--                android:textColorHint="@color/colorAccent"-->
+                <!--                app:errorTextAppearance="@style/error_appearance">-->
 
-            <!--                <EditText-->
-            <!--                    android:id="@+id/province"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:fontFamily="@fonts/roboto_light"-->
-            <!--                    android:hint="Province"-->
-            <!--                    android:imeOptions="actionNext"-->
-            <!--                    android:inputType="textEmailAddress"-->
-            <!--                    android:textColor="@android:color/white"-->
-            <!--                    android:textColorHint="@color/colorAccent"-->
-            <!--                    android:textSize="15sp" />-->
+                <!--                <EditText-->
+                <!--                    android:id="@+id/province"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:fontFamily="@fonts/roboto_light"-->
+                <!--                    android:hint="Province"-->
+                <!--                    android:imeOptions="actionNext"-->
+                <!--                    android:inputType="textEmailAddress"-->
+                <!--                    android:textColor="@android:color/white"-->
+                <!--                    android:textColorHint="@color/colorAccent"-->
+                <!--                    android:textSize="15sp" />-->
 
-            <!--            </com.google.android.material.textfield.TextInputLayout>-->
+                <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <Spinner
-                android:id="@+id/provinceSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <!-- Country -->
-            <!--            <com.google.android.material.textfield.TextInputLayout-->
-            <!--                android:id="@+id/countryWrapper"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textColor="@android:color/white"-->
-            <!--                android:textColorHint="@color/colorAccent"-->
-            <!--                app:errorTextAppearance="@style/error_appearance">-->
+                <Spinner
+                    android:id="@+id/provinceSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:theme="@style/SpinnerTheme" />
+                <!-- Country -->
+                <!--            <com.google.android.material.textfield.TextInputLayout-->
+                <!--                android:id="@+id/countryWrapper"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:textColor="@android:color/white"-->
+                <!--                android:textColorHint="@color/colorAccent"-->
+                <!--                app:errorTextAppearance="@style/error_appearance">-->
 
-            <!--                <EditText-->
-            <!--                    android:id="@+id/country"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:fontFamily="@fonts/roboto_light"-->
-            <!--                    android:hint="Country"-->
-            <!--                    android:imeOptions="actionNext"-->
-            <!--                    android:inputType="textEmailAddress"-->
-            <!--                    android:textColor="@android:color/white"-->
-            <!--                    android:textColorHint="@color/colorAccent"-->
-            <!--                    android:textSize="15sp" />-->
+                <!--                <EditText-->
+                <!--                    android:id="@+id/country"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:fontFamily="@fonts/roboto_light"-->
+                <!--                    android:hint="Country"-->
+                <!--                    android:imeOptions="actionNext"-->
+                <!--                    android:inputType="textEmailAddress"-->
+                <!--                    android:textColor="@android:color/white"-->
+                <!--                    android:textColorHint="@color/colorAccent"-->
+                <!--                    android:textSize="15sp" />-->
 
-            <!--            </com.google.android.material.textfield.TextInputLayout>-->
+                <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <Button
-                style="@style/button_style"
-                android:id="@+id/btnCheckOut"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="Checkout" />
-        </LinearLayout>
-
+                <Button
+                    android:id="@+id/btnCheckOut"
+                    style="@style/button_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="Checkout" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </ScrollView>
 
 </LinearLayout>

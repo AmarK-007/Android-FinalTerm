@@ -48,9 +48,8 @@ public class ProfileFragment extends Fragment {
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                         requireContext(),
                         R.array.canadian_provinces, // Array resource containing province names
-                        android.R.layout.simple_spinner_item // Default spinner layout
+                        R.layout.spinner_item // Custom spinner layout
                 );
-
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                 EditText updatedAddress1 = updateDialog.findViewById(R.id.update_address1);

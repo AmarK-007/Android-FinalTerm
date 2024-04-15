@@ -49,7 +49,7 @@ public class ShippingDetailsFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.canadian_provinces, // Array resource containing province names
-                android.R.layout.simple_spinner_item // Default spinner layout
+                R.layout.spinner_item // Default spinner layout
         );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
