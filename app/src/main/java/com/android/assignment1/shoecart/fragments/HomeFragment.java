@@ -2,6 +2,8 @@ package com.android.assignment1.shoecart.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,20 +26,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.adapters.HomeRecyclerViewAdapter;
+import com.android.assignment1.shoecart.db.ProductDataSource;
+import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 import com.android.assignment1.shoecart.models.HomeProduct;
+import com.android.assignment1.shoecart.models.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AdapterInterface<Product> {
 
     ViewFlipper viewFlipper;
     ImageView imageView;
     RecyclerView recyclerViewNewArrivals;
     RecyclerView recyclerViewBestSellers;
 
-    List<HomeProduct> gridNewShoes = new ArrayList<>();
-    List<HomeProduct> gridBestShoes = new ArrayList<>();
+    List<Product> productList = new ArrayList<>();
+
+    List<Product> gridNewShoes = new ArrayList<>();
+    List<Product> gridBestShoes = new ArrayList<>();
     int[] carousalImages = {R.drawable.product_blue_1, R.drawable.product_white_blue_1, R.drawable.product_grey_3};
     boolean imagesAdded = false;
 
@@ -45,21 +54,22 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        gridNewShoes = new ArrayList<>();
+        gridBestShoes = new ArrayList<>();
 
-        HomeProduct product1 = new HomeProduct(R.drawable.product_blue_1, "Blue Shoes", 122.99);
-        HomeProduct product2 = new HomeProduct(R.drawable.product_grey_1, "Grey Shoes", 122.99);
-        HomeProduct product3 = new HomeProduct(R.drawable.product_red_1, "Red Shoes", 122.99);
-        HomeProduct product4 = new HomeProduct(R.drawable.product_white_blue_1, "White Shoes", 122.99);
 
-        gridNewShoes.add(product1);
-        gridNewShoes.add(product2);
-        gridNewShoes.add(product3);
-        gridNewShoes.add(product4);
+        productList = new ProductDataSource(requireContext()).getAllProducts();
 
-        gridBestShoes.add(product1);
-        gridBestShoes.add(product2);
-        gridBestShoes.add(product3);
-        gridBestShoes.add(product4);
+
+
+        productList.forEach(product -> {
+            if (Objects.equals(product.getCategory(), "Sports Shoes")) {
+                gridBestShoes.add(product);
+            } else if (Objects.equals(product.getCategory(), "Trekking Shoes") || Objects.equals(product.getCategory(), "Formal shoes")) {
+                    gridNewShoes.add(product);
+            }
+            Log.e("TAG", product.getCategory());
+        });
 
 
         recyclerViewNewArrivals = rootView.findViewById(R.id.recyclerView_newArrivals);
@@ -67,13 +77,13 @@ public class HomeFragment extends Fragment {
 
         LinearLayoutManager layoutManagerNewArrivals = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewNewArrivals.setLayoutManager(layoutManagerNewArrivals);
-        HomeRecyclerViewAdapter adapterNewArrivals = new HomeRecyclerViewAdapter(gridNewShoes);
+        HomeRecyclerViewAdapter adapterNewArrivals = new HomeRecyclerViewAdapter(gridNewShoes,requireContext(),this);
         recyclerViewNewArrivals.setAdapter(adapterNewArrivals);
 
 
         GridLayoutManager layoutManagerBestSellers = new GridLayoutManager(getContext(), 2, GridLayoutManager.HORIZONTAL, false);
         recyclerViewBestSellers.setLayoutManager(layoutManagerBestSellers);
-        HomeRecyclerViewAdapter adapterBestSellers = new HomeRecyclerViewAdapter(gridBestShoes);
+        HomeRecyclerViewAdapter adapterBestSellers = new HomeRecyclerViewAdapter(gridBestShoes,requireContext(),this);
         recyclerViewBestSellers.setAdapter(adapterBestSellers);
 
         viewFlipper = rootView.findViewById(R.id.categoryCaraousal);
@@ -108,4 +118,30 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onItemSelected(Product data, int position) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("product", data);
+//        moving to add fragment
+        Fragment fragment = new ProductDetailsFragment();
+
+        //passing arguments
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frames, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+        // Set action bar title to the selected product's title
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(data.getTitle());
+        }
+    }
+
+    @Override
+    public void onItemRemoved() {
+
+    }
 }
