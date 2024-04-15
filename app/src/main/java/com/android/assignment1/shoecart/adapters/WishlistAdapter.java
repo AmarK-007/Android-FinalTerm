@@ -59,6 +59,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
         holder.tvQuantity.setText(String.valueOf(quantity[0]));
 
         holder.ivProduct.setImageResource(Utility.getImageResourceFromName(product.getImages().get(0).getImageUrl(), context));
+        holder.btnDelete.setVisibility(View.VISIBLE);
 
         holder.ivAdd.setOnClickListener(v -> {
             quantity[0]++;
@@ -92,6 +93,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
             wishlistList.remove(position);
             notifyDataSetChanged();
         });
+
+        holder.btnDelete.setOnClickListener(v -> {
+            dataSource.deleteWishlist(wishlistList.get(position));
+            wishlistList.remove(position);
+            notifyDataSetChanged();
+        });
     }
 
 
@@ -103,7 +110,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvPrice, tvQuantity;
-        Button btnRemove;
+        Button btnRemove, btnDelete;
         ImageView ivAdd, ivProduct, ivMinus;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -116,6 +123,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
             ivAdd = itemView.findViewById(R.id.ivAdd);
             ivProduct = itemView.findViewById(R.id.ivProduct);
             ivMinus = itemView.findViewById(R.id.ivMinus);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }

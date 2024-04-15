@@ -1,29 +1,33 @@
 package com.android.assignment1.shoecart.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.assignment1.shoecart.R;
-import com.android.assignment1.shoecart.models.Category;
-import com.android.assignment1.shoecart.models.HomeProduct;
+import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
 
-    List<Category> categories = new ArrayList<>();
+    List<String> categories = new ArrayList<>();
+    Context context;
+
+    AdapterInterface<String> adapterInterface;
 
 
-
-    public CategoryAdapter(List<Category> categories) {
+    public CategoryAdapter(List<String> categories, Context context, AdapterInterface<String> adapterInterface) {
         this.categories = categories;
+        this.context = context;
+        this.adapterInterface = adapterInterface;
     }
 
 
@@ -36,8 +40,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.Image.setImageResource(categories.get(position).getCategoryImage());
-        holder.Name.setText(categories.get(position).getCategoryName());
+//        String imageName = categories.get(position).getCategoryImage();
+////        String imageNameWithoutExtension = imageName.substring(0, imageName.lastIndexOf('.'));
+//        int resourceId = Utility.getImageResourceFromName(imageName, context);
+
+//        holder.Image.setImageResource(resourceId);
+        holder.Name.setText(categories.get(position));
+        holder.layout.setOnClickListener(v -> {
+            adapterInterface.onItemSelected(categories.get(position), position);
+        });
     }
 
     @Override
@@ -47,12 +58,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView Image;
+        //        ImageView Image;
+        LinearLayout layout;
         TextView Name;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            Image = itemView.findViewById(R.id.categoryImage);
+            layout = itemView.findViewById(R.id.rootViewLL);
+//            Image = itemView.findViewById(R.id.categoryImage);
             Name = itemView.findViewById(R.id.categoryName);
         }
     }
