@@ -94,7 +94,7 @@ public class OrderDetailsFragment extends Fragment implements OnDialogClickListe
     }
 
     public void setData() {
-        binding.tvOrderId.setText("#" + order.getOrderId());
+//        binding.tvOrderId.setText("#" + order.getOrderId());
         binding.tvDate.setText(order.getOrderDate().toString());
         binding.tvStatus.setText(order.getDeliveryStatus());
 //        binding.tvAddress.setText(order.get());

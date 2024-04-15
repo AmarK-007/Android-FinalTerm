@@ -30,6 +30,7 @@ import com.android.assignment1.shoecart.db.ProductDataSource;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
 import com.android.assignment1.shoecart.models.HomeProduct;
 import com.android.assignment1.shoecart.models.Product;
+import com.android.assignment1.shoecart.utils.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,12 +96,85 @@ public class HomeFragment extends Fragment implements AdapterInterface<Product> 
 
     private void addImagesToFlipper() {
         viewFlipper.removeAllViews();
-        for (int i : carousalImages) {
+
+        productList.forEach(product -> {
             ImageView imageView = new ImageView(requireContext());
-            imageView.setImageResource(i);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setImageResource(Utility.getImageResourceFromName(product.getImages().get(0).getImageUrl(), requireContext()));
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("product", product);
+//        moving to add fragment
+                Fragment fragment = new ProductDetailsFragment();
+
+                //passing arguments
+                fragment.setArguments(bundle);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frames, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                // Set action bar title to the selected product's title
+                ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setTitle(product.getTitle());
+                }
+            });
             viewFlipper.addView(imageView);
-        }
+        });
+//        for (int i = 0 ; i < productList.size(); i++){
+//            ImageView imageView = new ImageView(requireContext());
+//            imageView.setImageResource(i);
+//            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//            imageView.setOnClickListener(v -> {
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("product", productList.get(i));
+////        moving to add fragment
+//                Fragment fragment = new ProductDetailsFragment();
+//
+//                //passing arguments
+//                fragment.setArguments(bundle);
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.frames, fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//
+//                // Set action bar title to the selected product's title
+//                ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+//                if (actionBar != null) {
+//                    actionBar.setTitle(productList.get(i).getTitle());
+//                }
+//            });
+//            viewFlipper.addView(imageView);
+//        }
+//        for (int i : carousalImages) {
+//            ImageView imageView = new ImageView(requireContext());
+//            imageView.setImageResource(i);
+//            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//            imageView.setOnClickListener(v -> {
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("product", productList.get(i));
+////        moving to add fragment
+//                Fragment fragment = new ProductDetailsFragment();
+//
+//                //passing arguments
+//                fragment.setArguments(bundle);
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.frames, fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//
+//                // Set action bar title to the selected product's title
+//                ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+//                if (actionBar != null) {
+//                    actionBar.setTitle(productList.get(i).getTitle());
+//                }
+//            });
+//            viewFlipper.addView(imageView);
+//        }
         startFlipping();
     }
 
