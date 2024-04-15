@@ -45,7 +45,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent homeIntent = new Intent(SplashScreenActivity.this, LoginScreenActivity.class);
-             git    startActivity(homeIntent);
+                startActivity(homeIntent);
                 finish();
             }
         }, SPLASH_TIME_OUT);
