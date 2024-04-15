@@ -33,8 +33,9 @@
         android:layout_centerInParent="true"
         android:visibility="gone"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/shoecart_item_empty" />
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/shoecart_item_empty"
+        app:lottie_repeatMode="reverse" />
 
     <Button
         android:id="@+id/btnProceed"

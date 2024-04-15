@@ -56,8 +56,8 @@ public class WishlistFragment extends Fragment implements AdapterInterface<Wishl
         binding.rvWishlistItem.setLayoutManager(manager);
         binding.rvWishlistItem.setAdapter(adapter);
 
-        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view);
-        animationView.setAnimation(R.raw.shoecart_orderplaced);
+        LottieAnimationView animationView = binding.getRoot().findViewById(R.id.animation_view_empty_wishlist);
+        animationView.setAnimation(R.raw.shoecart_item_empty);
 
 
         if (arrayList.isEmpty()) {
