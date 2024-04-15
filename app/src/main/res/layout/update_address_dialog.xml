@@ -133,6 +133,7 @@
 
 
     <Button
+        style="@style/button_style"
         android:layout_gravity="center"
         android:backgroundTint="@color/colorAccent"
         android:id="@+id/update_btn"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,174 +10,188 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/productDetailImg"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/product_blue_2"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
-
-            <TextView
-                android:id="@+id/productDetailName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Blue Shoes"
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description"
-                android:textSize="25dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_margin="10dp"
-                android:layout_marginEnd="10dp"/>
-
-            <TextView
-                android:id="@+id/productDetailDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-                android:textSize="15dp"
-                android:textColor="@color/white"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:textAlignment="viewStart"
-                android:justificationMode="inter_word"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select Size"
-                android:textSize="25dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_margin="10dp"
-                android:layout_marginEnd="10dp"/>
-
-            <TextView
-                android:id="@+id/shoeSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/white"
-                android:text="6"
-                android:layout_marginStart="20dp"/>
-
-            <SeekBar
-                android:id="@+id/shoeSizeSeekBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:min="6"
-                android:max="14"/>
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="@dimen/activity_full_margin"
+            app:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/productDetailImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/product_blue_2" />
+
+                <TextView
+                    android:id="@+id/productDetailName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Blue Shoes"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quantity"
-                    android:textSize="20dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Description"
                     android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/productDetailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"/>
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_marginEnd="10dp"
+                    android:justificationMode="inter_word"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Select Size"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/shoeSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="6"
+                    android:textColor="@color/white" />
+
+                <SeekBar
+                    android:id="@+id/shoeSizeSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:max="14"
+                    android:min="6" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="40dp"
-                    android:layout_gravity="center">
-
-                    <ImageView
-                        android:id="@+id/pdAdd"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:backgroundTint="@color/white"
-                        android:src="@drawable/add" />
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/pdQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Quantity"
                         android:textColor="@color/white"
-                        android:text="3"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textSize="18dp" />
 
-                    <ImageView
-                        android:id="@+id/pdMinus"
-                        android:layout_width="30dp"
-                        android:backgroundTint="@color/white"
-                        android:layout_height="30dp"
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
                         android:layout_gravity="center"
-                        android:src="@drawable/minus" />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="40dp">
+
+                        <ImageView
+                            android:id="@+id/pdAdd"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/pdQuantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="10dp"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/pdMinus"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/minus"
+                            app:tint="@color/white" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/addToCartBtn"
-                    android:text="Add to Cart"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="@color/white"/>
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/addToCartBtn"
+                        style="@style/button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="Add to Cart"
+                        android:textColor="@color/colorPrimary" />
 
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/addToWishListBtn"
-                    android:text="Add to WishList"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/colorAccent"
-                    android:textColor="@color/white"/>
+                    <Button
+                        android:id="@+id/addToWishListBtn"
+                        style="@style/button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="Add to WishList"
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+
+
             </LinearLayout>
-
-
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </ScrollView>
-
 
 
 </FrameLayout>

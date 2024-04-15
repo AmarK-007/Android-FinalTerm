@@ -44,7 +44,7 @@
 
     <style name="button_style" parent="Theme.AppCompat">
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/background_material_light</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginTop">15dp</item>

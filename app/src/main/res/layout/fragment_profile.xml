@@ -151,7 +151,7 @@
                         android:layout_gravity="end"
                         android:backgroundTint="@color/colorAccent"
                         android:src="@drawable/icon_update"
-                        app:tint="@color/white"/>
+                        app:tint="@color/colorPrimary"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
