@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -87,9 +88,9 @@ public class OrderDetailsFragment extends Fragment implements OnDialogClickListe
 
 
     public void showPopUp() {
-        CustomAlertDialogFragment dialogFragment = CustomAlertDialogFragment.newInstance(this);
+        CustomAlertDialogFragment dialogFragment = CustomAlertDialogFragment.newInstance(this, "shoecart_orderplaced");
         dialogFragment.setCancelable(false);
-        dialogFragment.show(getChildFragmentManager(), "customAlertDialog");
+        dialogFragment.show(getChildFragmentManager(), getResources().getString(R.string.order_placed));
     }
 
     public void setData() {
@@ -123,22 +124,7 @@ public class OrderDetailsFragment extends Fragment implements OnDialogClickListe
 
     @Override
     public void onDialogButtonClick() {
-        // Create a new instance of HomeFragment
-        HomeFragment homeFragment = new HomeFragment();
-
-        // Get the FragmentManager
-        FragmentManager fragmentManager = getFragmentManager();
-
-        // Begin a FragmentTransaction
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         // Replace the current fragment with HomeFragment
-        fragmentTransaction.replace(R.id.frames, homeFragment);
-
-        // Add this transaction to the back stack
-        fragmentTransaction.addToBackStack(null);
-
-        // Commit the transaction
-        fragmentTransaction.commit();
+        Utility.callHomeFragment(((AppCompatActivity) getActivity()).getSupportFragmentManager());
     }
 }

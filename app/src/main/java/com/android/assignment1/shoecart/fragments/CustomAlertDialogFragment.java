@@ -6,10 +6,12 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.interfaces.OnDialogClickListener;
 
@@ -17,8 +19,11 @@ public class CustomAlertDialogFragment extends DialogFragment {
 
     private OnDialogClickListener listener;
 
-    public static CustomAlertDialogFragment newInstance(OnDialogClickListener listener) {
+    public static CustomAlertDialogFragment newInstance(OnDialogClickListener listener, String type) {
         CustomAlertDialogFragment fragment = new CustomAlertDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("type", type);
+        fragment.setArguments(args);
         fragment.listener = listener;
         return fragment;
     }
@@ -41,8 +46,6 @@ public class CustomAlertDialogFragment extends DialogFragment {
             // Set the background's dim amount
             dialog.getWindow().setDimAmount(0.5f);
 
-            // Set the animation
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         }
     }
 
@@ -54,7 +57,20 @@ public class CustomAlertDialogFragment extends DialogFragment {
         // Inflate the custom layout
         View view = inflater.inflate(R.layout.fragment_custom_alert_dialog, null);
         builder.setView(view);
+        LottieAnimationView animationView = view.findViewById(R.id.animation_view);
+        TextView tvMessage = view.findViewById(R.id.success_message);
+        // Retrieve the type from the bundle
+        String type = getArguments().getString("type");
 
+        // Handle different cases based on the type
+        if (getResources().getString(R.string.order_placed).equals(type)) {
+            animationView.setAnimation(R.raw.shoecart_orderplaced);
+            tvMessage.setText(type);
+        } else if (getResources().getString(R.string.add_to_cart).equals(type)) {
+            animationView.setAnimation(R.raw.shoecart_addtocart);
+            tvMessage.setText(type);
+        }
+//        animationView.playAnimation();
         view.findViewById(R.id.btnOk).setOnClickListener(v -> {
             listener.onDialogButtonClick();
             dismiss();

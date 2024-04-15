@@ -11,8 +11,11 @@ import android.view.Gravity;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.assignment1.shoecart.R;
+import com.android.assignment1.shoecart.fragments.HomeFragment;
 import com.android.assignment1.shoecart.models.User;
 import com.google.gson.Gson;
 
@@ -103,5 +106,23 @@ public class Utility {
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         titleTextView.setTypeface(null, Typeface.BOLD);
         return titleTextView;
+    }
+
+    public static void callHomeFragment(FragmentManager fragmentManager){
+        // Create a new instance of HomeFragment
+        HomeFragment homeFragment = new HomeFragment();
+
+
+        // Begin a FragmentTransaction
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Replace the current fragment with HomeFragment
+        fragmentTransaction.replace(R.id.frames, homeFragment);
+
+        // Add this transaction to the back stack
+        fragmentTransaction.addToBackStack(null);
+
+        // Commit the transaction
+        fragmentTransaction.commit();
     }
 }

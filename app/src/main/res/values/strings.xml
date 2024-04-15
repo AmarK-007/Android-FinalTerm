@@ -33,6 +33,8 @@
     <string name="request_message">Support Request Sent</string>
     <string name="about_text"> Discover about Shoe Cart, your one-stop shop for fashionable and cozy shoes. \n\nEstablished in 2024, we provide high-end shoes at reasonable costs. We want to make it easy for you to walk into style with our wide selection and hassle-free buying process. \n\nBecome a member of our community now to up your shoe game!</string>
 
+    <string name="order_placed">Order Placed Successfully.</string>
+    <string name="add_to_cart">Added to Cart.</string>
     <string-array name="canadian_provinces">
         <item>Alberta</item>
         <item>British Columbia</item>

@@ -10,14 +10,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.assignment1.shoecart.R;
 import com.android.assignment1.shoecart.db.CartDataSource;
 import com.android.assignment1.shoecart.db.ProductDataSource;
 import com.android.assignment1.shoecart.db.WishlistDataSource;
-import com.android.assignment1.shoecart.fragments.WishlistFragment;
+import com.android.assignment1.shoecart.fragments.CustomAlertDialogFragment;
 import com.android.assignment1.shoecart.interfaces.AdapterInterface;
+import com.android.assignment1.shoecart.interfaces.OnDialogClickListener;
 import com.android.assignment1.shoecart.models.Cart;
 import com.android.assignment1.shoecart.models.Product;
 import com.android.assignment1.shoecart.models.Wishlist;
@@ -52,7 +54,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
         ProductDataSource productDataSource = new ProductDataSource(context);
         Product product = productDataSource.getProduct(wishlistList.get(position).getProductId());
 
-        holder.btnRemove.setText("Add to Cart");
+        holder.btnAddToCart.setText("Add to Cart");
         final int[] quantity = {1};
 
         holder.tvPrice.setText("$" + product.getPrice());
@@ -79,7 +81,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
             }
         });
         final String[] productSize = new String[1];
-        holder.btnRemove.setOnClickListener(v -> {
+        holder.btnAddToCart.setOnClickListener(v -> {
             CartDataSource cartDataSource = new CartDataSource(context);
 
 
@@ -95,6 +97,17 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
             notifyDataSetChanged();
             // Notify the fragment that an item has been removed
             adapterInterface.onItemRemoved();
+            // Create an instance of your dialog fragment
+            CustomAlertDialogFragment dialogFragment = CustomAlertDialogFragment.newInstance(new OnDialogClickListener() {
+                @Override
+                public void onDialogButtonClick() {
+                    /*// Replace the current fragment with HomeFragment
+                    Utility.callHomeFragment(((AppCompatActivity) context).getSupportFragmentManager());*/
+                }
+            }, context.getResources().getString(R.string.add_to_cart));
+
+            // Show the dialog
+            dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "customDialog");
         });
 
         holder.btnDelete.setOnClickListener(v -> {
@@ -113,7 +126,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvPrice, tvQuantity;
-        Button btnRemove, btnDelete;
+        Button btnAddToCart, btnDelete;
         ImageView ivAdd, ivProduct, ivMinus;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -122,7 +135,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyView
             tvPrice = itemView.findViewById(R.id.tvPrice);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
-            btnRemove = itemView.findViewById(R.id.btnRemoveItem);
+            btnAddToCart = itemView.findViewById(R.id.btnRemoveItem);
             ivAdd = itemView.findViewById(R.id.ivAdd);
             ivProduct = itemView.findViewById(R.id.ivProduct);
             ivMinus = itemView.findViewById(R.id.ivMinus);
