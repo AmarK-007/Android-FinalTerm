@@ -30,6 +30,7 @@
     <color name="colorPrimaryDarkLight">#1A49FB</color>
     <color name="colorPrimaryLight">#013CDF</color>
     <color name="colorAccent">#FFFFDE03</color>
+    <color name="colorAccentDark">#C3AA01</color>
     <color name="colorGreen">#FF04BC0A</color>
     <color name="dividerColor">#E6888888</color>
 

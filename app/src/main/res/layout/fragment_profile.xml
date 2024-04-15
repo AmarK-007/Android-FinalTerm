@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ProfileFragment">
 
     <LinearLayout
@@ -14,111 +14,111 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="3dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="5dp"
-            android:backgroundTint="@color/white">
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/white"
+            android:elevation="3dp"
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="First Name:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/profile_firstName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:text="Admin"
-                    android:textSize="18dp"
-                    android:layout_marginStart="15dp"/>
+                    android:textSize="18dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="3dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="5dp"
-            android:backgroundTint="@color/white">
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/white"
+            android:elevation="3dp"
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Last Name:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/profile_lastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:text="Admin"
-                    android:textSize="18dp"
-                    android:layout_marginStart="15dp"/>
+                    android:textSize="18dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="3dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="5dp"
-            android:backgroundTint="@color/white">
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/white"
+            android:elevation="3dp"
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/profile_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:text="admin@gmail.com"
-                    android:textSize="18dp"
-                    android:layout_marginStart="15dp"/>
+                    android:textSize="18dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="3dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:cardCornerRadius="5dp"
-            android:backgroundTint="@color/white">
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/white"
+            android:elevation="3dp"
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -128,21 +128,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address"
                         android:textSize="18dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                     <ImageButton
                         android:id="@+id/update_address"
@@ -151,8 +151,9 @@
                         android:layout_gravity="end"
                         android:backgroundTint="@color/colorAccent"
                         android:src="@drawable/icon_update"
-                        app:tint="@color/colorPrimary"/>
+                        app:tint="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -165,14 +166,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="123 King Street"
-                        android:textSize="18dp"/>
+                        android:textSize="18dp" />
 
                     <TextView
                         android:id="@+id/profile_address_secondLine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="University Ave. East"
-                        android:textSize="18dp"/>
+                        android:textSize="18dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -184,7 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Waterloo"
-                            android:textSize="18dp"/>
+                            android:textSize="18dp" />
 
                         <TextView
                             android:id="@+id/profile_address_postal"
@@ -192,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:text="N2N 0K9"
-                            android:textSize="18dp"/>
+                            android:textSize="18dp" />
                     </LinearLayout>
 
                     <TextView
@@ -200,7 +201,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ontario"
-                        android:textSize="18dp"/>
+                        android:textSize="18dp" />
                 </LinearLayout>
 
             </LinearLayout>

@@ -52,7 +52,7 @@ public class ShippingDetailsFragment extends Fragment {
                 R.layout.spinner_item // Default spinner layout
         );
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         binding.provinceSpinner.setAdapter(adapter);
 
         binding.provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
                         R.array.canadian_provinces, // Array resource containing province names
                         R.layout.spinner_item // Custom spinner layout
                 );
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                adapter.setDropDownViewResource(R.layout.spinner_item);
 
                 EditText updatedAddress1 = updateDialog.findViewById(R.id.update_address1);
                 EditText updatedAddress2 = updateDialog.findViewById(R.id.update_address2);
