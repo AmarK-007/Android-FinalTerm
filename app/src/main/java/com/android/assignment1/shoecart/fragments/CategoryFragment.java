@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -84,6 +86,12 @@ public class CategoryFragment extends Fragment implements AdapterInterface<Strin
         fragmentTransaction.replace(R.id.frames, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
+        // Set action bar title to the selected category
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(data);
+        }
     }
 
     @Override

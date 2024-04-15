@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -77,11 +79,24 @@ public class ShowProductFragment extends Fragment implements AdapterInterface<Pr
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // Retrieve the category from the arguments
+        String category = getArguments().getString("category");
+
+        // Set action bar title to the category
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null && category != null) {
+            actionBar.setTitle(category);
+        }
+    }
+
+    @Override
     public void onItemSelected(Product data, int position) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("product", data);
 //        moving to add fragment
-        Fragment fragment = new ProductDetails();
+        Fragment fragment = new ProductDetailsFragment();
 
         //passing arguments
         fragment.setArguments(bundle);
@@ -90,6 +105,12 @@ public class ShowProductFragment extends Fragment implements AdapterInterface<Pr
         fragmentTransaction.replace(R.id.frames, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
+        // Set action bar title to the selected product's title
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(data.getTitle());
+        }
     }
 
     @Override
